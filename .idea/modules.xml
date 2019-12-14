@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/datax-all.iml" filepath="$PROJECT_DIR$/datax-all.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/datax-common.iml" filepath="$PROJECT_DIR$/common/datax-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core/datax-core.iml" filepath="$PROJECT_DIR$/core/datax-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/transformer/datax-transformer.iml" filepath="$PROJECT_DIR$/transformer/datax-transformer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/datax-web/datax-web.iml" filepath="$PROJECT_DIR$/datax-web/datax-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gpdbjsonwriter/gpdbjsonwriter.iml" filepath="$PROJECT_DIR$/gpdbjsonwriter/gpdbjsonwriter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gpdbwriter/gpdbwriter.iml" filepath="$PROJECT_DIR$/gpdbwriter/gpdbwriter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mongodbreader/mongodbreader.iml" filepath="$PROJECT_DIR$/mongodbreader/mongodbreader.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mongodbwriter/mongodbwriter.iml" filepath="$PROJECT_DIR$/mongodbwriter/mongodbwriter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mysqlreader/mysqlreader.iml" filepath="$PROJECT_DIR$/mysqlreader/mysqlreader.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mysqlwriter/mysqlwriter.iml" filepath="$PROJECT_DIR$/mysqlwriter/mysqlwriter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/oraclereader/oraclereader.iml" filepath="$PROJECT_DIR$/oraclereader/oraclereader.iml" />
+      <module fileurl="file://$PROJECT_DIR$/oraclewriter/oraclewriter.iml" filepath="$PROJECT_DIR$/oraclewriter/oraclewriter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/plugin-rdbms-util/plugin-rdbms-util.iml" filepath="$PROJECT_DIR$/plugin-rdbms-util/plugin-rdbms-util.iml" />
+      <module fileurl="file://$PROJECT_DIR$/plugin-unstructured-storage-util/plugin-unstructured-storage-util.iml" filepath="$PROJECT_DIR$/plugin-unstructured-storage-util/plugin-unstructured-storage-util.iml" />
+      <module fileurl="file://$PROJECT_DIR$/postgresqlreader/postgresqlreader.iml" filepath="$PROJECT_DIR$/postgresqlreader/postgresqlreader.iml" />
+      <module fileurl="file://$PROJECT_DIR$/postgresqlwriter/postgresqlwriter.iml" filepath="$PROJECT_DIR$/postgresqlwriter/postgresqlwriter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rdbmsreader/rdbmsreader.iml" filepath="$PROJECT_DIR$/rdbmsreader/rdbmsreader.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rdbmswriter/rdbmswriter.iml" filepath="$PROJECT_DIR$/rdbmswriter/rdbmswriter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sqlserverreader/sqlserverreader.iml" filepath="$PROJECT_DIR$/sqlserverreader/sqlserverreader.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sqlserverwriter/sqlserverwriter.iml" filepath="$PROJECT_DIR$/sqlserverwriter/sqlserverwriter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/streamreader/streamreader.iml" filepath="$PROJECT_DIR$/streamreader/streamreader.iml" />
+      <module fileurl="file://$PROJECT_DIR$/streamwriter/streamwriter.iml" filepath="$PROJECT_DIR$/streamwriter/streamwriter.iml" />
+    </modules>
+  </component>
+</project>

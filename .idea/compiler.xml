@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="oraclewriter" />
+        <module name="streamwriter" />
+        <module name="oraclereader" />
+        <module name="plugin-rdbms-util" />
+        <module name="mongodbwriter" />
+        <module name="rdbmsreader" />
+        <module name="mysqlwriter" />
+        <module name="sqlserverwriter" />
+        <module name="datax-web" />
+        <module name="plugin-unstructured-storage-util" />
+        <module name="streamreader" />
+        <module name="postgresqlreader" />
+        <module name="datax-core" />
+        <module name="datax-common" />
+        <module name="datax-transformer" />
+        <module name="gpdbjsonwriter" />
+        <module name="mysqlreader" />
+        <module name="sqlserverreader" />
+        <module name="postgresqlwriter" />
+        <module name="rdbmswriter" />
+        <module name="mongodbreader" />
+        <module name="gpdbwriter" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="datax-all" target="1.5" />
+      <module name="datax-common" target="1.6" />
+      <module name="datax-core" target="8" />
+      <module name="datax-transformer" target="1.6" />
+      <module name="datax-web" target="1.8" />
+      <module name="gpdbjsonwriter" target="1.6" />
+      <module name="gpdbwriter" target="1.6" />
+      <module name="mongodbreader" target="1.6" />
+      <module name="mongodbwriter" target="1.6" />
+      <module name="mysqlreader" target="1.6" />
+      <module name="mysqlwriter" target="1.6" />
+      <module name="oraclereader" target="1.6" />
+      <module name="oraclewriter" target="1.6" />
+      <module name="plugin-rdbms-util" target="1.5" />
+      <module name="plugin-unstructured-storage-util" target="1.5" />
+      <module name="postgresqlreader" target="1.6" />
+      <module name="postgresqlwriter" target="1.6" />
+      <module name="rdbmsreader" target="1.6" />
+      <module name="rdbmswriter" target="1.6" />
+      <module name="sqlserverreader" target="1.6" />
+      <module name="sqlserverwriter" target="1.6" />
+      <module name="streamreader" target="1.6" />
+      <module name="streamwriter" target="1.6" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="datax-web" options="-parameters" />
+    </option>
+  </component>
+</project>

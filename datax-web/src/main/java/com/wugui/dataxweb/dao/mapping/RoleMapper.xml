@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wugui.dataxweb.dao.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.wugui.dataxweb.entity.Role">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="type" jdbcType="SMALLINT" property="type" />
+    <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_user_id" jdbcType="BIGINT" property="updateUserId" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <collection property="permissionList" javaType="java.util.List" ofType="Permission" column="id" select="com.wugui.dataxweb.dao.PermissionMapper.getPermissionsByRole"/>
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, name, description, enterprise_id, type, create_user_id, create_time, update_user_id, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from role
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from role
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyProperty="id" useGeneratedKeys="true" parameterType="com.wukongxiaozi.api.model.Role">
+    insert into role (name, description,
+      enterprise_id, type, create_user_id, 
+      create_time, update_user_id, update_time
+      )
+    values (#{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
+      #{enterpriseId,jdbcType=BIGINT}, #{type,jdbcType=SMALLINT}, #{createUserId,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective"  keyProperty="id" useGeneratedKeys="true"  parameterType="com.wukongxiaozi.api.model.Role">
+    insert into role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="enterpriseId != null">
+        enterprise_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUserId != null">
+        update_user_id,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseId != null">
+        #{enterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null">
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wukongxiaozi.api.model.Role">
+    update role
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseId != null">
+        enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null">
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wukongxiaozi.api.model.Role">
+    update role
+    set name = #{name,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+      type = #{type,jdbcType=SMALLINT},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--根据企业ID查询企业下所有岗位（角色）
+      Created by luojiayi on 2018/7/2 9:53 -->
+  <select id="getRoleByEnterpriseId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from role
+    where enterprise_id = #{enterpriseId,jdbcType=BIGINT}
+  </select>
+
+  <!--根据企业id和岗位（角色）名称查询
+      Created by luojiayi on 2018/7/3 13:34 -->
+  <select id="getRoleByEnterpriseIdAndName" parameterType="com.wukongxiaozi.api.model.Role" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from role
+    where enterprise_id = #{enterpriseId,jdbcType=BIGINT} and name = #{name,jdbcType=VARCHAR}
+  </select>
+
+  <!--根据企业id和岗位（角色）名称查询
+     Created by luojiayi on 2018/7/3 13:34 -->
+  <select id="getRoleByEnterpriseIdAndNameCount" parameterType="com.wukongxiaozi.api.model.Role" resultType="java.lang.Integer">
+    select count(id) from role
+    where enterprise_id = #{enterpriseId,jdbcType=BIGINT} and name = #{name,jdbcType=VARCHAR}
+    <if test="id > 0">
+      and id != #{id,jdbcType=BIGINT}
+    </if>
+</select>
+
+  <!-- 查询岗位（角色）下是否有用户
+    Created by luojiayi on 2018/7/3 17:59-->
+  <select id="getUserIdByRoleId" parameterType="java.lang.Long" resultType="java.lang.Long">
+    SELECT
+	    u.id
+    FROM
+        enterprise_user u
+    INNER JOIN enterprise_user_role ur ON u.id = ur.user_id
+    AND ur.role_id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectRoleListByUserId" resultMap="BaseResultMap">
+    select * from role where id in (
+      select role_id from enterprise_user_role where user_id = #{userId}
+    )
+  </select>
+
+  <insert id="insertFromPreRole" keyProperty="id" useGeneratedKeys="true">
+    INSERT INTO role
+      (`name`, description, enterprise_id, `type`, create_user_id, create_time)
+    SELECT
+      `name`, description, #{enterpriseId} AS enterprise_id, `type`, #{createUserId} AS create_user_id, #{createTime} AS create_time
+    FROM pre_role
+  </insert>
+
+  <insert id="insertRolePermissionFromPrePermission">
+    INSERT INTO `role_permission`(`enterprise_id`, `role_id`, `permission_id`)
+    SELECT r.enterprise_id, r.id AS role_id, prp.permission_id
+    FROM role r
+    INNER JOIN pre_role_permission prp ON prp.type=r.type
+    WHERE r.enterprise_id=#{enterpriseId};
+  </insert>
+</mapper>

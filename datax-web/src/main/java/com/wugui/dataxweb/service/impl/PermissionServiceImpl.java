@@ -1,5 +1,6 @@
 package com.wugui.dataxweb.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wugui.dataxweb.dao.PermissionMapper;
 import com.wugui.dataxweb.entity.Permission;
 import com.wugui.dataxweb.entity.UserEntity;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PermissionServiceImpl implements PermissionService {
+public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permission> implements PermissionService {
 
     private PermissionMapper permissionMapper;
 
@@ -30,22 +31,18 @@ public class PermissionServiceImpl implements PermissionService {
 
     @Override
     public Boolean validatePermissionCodeExist(UserEntity user, String code) {
-        return null;
+        return permissionMapper.selectPermissionByUserIdAndCode(user.getId(), code) != null;
     }
 
     @Override
     public Permission permissionManagerAdd(Permission permission) {
-        return null;
+        permissionMapper.insertSelective(permission);
+        return permission;
     }
 
     @Override
     public int countByCode(String code) {
         return 0;
-    }
-
-    @Override
-    public Boolean update() {
-        return null;
     }
 
     @Autowired

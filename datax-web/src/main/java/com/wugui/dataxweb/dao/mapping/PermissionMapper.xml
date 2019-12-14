@@ -1,24 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wugui.dataxweb.dao.PermissionMapper">
-  <resultMap id="BaseResultMap" type="com.wugui.dataxweb.entity.JobConfig">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <id column="ID" jdbcType="INTEGER" property="id" />
-    <result column="config_json" jdbcType="VARCHAR" property="configJson" />
-    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
-    <result column="CREATE_BY" jdbcType="INTEGER" property="createBy" />
-    <result column="UPDATE_BY" jdbcType="INTEGER" property="updateBy" />
-    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
-    <result column="STATUS" jdbcType="INTEGER" property="status" />
+  <resultMap id="BaseResultMap" type="com.wugui.dataxweb.entity.Permission">
+      <id column="id" jdbcType="BIGINT" property="id" />
+      <result column="code" jdbcType="VARCHAR" property="code" />
+      <result column="name" jdbcType="VARCHAR" property="name" />
+      <result column="path" jdbcType="VARCHAR" property="path" />
+      <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+      <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+      <result column="update_user_id" jdbcType="BIGINT" property="updateUserId" />
+      <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+
   <sql id="Base_Column_List">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    ID, CONFIG, CREATE_DATE, CREATE_BY, UPDATE_BY, UPDATE_DATE, "STATUS"
+    id, code, name, path,create_user_id, create_time, update_user_id,
+    update_time
   </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from permission
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from permission
+        where id = #{id,jdbcType=BIGINT}
+   </delete>
+
+    <insert id="insertSelective" parameterType="com.wugui.dataxweb.entity.Permission" keyProperty="id" useGeneratedKeys="true">
+        insert into permission
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="code != null">
+                code,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="path != null">
+                path,
+            </if>
+            <if test="isLeaf != null">
+                is_leaf,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="level != null">
+                level,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="code != null">
+                #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="path != null">
+                #{path,jdbcType=VARCHAR},
+            </if>
+            <if test="isLeaf != null">
+                #{isLeaf,jdbcType=BIT},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=BIGINT},
+            </if>
+            <if test="level != null">
+                #{level,jdbcType=SMALLINT},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.wugui.dataxweb.entity.Permission">
+        update permission
+        <set>
+            <if test="code != null">
+                code = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="path != null">
+                path = #{path,jdbcType=VARCHAR},
+            </if>
+            <if test="isLeaf != null">
+                is_leaf = #{isLeaf,jdbcType=BIT},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=BIGINT},
+            </if>
+            <if test="level != null">
+                level = #{level,jdbcType=SMALLINT},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 
   <select id="selectPermissionsByUserId" resultType="java.lang.String">
       select
@@ -28,5 +120,31 @@
       left join role_permission rp on ur.role_id = rp.role_id and rp.enterprise_id = #{enterpriseId}
       left join permission p on rp.permission_id = p.id
       where u.id = #{userId}
+  </select>
+
+
+  <select id="selectPermissionByUserIdAndCode" parameterType="java.lang.Long" resultMap="BaseResultMap">
+     select distinct p.code, p.id, p.name, p.path, p.is_leaf, p.parent_id, p.level, p.sort from enterprise_user u
+    left join enterprise_user_role ur on u.id = ur.user_id
+    left join role_permission rp on ur.role_id = rp.role_id
+    left join permission p on rp.permission_id = p.id
+    where u.id = #{userId} and p.code = #{code}
+  </select>
+
+    <select id="getAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from permission
+        order by path asc
+    </select>
+
+    <select id="getPermissionsByRole" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+          p.id, p.code, p.name, p.path, p.is_leaf, p.parent_id, p.level, p.sort
+        FROM
+            permission p
+        INNER JOIN role_permission r ON p.id = r.permission_id
+        WHERE
+            r.role_id = #{roleId,jdbcType=BIGINT}
   </select>
 </mapper>

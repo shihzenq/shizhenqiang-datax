@@ -145,11 +145,11 @@ public class OAuth2ServiceImpl implements OAuth2Service {
 
     @Override
     public boolean deleteUser(UserEntity enterpriseUser) {
-        return status(enterpriseUser, (short)0, false);
+        return status(enterpriseUser, true, false);
     }
 
     @Override
-    public boolean status(UserEntity enterpriseUser, Short status, Boolean onJob) {
+    public boolean status(UserEntity enterpriseUser, boolean status, Boolean onJob) {
         Map<String, Object> data= new HashMap<>();
         data.put("id", enterpriseUser.getUcUid());
         data.put("username", enterpriseUser.getUsername());

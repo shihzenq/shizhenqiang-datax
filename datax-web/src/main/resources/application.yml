@@ -8,6 +8,17 @@ spring:
     url: jdbc:mysql://localhost:3306/datax_web?serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false&useSSL=false&nullNamePatternMatchesAll=true&useUnicode=true&characterEncoding=UTF-8
     driver-class-name: com.mysql.jdbc.Driver
 
+  session:
+    store-type: redis
+    timeout: 8H
+  redis:
+    host: localhost
+    #    password: JjWkXz2018DEV
+    port: 6379
+
+management:
+    security:
+    enabled: false
 
 mybatis-plus:
   # mapper.xml文件扫描
@@ -41,6 +52,12 @@ app:
   etlLogDir: /xcloud/gpDataTest/data/applogs/datax-web/
 
 dataX-path: /Users/shizhenqiang/Documents/dataX/datax/bin/
+
+#测试图形验证码
+captcha-test-code: 888888
+
+#初始密码
+init-password: 123456
 
 zhongkeyuan:
   webmvc:

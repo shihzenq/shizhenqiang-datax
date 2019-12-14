@@ -11,6 +11,7 @@ import com.alibaba.datax.common.statistics.PerfTrace;
 import com.alibaba.datax.common.statistics.VMInfo;
 import com.alibaba.datax.common.util.Configuration;
 import com.alibaba.datax.core.AbstractContainer;
+import com.alibaba.datax.core.DataXLog;
 import com.alibaba.datax.core.statistics.communication.Communication;
 import com.alibaba.datax.core.statistics.communication.CommunicationTool;
 import com.alibaba.datax.core.statistics.container.communicator.taskgroup.StandaloneTGContainerCommunicator;
@@ -91,7 +92,7 @@ public class TaskGroupContainer extends AbstractContainer {
     }
 
     @Override
-    public void start() {
+    public DataXLog start() {
         try {
             /**
              * 状态check时间间隔，较短，可以把任务及时分发到对应channel中
@@ -307,6 +308,7 @@ public class TaskGroupContainer extends AbstractContainer {
                 EtlJobLogger.log(PerfTrace.getInstance().summarizeNoException());
             }
         }
+        return null;
     }
     
     private Map<Integer, Configuration> buildTaskConfigMap(List<Configuration> configurations){

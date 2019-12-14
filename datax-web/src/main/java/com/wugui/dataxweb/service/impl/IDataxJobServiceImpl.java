@@ -13,22 +13,29 @@ import com.alibaba.datax.core.util.container.CoreConstant;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.wugui.dataxweb.dto.RunJobDto;
+import com.wugui.dataxweb.entity.DataXLog;
 import com.wugui.dataxweb.entity.JobLog;
 import com.wugui.dataxweb.service.IDataxJobService;
 import com.wugui.dataxweb.service.IJobLogService;
+import com.wugui.dataxweb.util.ProcessUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 
@@ -41,6 +48,7 @@ import java.util.concurrent.*;
 @Service
 public class IDataxJobServiceImpl implements IDataxJobService {
 
+    private final static ConcurrentMap<String, String> jobTmpFiles = Maps.newConcurrentMap();
 
     private static final Logger log = LoggerFactory.getLogger(IDataxJobServiceImpl.class);
 
@@ -63,8 +71,8 @@ public class IDataxJobServiceImpl implements IDataxJobService {
 
 
     @Override
-    public String startJobByJsonStr(String jobJson) {
-
+    public List<com.alibaba.datax.core.DataXLog> startJobByJsonStr(String jobJson) {
+        List<com.alibaba.datax.core.DataXLog> logList = new ArrayList<>();
         jobPool.submit(() -> {
 
             final String tmpFilePath = "/xcloud/gpDataTest/temp_json/jobTmp-" + System.currentTimeMillis() + ".json";
@@ -84,9 +92,13 @@ public class IDataxJobServiceImpl implements IDataxJobService {
 
             try {
                 // 使用临时本地文件启动datax作业
-                Engine.entry(tmpFilePath);
-                //  删除临时文件
+                com.alibaba.datax.core.DataXLog log = Engine.entry(tmpFilePath);
                 FileUtil.del(new File(tmpFilePath));
+                // 执行日志
+                if (null != log) {
+                    logList.add(log);
+                }
+                //  删除临时文件
             } catch (Throwable e) {
                 log.error("\n\n经DataX智能分析,该任务最可能的错误原因是:\n" + ExceptionTracker.trace(e));
 
@@ -101,12 +113,12 @@ public class IDataxJobServiceImpl implements IDataxJobService {
             }
         });
 
-        return "success";
+        return logList;
     }
 
 
     @Override
-    public String startJobLog(RunJobDto runJobDto) {
+    public List<com.alibaba.datax.core.DataXLog> startJobLog(RunJobDto runJobDto) {
         //取出 jobJson，并转为json对象
         JSONObject json = JSONObject.parseObject(runJobDto.getJobJson());
         //根据jobId和当前时间戳生成日志文件名
@@ -137,5 +149,38 @@ public class IDataxJobServiceImpl implements IDataxJobService {
             //取出路径，读取文件
             return EtlJobLogger.readLog(list.get(0).getLogFilePath(), fromLineNum);
         }
+    }
+
+    @Override
+    public Boolean killJob(String pid, Long id) {
+        boolean result = ProcessUtil.killProcessByPid(pid);
+        //  删除临时文件
+        if (!CollectionUtils.isEmpty(jobTmpFiles)) {
+            String pathname = jobTmpFiles.get(pid);
+            if (pathname != null) {
+                FileUtil.del(new File(pathname));
+            }
+        }
+        //jobLogService.update(null, Wrappers.<JobLog>lambdaUpdate().set(JobLog::getHandleMsg, "job running，killed").set(JobLog::getHandleCode, 500).eq(JobLog::getId, id));
+        return result;
+    }
+
+    @Override
+    public String addExecutorLog(String ipAddress, List<com.alibaba.datax.core.DataXLog> logList) {
+        if (!CollectionUtils.isEmpty(logList)) {
+            com.alibaba.datax.core.DataXLog source = new com.alibaba.datax.core.DataXLog();
+            for (com.alibaba.datax.core.DataXLog log : logList) {
+                if (null != log) {
+                    source = log;
+                }
+            }
+            if (null != source) {
+                // 执行日志插入
+                DataXLog dataXLog = new DataXLog();
+                BeanUtils.copyProperties(source, dataXLog);
+
+            }
+        }
+        return null;
     }
 }

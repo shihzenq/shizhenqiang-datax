@@ -37,7 +37,7 @@ public class Engine {
     private static String RUNTIME_MODE;
 
     /* check job model (job/task) first */
-    public void start(Configuration allConf) {
+    public DataXLog start(Configuration allConf) {
 
         // 绑定column转换信息
         ColumnCast.bind(allConf);
@@ -90,8 +90,8 @@ public class Engine {
         //初始化PerfTrace
         PerfTrace perfTrace = PerfTrace.getInstance(isJob, instanceId, taskGroupId, priority, traceEnable);
         perfTrace.setJobInfo(jobInfoConfig, perfReportEnable, channelNumber);
-        container.start();
-
+        DataXLog log = container.start();
+        return log;
     }
 
 
@@ -120,7 +120,7 @@ public class Engine {
         return configuration;
     }
 
-    public static void entry(String jobPath) throws Throwable {
+    public static DataXLog entry(String jobPath) throws Throwable {
 //        Options options = new Options();
 //        options.addOption("job", true, "Job config.");
 //        options.addOption("jobid", true, "Job unique id.");
@@ -175,7 +175,8 @@ public class Engine {
         EtlJobLogger.log(configuration.toJSON());
         ConfigurationValidate.doValidate(configuration);
         Engine engine = new Engine();
-        engine.start(configuration);
+        DataXLog log = engine.start(configuration);
+        return log;
     }
 
 

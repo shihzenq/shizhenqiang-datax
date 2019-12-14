@@ -4,10 +4,13 @@ import com.alibaba.datax.common.log.LogResult;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.wugui.dataxweb.dto.RunJobDto;
 import com.wugui.dataxweb.service.IDataxJobService;
+import com.wugui.dataxweb.util.IpUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @program: datax-all
@@ -18,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("api")
 @Api(tags = "datax作业接口")
-public class JobController {
+public class JobController extends BaseController{
 
     @Autowired
     IDataxJobService iDataxJobService;
@@ -134,8 +137,10 @@ public class JobController {
     @ApiOperation("通过传入json配置启动一个datax作业")
     @PostMapping("/runJob")
     public R<String> runJob(@RequestBody RunJobDto runJobDto) {
-        String result = iDataxJobService.startJobByJsonStr(runJobDto.getJobJson());
-        return R.ok(result);
+        List<com.alibaba.datax.core.DataXLog> result = iDataxJobService.startJobByJsonStr(runJobDto.getJobJson());
+        String ipAddress = IpUtils.getIpAddress(request);
+        String executorLog = iDataxJobService.addExecutorLog(ipAddress, result);
+        return R.ok(executorLog);
     }
 
     /**
@@ -147,8 +152,10 @@ public class JobController {
     @ApiOperation("通过传入 runJobDto 实体启动一个datax作业，并记录日志")
     @PostMapping("/runJobLog")
     public R<String> runJobLog(@RequestBody RunJobDto runJobDto) {
-        String result = iDataxJobService.startJobLog(runJobDto);
-        return R.ok(result);
+        List<com.alibaba.datax.core.DataXLog> result = iDataxJobService.startJobLog(runJobDto);
+        String ipAddress = IpUtils.getIpAddress(request);
+        String executorLog = iDataxJobService.addExecutorLog(ipAddress, result);
+        return R.ok(executorLog);
     }
 
     /**
@@ -161,5 +168,11 @@ public class JobController {
     @GetMapping("/viewJobLog")
     public R<LogResult> viewJogLog(Long id, int fromLineNum) {
         return R.ok(iDataxJobService.viewJogLog(id, fromLineNum));
+    }
+
+    @ApiOperation("通过传入 进程ID 停止该job作业")
+    @GetMapping("/killJob/{pid}/{id}")
+    public R<Boolean> killJob(@PathVariable(value ="pid") String pid,@PathVariable(value = "id") Long id){
+        return R.ok(iDataxJobService.killJob(pid,id));
     }
 }

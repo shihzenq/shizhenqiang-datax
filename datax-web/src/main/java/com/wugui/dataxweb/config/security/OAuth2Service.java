@@ -18,5 +18,5 @@ public interface OAuth2Service {
 
     boolean deleteUser(UserEntity enterpriseUser);
 
-    boolean status(UserEntity enterpriseUser, Short status, Boolean onJob);
+    boolean status(UserEntity enterpriseUser, boolean status, Boolean onJob);
 }

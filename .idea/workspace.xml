@@ -1,0 +1,1607 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e98e63a5-a44d-4c3f-b084-720bfeb89bbe" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/alibaba/datax/core/DataXLog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/constants/Permissions.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/controller/BaseController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/DataXLogMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/RoleMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/mapping/DataXLogMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/mapping/RoleMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/mapping/UserMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dto/user/ModifyPasswordDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dto/user/UserUpdateDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/DataXLog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/Role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/export/Excel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/export/UserErrorExcel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/log/CollectingLogOutputStream.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/log/EtlJobFileAppender.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/log/EtlJobLogger.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/log/LogResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/DataXLogService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/RoleService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/DataXLogServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/RoleServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/thread/ExecDataXOutputThread.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/util/Kernel32.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/util/ProcessUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/util/StringUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/util/WorkBookUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/validator/CaptchaValidator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/validator/CurrentUserPasswordValidator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/validator/EqualsField.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/validator/EqualsFieldValidator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/validator/annotation/Captcha.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/validator/annotation/CurrentUserPassword.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/vo/ResponseData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/datax-common.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/datax-core.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/alibaba/datax/core/AbstractContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/alibaba/datax/core/AbstractContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/alibaba/datax/core/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/alibaba/datax/core/Engine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/alibaba/datax/core/job/JobContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/alibaba/datax/core/job/JobContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/alibaba/datax/core/taskgroup/TaskGroupContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/alibaba/datax/core/taskgroup/TaskGroupContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datax-all.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/datax-web/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/config/security/OAuth2Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/config/security/OAuth2Service.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/config/security/OAuth2ServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/config/security/OAuth2ServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/controller/JobController.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/controller/JobController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/controller/SystemManagementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/controller/SystemManagementController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/PermissionMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/PermissionMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/mapping/PermissionMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/mapping/PermissionMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/BaseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/BaseEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/Permission.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/Permission.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/UserEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/IDataxJobService.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/IDataxJobService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/PermissionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/PermissionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/IDataxJobServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/IDataxJobServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/PermissionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/PermissionServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datax-web/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gpdbjsonwriter/gpdbjsonwriter.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gpdbwriter/gpdbwriter.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mongodbreader/mongodbreader.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mongodbwriter/mongodbwriter.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysqlreader/mysqlreader.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysqlwriter/mysqlwriter.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/oraclereader/oraclereader.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/oraclewriter/oraclewriter.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugin-rdbms-util/plugin-rdbms-util.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugin-rdbms-util/src/main/java/com/alibaba/datax/plugin/rdbms/util/DBUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/plugin-rdbms-util/src/main/java/com/alibaba/datax/plugin/rdbms/util/DBUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugin-rdbms-util/target/classes/com/alibaba/datax/plugin/rdbms/reader/Key.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugin-rdbms-util/target/classes/com/alibaba/datax/plugin/rdbms/reader/ResultSetReadProxy.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugin-rdbms-util/target/classes/com/alibaba/datax/plugin/rdbms/util/ConnectionFactory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugin-rdbms-util/target/classes/com/alibaba/datax/plugin/rdbms/util/Constant.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugin-rdbms-util/target/classes/com/alibaba/datax/plugin/rdbms/writer/Constant.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugin-rdbms-util/target/classes/com/alibaba/datax/plugin/rdbms/writer/util/OriginalConfPretreatmentUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugin-rdbms-util/target/classes/com/alibaba/datax/plugin/rdbms/writer/util/WriterUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugin-unstructured-storage-util/plugin-unstructured-storage-util.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/postgresqlreader/postgresqlreader.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/postgresqlwriter/postgresqlwriter.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/rdbmsreader/rdbmsreader.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/rdbmswriter/rdbmswriter.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sqlserverreader/sqlserverreader.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sqlserverwriter/sqlserverwriter.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/streamreader/streamreader.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/streamwriter/streamwriter.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/transformer/datax-transformer.iml" beforeDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/classes/" />
+    <ignored path="$PROJECT_DIR$/plugin-unstructured-storage-util/target/" />
+    <ignored path="$PROJECT_DIR$/mongodbwriter/target/" />
+    <ignored path="$PROJECT_DIR$/sqlserverreader/target/" />
+    <ignored path="$PROJECT_DIR$/mysqlwriter/target/" />
+    <ignored path="$PROJECT_DIR$/sqlserverwriter/target/" />
+    <ignored path="$PROJECT_DIR$/mysqlreader/target/" />
+    <ignored path="$PROJECT_DIR$/oraclereader/target/" />
+    <ignored path="$PROJECT_DIR$/postgresqlreader/target/" />
+    <ignored path="$PROJECT_DIR$/rdbmsreader/target/" />
+    <ignored path="$PROJECT_DIR$/gpdbjsonwriter/target/" />
+    <ignored path="$PROJECT_DIR$/rdbmswriter/target/" />
+    <ignored path="$PROJECT_DIR$/gpdbwriter/target/" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <ignored path="$PROJECT_DIR$/oraclewriter/target/" />
+    <ignored path="$PROJECT_DIR$/streamwriter/target/" />
+    <ignored path="$PROJECT_DIR$/core/target/" />
+    <ignored path="$PROJECT_DIR$/postgresqlwriter/target/" />
+    <ignored path="$PROJECT_DIR$/streamreader/target/" />
+    <ignored path="$PROJECT_DIR$/mongodbreader/target/" />
+    <ignored path="$PROJECT_DIR$/datax-web/target/" />
+    <ignored path="$PROJECT_DIR$/common/target/" />
+    <ignored path="$PROJECT_DIR$/plugin-rdbms-util/target/" />
+    <ignored path="$PROJECT_DIR$/transformer/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="testRunner" value="GRADLE" />
+    <option name="delegatedBuild" value="true" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/controller/JobController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="480">
+              <caret line="156" column="52" selection-start-line="156" selection-start-column="52" selection-end-line="156" selection-end-column="52" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/IDataxJobService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="527">
+              <caret line="34" column="80" selection-start-line="34" selection-start-column="80" selection-end-line="34" selection-end-column="80" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/IDataxJobServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="604">
+              <caret line="180" selection-start-line="180" selection-end-line="180" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/DataXLogService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="34" selection-start-line="6" selection-start-column="34" selection-end-line="6" selection-end-column="34" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/DataXLogServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="16" column="27" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#620#621#0" expanded="true" />
+                <element signature="e#672#673#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/com/alibaba/datax/core/Engine.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="356">
+              <caret line="122" column="30" selection-start-line="122" selection-start-column="30" selection-end-line="122" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/com/alibaba/datax/core/AbstractContainer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="476">
+              <caret line="32" column="28" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
+              <folding>
+                <element signature="e#759#760#0" expanded="true" />
+                <element signature="e#803#804#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/com/alibaba/datax/core/taskgroup/TaskGroupContainer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2950">
+              <caret line="94" column="19" selection-start-line="94" selection-start-column="19" selection-end-line="94" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/com/alibaba/datax/core/job/JobContainer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="269">
+              <caret line="97" column="20" selection-start-line="97" selection-start-column="20" selection-end-line="97" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/com/alibaba/datax/core/taskgroup/runner/TaskGroupContainerRunner.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="23" column="36" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>${captcha-test-code}</find>
+      <find>${init-password}</find>
+      <find>context</find>
+      <find>countb</find>
+      <find>favicon</find>
+      <find>dataXPath</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/PermissionService.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/PermissionServiceImpl.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/RoleMapper.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/RoleService.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/RoleServiceImpl.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/export/Excel.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/export/VoucherErrorExcel.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/export/UserErrorExcel.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/util/WorkBookUtil.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/util/StringUtil.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/validator/EqualsFieldValidator.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/validator/CurrentUserPasswordValidator.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/validator/CaptchaValidator.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/validator/annotation/Captcha.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/validator/EqualsField.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/validator/annotation/CurrentUserPassword.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dto/user/ModifyPasswordForm.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/config/security/OAuth2ServiceImpl.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/config/security/OAuth2Service.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dto/user/UserUpdateDTO.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/UserService.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/UserMapper.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/resources/application.yml" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/ExecDataXOutputThread.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/log/EtlJobFileAppender.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/log/CollectingLogOutputStream.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/thread/ExecDataXOutputThread.java" />
+        <option value="$PROJECT_DIR$/datax-web/pom.xml" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/util/Kernel32.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/util/ProcessUtil.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/Role.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/BaseEntity.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/mapping/RoleMapper.xml" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/mapping/PermissionMapper.xml" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/UserEntity.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/mapping/UserMapper.xml" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/DataXResult.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/DataXLogMapper.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/mapping/DataXLogMapper.xml" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/controller/SystemManagementController.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/UserServiceImpl.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/alibaba/datax/core/DataXLog.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/alibaba/datax/core/job/JobContainer.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/alibaba/datax/core/Engine.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/alibaba/datax/core/AbstractContainer.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/com/alibaba/datax/core/taskgroup/TaskGroupContainer.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/controller/JobController.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/IDataxJobService.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/IDataxJobServiceImpl.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/DataXLogService.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/DataXLogServiceImpl.java" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$USER_HOME$/Downloads/apache-maven-3.5.4" />
+        <option name="userSettingsFile" value="$USER_HOME$/Downloads/apache-maven-3.5.4/conf/settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="datax-web" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="datax-web" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Dependencies" type="f4be9f2a:MavenProjectsStructure$DependenciesNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
+  </component>
+  <component name="ProjectConfigurationFiles">
+    <option name="files">
+      <list>
+        <option value="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
+        <option value="$PROJECT_DIR$/.idea/misc.xml" />
+        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
+        <option value="$PROJECT_DIR$/plugin-unstructured-storage-util/plugin-unstructured-storage-util.iml" />
+        <option value="$PROJECT_DIR$/mongodbwriter/mongodbwriter.iml" />
+        <option value="$PROJECT_DIR$/sqlserverreader/sqlserverreader.iml" />
+        <option value="$PROJECT_DIR$/mysqlwriter/mysqlwriter.iml" />
+        <option value="$PROJECT_DIR$/sqlserverwriter/sqlserverwriter.iml" />
+        <option value="$PROJECT_DIR$/mysqlreader/mysqlreader.iml" />
+        <option value="$PROJECT_DIR$/oraclereader/oraclereader.iml" />
+        <option value="$PROJECT_DIR$/postgresqlreader/postgresqlreader.iml" />
+        <option value="$PROJECT_DIR$/rdbmsreader/rdbmsreader.iml" />
+        <option value="$PROJECT_DIR$/gpdbjsonwriter/gpdbjsonwriter.iml" />
+        <option value="$PROJECT_DIR$/rdbmswriter/rdbmswriter.iml" />
+        <option value="$PROJECT_DIR$/gpdbwriter/gpdbwriter.iml" />
+        <option value="$PROJECT_DIR$/datax-all.iml" />
+        <option value="$PROJECT_DIR$/oraclewriter/oraclewriter.iml" />
+        <option value="$PROJECT_DIR$/streamwriter/streamwriter.iml" />
+        <option value="$PROJECT_DIR$/core/datax-core.iml" />
+        <option value="$PROJECT_DIR$/postgresqlwriter/postgresqlwriter.iml" />
+        <option value="$PROJECT_DIR$/streamreader/streamreader.iml" />
+        <option value="$PROJECT_DIR$/mongodbreader/mongodbreader.iml" />
+        <option value="$PROJECT_DIR$/common/datax-common.iml" />
+        <option value="$PROJECT_DIR$/plugin-rdbms-util/plugin-rdbms-util.iml" />
+        <option value="$PROJECT_DIR$/transformer/datax-transformer.iml" />
+        <option value="$PROJECT_DIR$/.idea/compiler.xml" />
+        <option value="$PROJECT_DIR$/.idea/encodings.xml" />
+        <option value="$PROJECT_DIR$/.idea/modules.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__asm_asm_3_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__cglib_cglib_2_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_0_13.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_2_3.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_core_1_0_13.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_core_1_2_3.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__cn_hutool_hutool_all_4_5_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__cn_hutool_hutool_all_4_5_7.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_druid_1_0_15.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_druid_1_1_14.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_fastjson_1_1_46_sec01.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_aliyun_oss_aliyun_sdk_oss_2_0_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_apple_AppleJavaExtensions_1_4.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_3_0_7_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_annotation_3_0_7_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_boot_starter_3_0_7_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_core_3_0_7_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_extension_3_0_7_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_facebook_presto_hadoop_hadoop_apache2_0_3.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_classmate_1_3_4.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_9_0.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_9_6.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_9_6.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jdk8_2_9_6.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_9_6.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_parameter_names_2_9_6.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_github_jsqlparser_jsqlparser_1_0.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_5_1_4.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_spring_boot_autoconfigure_1_2_5.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_spring_boot_starter_1_2_5.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_findbugs_annotations_2_0_3.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_findbugs_bcel_findbugs_6_0.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_findbugs_findbugs_3_0_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_findbugs_jFormatString_2_0_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_findbugs_jsr305_3_0_0.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_findbugs_jsr305_3_0_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_2_4.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_google_errorprone_error_prone_annotations_2_2_0.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_failureaccess_1_0_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_16_0_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_27_0_1_jre.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_r05.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_listenablefuture_9999_0_empty_to_avoid_conflict_with_guava.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_google_j2objc_j2objc_annotations_1_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_google_protobuf_protobuf_java_2_5_0.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_h2database_h2_1_4_197.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_h2database_h2_1_4_200.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_jamesmurty_utils_java_xmlbuilder_0_4.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_jayway_jsonpath_json_path_2_4_0.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_jcraft_jsch_0_1_42.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_istack_istack_commons_runtime_3_0_8.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_jersey_jersey_core_1_9.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_jersey_jersey_json_1_9.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_jersey_jersey_server_1_9.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_xml_bind_jaxb_impl_2_2_3_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_xml_fastinfoset_FastInfoset_1_2_16.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_thoughtworks_paranamer_paranamer_2_3.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_external_google_android_json_0_0_20131108_vaadin1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_zaxxer_HikariCP_2_7_9.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_9_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__commons_beanutils_commons_beanutils_core_1_8_0.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__commons_cli_commons_cli_1_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__commons_cli_commons_cli_1_4.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_11.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_4.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_9.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__commons_collections_commons_collections_3_0.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__commons_collections_commons_collections_3_2_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__commons_configuration_commons_configuration_1_10.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__commons_configuration_commons_configuration_1_6.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__commons_digester_commons_digester_1_8.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__commons_httpclient_commons_httpclient_3_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_4.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__commons_lang_commons_lang_2_6.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_1_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__commons_net_commons_net_3_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__dom4j_dom4j_1_6_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__io_airlift_aircompressor_0_3.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__io_jsonwebtoken_jjwt_0_9_0.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__io_lettuce_lettuce_core_5_0_4_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__io_micrometer_micrometer_core_1_0_5.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_3_7_0_Final.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_buffer_4_1_25_Final.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_codec_4_1_25_Final.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_common_4_1_25_Final.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_handler_4_1_25_Final.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_resolver_4_1_25_Final.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_transport_4_1_25_Final.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__io_projectreactor_reactor_core_3_1_8_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_core_2_9_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_schema_2_9_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_spi_2_9_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_spring_web_2_9_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_swagger2_2_9_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_swagger_common_2_9_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_swagger_ui_2_9_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__io_swagger_swagger_annotations_1_5_20.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__io_swagger_swagger_models_1_5_20.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_activation_jakarta_activation_api_1_2_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_xml_bind_jakarta_xml_bind_api_2_3_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__javax_activation_activation_1_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__javax_annotation_javax_annotation_api_1_3_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__javax_persistence_javax_persistence_api_2_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__javax_servlet_jsp_jsp_api_2_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__javax_servlet_servlet_api_2_5.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__javax_validation_validation_api_2_0_1_Final.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__javax_xml_bind_jaxb_api_2_2_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__javax_xml_bind_jaxb_api_2_3_0.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__javax_xml_stream_stax_api_1_0_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__jaxen_jaxen_1_1_6.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_11.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_12.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__log4j_log4j_1_2_17.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_5_1_34.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_5_1_47.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_1_7_11.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_agent_1_7_11.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__net_java_dev_jets3t_jets3t_0_9_0.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__net_jcip_jcip_annotations_1_0.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__net_minidev_accessors_smart_1_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__net_minidev_json_smart_2_3.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__net_sourceforge_javacsv_javacsv_2_0.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_anarres_lzo_lzo_core_1_0_5.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_avro_avro_1_7_4.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_compress_1_9.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_3_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_7.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_math3_3_1_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_curator_curator_client_2_7_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_curator_curator_framework_2_7_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_curator_curator_recipes_2_7_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_directory_api_api_asn1_api_1_0_0_M20.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_directory_api_api_util_1_0_0_M20.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_directory_server_apacheds_i18n_2_0_0_M15.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_directory_server_apacheds_kerberos_codec_2_0_0_M15.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_hadoop_hadoop_annotations_2_7_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_hadoop_hadoop_auth_2_7_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_hadoop_hadoop_common_2_7_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_htrace_htrace_core_3_1_0_incubating.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_fluent_hc_4_4.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_fluent_hc_4_5_5.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_1_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_1_3.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_4.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_5_5.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_1_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_1_4.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_4.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_4_9.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_10_0.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_to_slf4j_2_10_0.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_8_5_31.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_el_8_5_31.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_8_5_31.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_zookeeper_zookeeper_3_4_6.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_assertj_assertj_core_3_9_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_bouncycastle_bcpkix_jdk15on_1_56.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_bouncycastle_bcprov_jdk15on_1_56.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_checkerframework_checker_qual_2_5_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_groovy_groovy_all_2_1_9.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_groovy_groovy_all_2_4_15.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_jackson_jackson_core_asl_1_9_13.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_jackson_jackson_jaxrs_1_8_3.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_jackson_jackson_mapper_asl_1_9_13.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_jackson_jackson_xc_1_8_3.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_janino_commons_compiler_3_0_8.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_janino_janino_2_5_16.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_janino_janino_3_0_8.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_jettison_jettison_1_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_mojo_animal_sniffer_annotations_1_17.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_jaxb_jaxb_runtime_2_3_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_jaxb_txw2_2_3_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_library_1_3.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_hdrhistogram_HdrHistogram_2_1_10.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_validator_hibernate_validator_6_0_10_Final.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_javassist_javassist_3_15_0_GA.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_3_2_Final.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_jdom_jdom_1_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_jvnet_staxex_stax_ex_1_8_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_latencyutils_LatencyUtils_2_0_3.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_mapstruct_mapstruct_1_2_0_Final.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_mockito_mockito_all_1_9_5.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_mockito_mockito_core_1_8_5.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_mockito_mockito_core_2_15_0.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_mongodb_mongo_java_driver_3_2_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_mongodb_mongo_java_driver_3_4_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_mortbay_jetty_jetty_6_1_26.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_mortbay_jetty_jetty_util_6_1_26.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_3_4_6.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_spring_1_3_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_spring_boot_mybatis_spring_boot_autoconfigure_1_3_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_spring_boot_mybatis_spring_boot_starter_1_3_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_objenesis_objenesis_1_0.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_objenesis_objenesis_2_6.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_ow2_asm_asm_5_0_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_ow2_asm_asm_commons_5_0_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_ow2_asm_asm_debug_all_5_0_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_ow2_asm_asm_tree_5_0_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_postgresql_postgresql_42_2_5.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_postgresql_postgresql_9_3_1102_jdbc4.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_powermock_powermock_api_mockito_1_4_10.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_powermock_powermock_api_support_1_4_10.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_powermock_powermock_core_1_4_10.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_powermock_powermock_module_junit4_1_4_10.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_powermock_powermock_module_junit4_common_1_4_10.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_powermock_powermock_reflect_1_4_10.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_16_22.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_reactivestreams_reactive_streams_1_0_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_skyscreamer_jsonassert_1_5_0.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jul_to_slf4j_1_7_25.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_10.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_25.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_log4j12_1_7_10.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_2_0_3_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_actuator_2_0_3_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_actuator_autoconfigure_2_0_3_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_2_0_3_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_configuration_processor_2_0_3_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_2_0_3_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_actuator_2_0_3_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_data_redis_2_0_3_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_jdbc_2_0_3_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_json_2_0_3_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_2_0_3_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_security_2_0_3_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_test_2_0_3_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_2_0_3_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_2_0_3_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_2_0_3_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_autoconfigure_2_0_3_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_commons_2_0_8_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_keyvalue_2_0_8_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_redis_2_0_8_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_plugin_spring_plugin_core_1_2_0_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_plugin_spring_plugin_metadata_1_2_0_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_oauth_boot_spring_security_oauth2_autoconfigure_2_2_1_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_oauth_spring_security_oauth2_2_2_1_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_config_5_0_6_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_core_5_0_6_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_jwt_1_0_9_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_web_5_0_6_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_session_spring_session_core_2_0_4_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_session_spring_session_data_redis_2_0_4_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_5_0_7_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_5_0_7_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_5_0_7_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_support_5_0_7_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_5_0_7_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_5_0_7_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jcl_5_0_7_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jdbc_5_0_7_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_oxm_5_0_7_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_test_5_0_7_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_tx_5_0_7_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_5_0_7_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_5_0_7_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_xerial_snappy_snappy_java_1_0_4_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_xmlunit_xmlunit_core_2_5_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_yaml_snakeyaml_1_19.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__xml_apis_xml_apis_1_4_01.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__xmlenc_xmlenc_0_52.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_3_9.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_ooxml_3_9.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_ooxml_schemas_3_9.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlbeans_xmlbeans_2_3_0.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__stax_stax_api_1_0_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_exec_1_3.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__net_java_dev_jna_jna_4_2_2.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="y" value="23" />
+    <option name="width" value="1680" />
+    <option name="height" value="947" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="datax-all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shizhenqiang-datax" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="datax-all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shizhenqiang-datax" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="datax-all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shizhenqiang-datax" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="datax-all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shizhenqiang-datax" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="datax-all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shizhenqiang-datax" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="datax-all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shizhenqiang-datax" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="datax" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="datax-all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shizhenqiang-datax" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="datax" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="datax-all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shizhenqiang-datax" type="462c0819:PsiDirectoryNode" />
+              <item name="datax-web" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="datax-all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shizhenqiang-datax" type="462c0819:PsiDirectoryNode" />
+              <item name="datax-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="datax-all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shizhenqiang-datax" type="462c0819:PsiDirectoryNode" />
+              <item name="datax-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="datax-all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shizhenqiang-datax" type="462c0819:PsiDirectoryNode" />
+              <item name="datax-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="datax-all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shizhenqiang-datax" type="462c0819:PsiDirectoryNode" />
+              <item name="datax-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="wugui" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="datax-all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shizhenqiang-datax" type="462c0819:PsiDirectoryNode" />
+              <item name="datax-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="wugui" type="462c0819:PsiDirectoryNode" />
+              <item name="dataxweb" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="datax-all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shizhenqiang-datax" type="462c0819:PsiDirectoryNode" />
+              <item name="datax-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="wugui" type="462c0819:PsiDirectoryNode" />
+              <item name="dataxweb" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="datax-all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shizhenqiang-datax" type="462c0819:PsiDirectoryNode" />
+              <item name="datax-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="wugui" type="462c0819:PsiDirectoryNode" />
+              <item name="dataxweb" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="datax-all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shizhenqiang-datax" type="462c0819:PsiDirectoryNode" />
+              <item name="datax-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="wugui" type="462c0819:PsiDirectoryNode" />
+              <item name="dataxweb" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
+              <item name="mapping" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="datax-all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shizhenqiang-datax" type="462c0819:PsiDirectoryNode" />
+              <item name="datax-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="wugui" type="462c0819:PsiDirectoryNode" />
+              <item name="dataxweb" type="462c0819:PsiDirectoryNode" />
+              <item name="dto" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="datax-all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shizhenqiang-datax" type="462c0819:PsiDirectoryNode" />
+              <item name="datax-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="wugui" type="462c0819:PsiDirectoryNode" />
+              <item name="dataxweb" type="462c0819:PsiDirectoryNode" />
+              <item name="entity" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="datax-all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shizhenqiang-datax" type="462c0819:PsiDirectoryNode" />
+              <item name="datax-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="wugui" type="462c0819:PsiDirectoryNode" />
+              <item name="dataxweb" type="462c0819:PsiDirectoryNode" />
+              <item name="export" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="datax-all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shizhenqiang-datax" type="462c0819:PsiDirectoryNode" />
+              <item name="datax-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="wugui" type="462c0819:PsiDirectoryNode" />
+              <item name="dataxweb" type="462c0819:PsiDirectoryNode" />
+              <item name="log" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="datax-all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shizhenqiang-datax" type="462c0819:PsiDirectoryNode" />
+              <item name="datax-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="wugui" type="462c0819:PsiDirectoryNode" />
+              <item name="dataxweb" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="datax-all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shizhenqiang-datax" type="462c0819:PsiDirectoryNode" />
+              <item name="datax-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="wugui" type="462c0819:PsiDirectoryNode" />
+              <item name="dataxweb" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="impl" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="datax-all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shizhenqiang-datax" type="462c0819:PsiDirectoryNode" />
+              <item name="datax-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="wugui" type="462c0819:PsiDirectoryNode" />
+              <item name="dataxweb" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="datax-all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shizhenqiang-datax" type="462c0819:PsiDirectoryNode" />
+              <item name="datax-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="wugui" type="462c0819:PsiDirectoryNode" />
+              <item name="dataxweb" type="462c0819:PsiDirectoryNode" />
+              <item name="validator" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="datax-all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shizhenqiang-datax" type="462c0819:PsiDirectoryNode" />
+              <item name="datax-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="wugui" type="462c0819:PsiDirectoryNode" />
+              <item name="dataxweb" type="462c0819:PsiDirectoryNode" />
+              <item name="validator" type="462c0819:PsiDirectoryNode" />
+              <item name="annotation" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="datax-all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shizhenqiang-datax" type="462c0819:PsiDirectoryNode" />
+              <item name="datax-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="datax-all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shizhenqiang-datax" type="462c0819:PsiDirectoryNode" />
+              <item name="datax-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/mapping" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.37558138" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.wugui.dataxweb.service.impl" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.alibaba.datax.core" />
+      <recent name="com.wugui.dataxweb.dao" />
+      <recent name="com.wugui.dataxweb.service.impl" />
+      <recent name="com.wugui.dataxweb.service" />
+      <recent name="com.wugui.dataxweb.controller" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/mapping" />
+      <recent name="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/util" />
+      <recent name="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/log" />
+      <recent name="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/export" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="DataxWebApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="datax-web" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.wugui.dataxweb.DataxWebApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e98e63a5-a44d-4c3f-b084-720bfeb89bbe" name="Default Changelist" comment="" />
+      <created>1576236129840</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1576236129840</updated>
+      <workItem from="1576236133649" duration="25178000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="25178000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="23" width="1680" height="947" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Designer" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info id="Web" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24969475" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="FindBugs-IDEA" />
+      <window_info anchor="bottom" id="Messages" weight="0.32865497" />
+      <window_info anchor="bottom" id="Spring" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Run with VisualVM" />
+      <window_info anchor="bottom" id="Java Enterprise" />
+      <window_info anchor="bottom" id="Database Changes" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Debug with VisualVM" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32959184" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.34489796" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Maven" weight="0.32967034" />
+      <window_info anchor="right" id="PlantUML" />
+      <window_info anchor="right" id="BPMNPalette" />
+      <window_info anchor="right" id="aiXcoder" />
+      <window_info anchor="right" id="Database" />
+      <window_info anchor="right" id="Palette&#9;" />
+      <window_info anchor="right" id="Bean Validation" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="Designer" order="0" />
+      <window_info id="Favorites" order="1" side_tool="true" />
+      <window_info id="Web" order="2" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="3" visible="true" weight="0.24969475" />
+      <window_info id="Structure" order="4" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="FindBugs-IDEA" order="0" />
+      <window_info anchor="bottom" id="Messages" order="1" weight="0.32865497" />
+      <window_info anchor="bottom" id="Spring" order="2" />
+      <window_info anchor="bottom" id="Terminal" order="3" />
+      <window_info anchor="bottom" id="Event Log" order="4" side_tool="true" />
+      <window_info anchor="bottom" id="Run with VisualVM" order="5" />
+      <window_info anchor="bottom" id="Java Enterprise" order="6" />
+      <window_info anchor="bottom" id="Database Changes" order="7" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Debug with VisualVM" order="9" />
+      <window_info anchor="bottom" id="Message" order="10" />
+      <window_info anchor="bottom" id="Find" order="11" />
+      <window_info anchor="bottom" id="Run" order="12" weight="0.32959184" />
+      <window_info anchor="bottom" id="Debug" order="13" weight="0.34489796" />
+      <window_info anchor="bottom" id="Cvs" order="14" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="15" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="16" />
+      <window_info anchor="right" id="Maven" order="0" weight="0.32967034" />
+      <window_info anchor="right" id="PlantUML" order="1" />
+      <window_info anchor="right" id="BPMNPalette" order="2" />
+      <window_info anchor="right" id="aiXcoder" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="right" id="Palette&#9;" order="5" />
+      <window_info anchor="right" id="Bean Validation" order="6" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="7" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="8" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="9" weight="0.25" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/core/src/main/java/com/alibaba/datax/core/Engine.java</url>
+          <line>177</line>
+          <properties />
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/core/src/main/java/com/alibaba/datax/core/job/JobContainer.java</url>
+          <line>99</line>
+          <properties />
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dto/user/UserUpdateDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="20" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/controller/BaseController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="34" column="24" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1072#1073#0" expanded="true" />
+            <element signature="e#1120#1121#0" expanded="true" />
+            <element signature="e#1653#1654#0" expanded="true" />
+            <element signature="e#1706#1707#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/UserMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="22" column="7" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/resources/application.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="18" column="11" lean-forward="true" selection-start-line="18" selection-start-column="11" selection-end-line="18" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/resources/static/favicon.ico">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/resources/static/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="130" selection-start-column="130" selection-end-column="130" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/controller/JobConfigController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="145" column="18" selection-start-line="145" selection-start-column="18" selection-end-line="145" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/ExecDataXOutputThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/log/EtlJobFileAppender.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="19" column="33" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/jre/lib/rt.jar!/sun/rmi/log/LogOutputStream.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/log/CollectingLogOutputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/thread/ExecDataXOutputThread.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/log/LogResult.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-extension/3.0.7.1/mybatis-plus-extension-3.0.7.1.jar!/com/baomidou/mybatisplus/extension/api/R.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="26" column="27" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="119" column="20" selection-start-line="119" selection-start-column="20" selection-end-line="119" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/util/ProcessUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="49">
+          <caret line="25" column="27" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/util/Kernel32.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="3" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/src/main/java/com/alibaba/datax/common/log/EtlJobFileAppender.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="347">
+          <caret line="48" column="23" lean-forward="true" selection-start-line="48" selection-start-column="23" selection-end-line="48" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/alibaba/datax/core/util/container/CoreConstant.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="97" column="31" selection-start-line="97" selection-start-column="31" selection-end-line="97" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/log/LogAspect.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6173">
+          <folding>
+            <element signature="e#0#27987#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/util/IpUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="9" lean-forward="true" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/BaseEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
+          <folding>
+            <element signature="e#1165#1166#0" expanded="true" />
+            <element signature="e#1200#1201#0" expanded="true" />
+            <element signature="e#1254#1255#0" expanded="true" />
+            <element signature="e#1302#1303#0" expanded="true" />
+            <element signature="e#1339#1340#0" expanded="true" />
+            <element signature="e#1374#1375#0" expanded="true" />
+            <element signature="e#1428#1429#0" expanded="true" />
+            <element signature="e#1476#1477#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/Role.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="8" column="17" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/Permission.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/mapping/RoleMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="15" lean-forward="true" selection-start-line="16" selection-start-column="48" selection-end-line="17" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/UserEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="23" column="25" lean-forward="true" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/mapping/UserMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3265">
+          <caret line="214" column="8" selection-start-line="214" selection-start-column="8" selection-end-line="214" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/RoleMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/DataXLog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" column="41" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/PermissionMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/mapping/PermissionMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="75" selection-start-line="8" selection-start-column="75" selection-end-line="8" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/mapping/DataXLogMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="65" lean-forward="true" selection-start-line="16" selection-start-column="65" selection-end-line="16" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/DataXLogMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/UserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="22" column="12" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-core/3.0.7.1/mybatis-plus-core-3.0.7.1.jar!/com/baomidou/mybatisplus/core/mapper/BaseMapper.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/config/security/OAuth2Service.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="20" column="12" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/UserServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-671">
+          <caret line="127" column="11" lean-forward="true" selection-start-line="127" selection-start-column="11" selection-end-line="127" selection-end-column="11" />
+          <folding>
+            <element signature="e#4977#4978#0" expanded="true" />
+            <element signature="e#5054#5055#0" expanded="true" />
+            <element signature="e#5112#5113#0" expanded="true" />
+            <element signature="e#5189#5190#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/controller/SystemManagementController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="549">
+          <caret line="176" column="28" selection-start-line="176" selection-start-column="28" selection-end-line="176" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#6918#6919#0" expanded="true" />
+            <element signature="e#6979#6980#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/log/EtlJobLogger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2184" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/src/main/java/com/alibaba/datax/common/log/EtlJobLogger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="57" column="23" selection-start-line="57" selection-start-column="23" selection-end-line="57" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/alibaba/datax/core/DataXLog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="12" lean-forward="true" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
+          <folding>
+            <element signature="e#596#597#0" expanded="true" />
+            <element signature="e#633#634#0" expanded="true" />
+            <element signature="e#691#692#0" expanded="true" />
+            <element signature="e#743#744#0" expanded="true" />
+            <element signature="e#780#781#0" expanded="true" />
+            <element signature="e#815#816#0" expanded="true" />
+            <element signature="e#869#870#0" expanded="true" />
+            <element signature="e#917#918#0" expanded="true" />
+            <element signature="e#952#953#0" expanded="true" />
+            <element signature="e#985#986#0" expanded="true" />
+            <element signature="e#1035#1036#0" expanded="true" />
+            <element signature="e#1079#1080#0" expanded="true" />
+            <element signature="e#1122#1123#0" expanded="true" />
+            <element signature="e#1163#1164#0" expanded="true" />
+            <element signature="e#1229#1230#0" expanded="true" />
+            <element signature="e#1289#1290#0" expanded="true" />
+            <element signature="e#1334#1335#0" expanded="true" />
+            <element signature="e#1377#1378#0" expanded="true" />
+            <element signature="e#1447#1448#0" expanded="true" />
+            <element signature="e#1511#1512#0" expanded="true" />
+            <element signature="e#1552#1553#0" expanded="true" />
+            <element signature="e#1591#1592#0" expanded="true" />
+            <element signature="e#1653#1654#0" expanded="true" />
+            <element signature="e#1709#1710#0" expanded="true" />
+            <element signature="e#1751#1752#0" expanded="true" />
+            <element signature="e#1791#1792#0" expanded="true" />
+            <element signature="e#1855#1856#0" expanded="true" />
+            <element signature="e#1913#1914#0" expanded="true" />
+            <element signature="e#1963#1964#0" expanded="true" />
+            <element signature="e#2011#2012#0" expanded="true" />
+            <element signature="e#2214#2215#0" expanded="true" />
+            <element signature="e#2261#2262#0" expanded="true" />
+            <element signature="e#2460#2461#0" expanded="true" />
+            <element signature="e#2507#2508#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/alibaba/datax/core/taskgroup/runner/TaskGroupContainerRunner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="23" column="36" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/alibaba/datax/core/job/JobContainer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="97" column="20" selection-start-line="97" selection-start-column="20" selection-end-line="97" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/alibaba/datax/core/AbstractContainer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="32" column="28" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
+          <folding>
+            <element signature="e#759#760#0" expanded="true" />
+            <element signature="e#803#804#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/alibaba/datax/core/taskgroup/TaskGroupContainer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2950">
+          <caret line="94" column="19" selection-start-line="94" selection-start-column="19" selection-end-line="94" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/com/alibaba/datax/core/Engine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="356">
+          <caret line="122" column="30" selection-start-line="122" selection-start-column="30" selection-end-line="122" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/controller/JobController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="156" column="52" selection-start-line="156" selection-start-column="52" selection-end-line="156" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/IDataxJobService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="34" column="80" selection-start-line="34" selection-start-column="80" selection-end-line="34" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/IDataxJobServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="604">
+          <caret line="180" selection-start-line="180" selection-end-line="180" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/DataXLogService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="34" selection-start-line="6" selection-start-column="34" selection-end-line="6" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/DataXLogServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="27" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#620#621#0" expanded="true" />
+            <element signature="e#672#673#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.37558138" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Spring</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.37558138" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>datax-all</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.37558138" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: asm:asm:3.1</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.37558138" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

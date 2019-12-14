@@ -1,11 +1,12 @@
 package com.wugui.dataxweb.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.wugui.dataxweb.entity.Permission;
 import com.wugui.dataxweb.entity.UserEntity;
 
 import java.util.List;
 
-public interface PermissionService {
+public interface PermissionService extends IService<Permission> {
 
     List<Permission> getAll();
 
@@ -38,10 +39,4 @@ public interface PermissionService {
      * @return int
      */
     int countByCode(String code);
-
-    /**
-     * 修改权限
-     * @return Boolean
-     */
-    Boolean update();
 }

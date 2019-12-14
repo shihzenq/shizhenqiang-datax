@@ -30,6 +30,7 @@ public abstract class AbstractContainer {
         this.containerCommunicator = containerCommunicator;
     }
 
-    public abstract void start();
+    public abstract DataXLog start();
+
 
 }

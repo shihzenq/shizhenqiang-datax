@@ -12,6 +12,7 @@ import com.alibaba.datax.common.statistics.VMInfo;
 import com.alibaba.datax.common.util.Configuration;
 import com.alibaba.datax.common.util.StrUtil;
 import com.alibaba.datax.core.AbstractContainer;
+import com.alibaba.datax.core.DataXLog;
 import com.alibaba.datax.core.Engine;
 import com.alibaba.datax.core.container.util.HookInvoker;
 import com.alibaba.datax.core.container.util.JobAssignUtil;
@@ -94,11 +95,12 @@ public class JobContainer extends AbstractContainer {
      * post以及destroy和statistics
      */
     @Override
-    public void start() {
+    public DataXLog start() {
         LOG.info("DataX jobContainer starts job.");
         EtlJobLogger.log("DataX jobContainer starts job.");
         boolean hasException = false;
         boolean isDryRun = false;
+        DataXLog log = null;
         try {
             this.startTimeStamp = System.currentTimeMillis();
             isDryRun = configuration.getBool(CoreConstant.DATAX_JOB_SETTING_DRYRUN, false);
@@ -182,10 +184,11 @@ public class JobContainer extends AbstractContainer {
 
                     LOG.info(PerfTrace.getInstance().summarizeNoException());
                     EtlJobLogger.log(PerfTrace.getInstance().summarizeNoException());
-                    this.logStatistics();
+                    log = this.logStatistics();
                 }
             }
         }
+        return log;
     }
 
     private void preCheck() {
@@ -594,7 +597,7 @@ public class JobContainer extends AbstractContainer {
         }
     }
 
-    private void logStatistics() {
+    private DataXLog logStatistics() {
         long totalCosts = (this.endTimeStamp - this.startTimeStamp) / 1000;
         long transferCosts = (this.endTransferTimeStamp - this.startTransferTimeStamp) / 1000;
         if (0L == transferCosts) {
@@ -602,7 +605,7 @@ public class JobContainer extends AbstractContainer {
         }
 
         if (super.getContainerCommunicator() == null) {
-            return;
+            return null;
         }
 
         Communication communication = super.getContainerCommunicator().collect();
@@ -624,6 +627,15 @@ public class JobContainer extends AbstractContainer {
         reportCommunication.setLongCounter(CommunicationTool.RECORD_SPEED, recordSpeedPerSecond);
 
         super.getContainerCommunicator().report(reportCommunication);
+
+        DataXLog dataXLog = new DataXLog();
+        dataXLog.setStartTimeStamp(startTimeStamp);
+        dataXLog.setEndTimeStamp(endTimeStamp);
+        dataXLog.setTotalCosts(totalCosts);
+        dataXLog.setByteSpeedPerSecond(byteSpeedPerSecond);
+        dataXLog.setRecordSpeedPerSecond(recordSpeedPerSecond);
+        dataXLog.setTotalReadRecords(CommunicationTool.getTotalReadRecords(communication));
+        dataXLog.setTotalErrorRecords(CommunicationTool.getTotalErrorRecords(communication));
 
         String log = String.format(
                 "\n" + "%-26s: %-18s\n" + "%-26s: %-18s\n" + "%-26s: %19s\n"
@@ -664,11 +676,14 @@ public class JobContainer extends AbstractContainer {
                     "Transformer过滤记录总数",
                     communication.getLongCounter(CommunicationTool.TRANSFORMER_FILTER_RECORDS)
             );
+            dataXLog.setTransformerSucceedRecords(communication.getLongCounter(CommunicationTool.TRANSFORMER_SUCCEED_RECORDS));
+            dataXLog.setTransformerFailedRecords(communication.getLongCounter(CommunicationTool.TRANSFORMER_FAILED_RECORDS));
+            dataXLog.setTransformerFilterRecords(communication.getLongCounter(CommunicationTool.TRANSFORMER_FILTER_RECORDS));
             LOG.info(log);
             EtlJobLogger.log(log);
         }
 
-
+        return dataXLog;
     }
 
     /**

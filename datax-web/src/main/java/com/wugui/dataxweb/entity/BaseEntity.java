@@ -15,8 +15,8 @@ public class BaseEntity implements Serializable {
             generator = "JDBC"
     )
     protected Long id;
-    protected Long createUser;
-    protected Long updateUser;
+    protected Long createUserId;
+    protected Long updateUserId;
     @DateTimeFormat(
             pattern = "yyyy-MM-dd HH:mm:ss"
     )
@@ -33,7 +33,6 @@ public class BaseEntity implements Serializable {
             timezone = "GMT+8"
     )
     protected Date updateTime;
-    protected Boolean deleted;
 
     public BaseEntity() {
     }
@@ -46,20 +45,20 @@ public class BaseEntity implements Serializable {
         this.id = id;
     }
 
-    public Long getCreateUser() {
-        return createUser;
+    public Long getCreateUserId() {
+        return createUserId;
     }
 
-    public void setCreateUser(Long createUser) {
-        this.createUser = createUser;
+    public void setCreateUserId(Long createUserId) {
+        this.createUserId = createUserId;
     }
 
-    public Long getUpdateUser() {
-        return updateUser;
+    public Long getUpdateUserId() {
+        return updateUserId;
     }
 
-    public void setUpdateUser(Long updateUser) {
-        this.updateUser = updateUser;
+    public void setUpdateUserId(Long updateUserId) {
+        this.updateUserId = updateUserId;
     }
 
     public Date getCreateTime() {
@@ -76,13 +75,5 @@ public class BaseEntity implements Serializable {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public Boolean getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Boolean deleted) {
-        this.deleted = deleted;
     }
 }

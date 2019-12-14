@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wugui.dataxweb.dao.DataXLogMapper">
+  <resultMap id="BaseResultMap" type="com.wugui.dataxweb.entity.DataXLog">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="start_time_stamp" jdbcType="BIGINT" property="startTimeStamp" />
+    <result column="end_time_stamp" jdbcType="BIGINT" property="endTimeStamp" />
+    <result column="total_costs" jdbcType="BIGINT" property="totalCosts" />
+    <result column="byte_speed_per_second" jdbcType="BIGINT" property="byteSpeedPerSecond" />
+    <result column="record_speed_per_second" jdbcType="BIGINT" property="recordSpeedPerSecond" />
+    <result column="total_read_records" jdbcType="BIGINT" property="totalReadRecords" />
+    <result column="total_error_records" jdbcType="BIGINT" property="totalErrorRecords" />
+    <result column="trans_former_succeed_records" jdbcType="BIGINT" property="transformerSucceedRecords" />
+    <result column="trans_former_failed_records" jdbcType="BIGINT" property="transformerFailedRecords" />
+    <result column="trans_former_filter_records" jdbcType="BIGINT" property="transformerFilterRecords" />
+    <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_user_id" jdbcType="BIGINT" property="updateUserId" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, start_time_stamp, end_time_stamp, total_costs, byte_speed_per_second,record_speed_per_second,
+     total_read_records,total_error_records,trans_former_succeed_records,trans_former_failed_records,
+     trans_former_filter_records,
+     create_user_id, create_time, update_user_id,
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dataX_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from dataX_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insertSelective"  keyProperty="id" useGeneratedKeys="true"  parameterType="com.wugui.dataxweb.entity.DataXLog">
+    insert into dataX_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="startTimeStamp != null">
+        start_time_stamp,
+      </if>
+      <if test="endTimeStamp != null">
+        end_time_stamp,
+      </if>
+      <if test="totalCosts != null">
+        total_costs,
+      </if>
+      <if test="byteSpeedPerSecond != null">
+        byte_speed_per_second,
+      </if>
+      <if test="recordSpeedPerSecond != null">
+        record_speed_per_second,
+      </if>
+      <if test="totalReadRecords != null">
+        total_read_records,
+      </if>
+      <if test="totalErrorRecords != null">
+        total_error_records,
+      </if>
+      <if test="transformerSucceedRecords != null">
+        trans_former_succeed_records,
+      </if>
+      <if test="transformerFailedRecords != null">
+        trans_former_failed_records,
+      </if>
+      <if test="transformerFilterRecords != null">
+        trans_former_filter_records,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUserId != null">
+        update_user_id,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="startTimeStamp != null">
+        #{startTimeStamp,jdbcType=VARCHAR},
+      </if>
+      <if test="endTimeStamp != null">
+        #{endTimeStamp,jdbcType=VARCHAR},
+      </if>
+      <if test="totalCosts != null">
+        #{totalCosts,jdbcType=BIGINT},
+      </if>
+      <if test="byteSpeedPerSecond != null">
+        #{byteSpeedPerSecond,jdbcType=SMALLINT},
+      </if>
+      <if test="recordSpeedPerSecond != null">
+        #{recordSpeedPerSecond,jdbcType=SMALLINT},
+      </if>
+      <if test="totalReadRecords != null">
+        #{totalReadRecords,jdbcType=SMALLINT},
+      </if>
+      <if test="totalErrorRecords != null">
+        #{totalErrorRecords,jdbcType=SMALLINT},
+      </if>
+      <if test="transformerSucceedRecords != null">
+        #{transformerSucceedRecords,jdbcType=SMALLINT},
+      </if>
+      <if test="transformerFailedRecords != null">
+        #{transformerFailedRecords,jdbcType=SMALLINT},
+      </if>
+      <if test="transformerFilterRecords != null">
+        #{transformerFilterRecords,jdbcType=SMALLINT},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null">
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wugui.dataxweb.entity.DataXLog">
+    update dataX_log
+    <set>
+      <if test="startTimeStamp != null">
+        start_time_stamp = #{startTimeStamp,jdbcType=VARCHAR},
+      </if>
+      <if test="endTimeStamp != null">
+        end_time_stamp = #{endTimeStamp,jdbcType=VARCHAR},
+      </if>
+      <if test="totalCosts != null">
+        total_costs = #{totalCosts,jdbcType=VARCHAR},
+      </if>
+      <if test="byteSpeedPerSecond != null">
+        byte_speed_per_second = #{byteSpeedPerSecond,jdbcType=VARCHAR},
+      </if>
+      <if test="recordSpeedPerSecond != null">
+        record_speed_per_second = #{recordSpeedPerSecond,jdbcType=VARCHAR},
+      </if>
+      <if test="totalReadRecords != null">
+        total_read_records = #{totalReadRecords,jdbcType=VARCHAR},
+      </if>
+      <if test="totalErrorRecords != null">
+        total_error_records = #{totalErrorRecords,jdbcType=VARCHAR},
+      </if>
+      <if test="transformerSucceedRecords != null">
+        trans_former_succeed_records = #{transformerSucceedRecords,jdbcType=VARCHAR},
+      </if>
+      <if test="transformerFailedRecords != null">
+        trans_former_failed_records = #{transformerFailedRecords,jdbcType=VARCHAR},
+      </if>
+      <if test="transformerFilterRecords != null">
+        trans_former_filter_records = #{transformerFilterRecords,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null">
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+</mapper>
