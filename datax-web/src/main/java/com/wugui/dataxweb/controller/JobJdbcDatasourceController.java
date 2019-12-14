@@ -2,20 +2,17 @@ package com.wugui.dataxweb.controller;
 
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.api.ApiController;
-import com.baomidou.mybatisplus.extension.api.R;
+import com.github.pagehelper.PageInfo;
 import com.wugui.dataxweb.entity.JobJdbcDatasource;
 import com.wugui.dataxweb.service.IJobJdbcDatasourceService;
+import com.wugui.dataxweb.util.IpUtils;
 import com.wugui.dataxweb.util.PageUtils;
+import com.wugui.dataxweb.vo.ResponseData;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +26,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/jobJdbcDatasource")
 @Api(tags = "jdbc数据源配置接口")
-public class JobJdbcDatasourceController extends ApiController {
+public class JobJdbcDatasourceController extends BaseController {
     /**
      * 服务对象
      */
@@ -41,18 +38,34 @@ public class JobJdbcDatasourceController extends ApiController {
      *
      * @return 所有数据
      */
-    @GetMapping
+    @GetMapping("/list")
     @ApiOperation("分页查询所有数据")
-    @ApiImplicitParams(
-            {@ApiImplicitParam(paramType = "query", dataType = "String", name = "current", value = "当前页", defaultValue = "1", required = true),
-                    @ApiImplicitParam(paramType = "query", dataType = "String", name = "size", value = "一页大小", defaultValue = "10", required = true),
-                    @ApiImplicitParam(paramType = "query", dataType = "Boolean", name = "ifCount", value = "是否查询总数", defaultValue = "true"),
-                    @ApiImplicitParam(paramType = "query", dataType = "String", name = "ascs", value = "升序字段，多个用逗号分隔"),
-                    @ApiImplicitParam(paramType = "query", dataType = "String", name = "descs", value = "降序字段，多个用逗号分隔")
-            })
-    public R<IPage<JobJdbcDatasource>> selectAll() {
-        BaseForm<JobJdbcDatasource> baseForm = new BaseForm();
-        return success(this.jobJdbcDatasourceService.page(baseForm.getPlusPagingQueryEntity(), pageQueryWrapperCustom(baseForm.getParameters())));
+//    @ApiImplicitParams(
+//            {@ApiImplicitParam(paramType = "query", dataType = "String", name = "current", value = "当前页", defaultValue = "1", required = true),
+//                    @ApiImplicitParam(paramType = "query", dataType = "String", name = "size", value = "一页大小", defaultValue = "10", required = true),
+//                    @ApiImplicitParam(paramType = "query", dataType = "Boolean", name = "ifCount", value = "是否查询总数", defaultValue = "true"),
+//                    @ApiImplicitParam(paramType = "query", dataType = "String", name = "ascs", value = "升序字段，多个用逗号分隔"),
+//                    @ApiImplicitParam(paramType = "query", dataType = "String", name = "descs", value = "降序字段，多个用逗号分隔")
+//            })
+    public ResponseData<PageInfo<JobJdbcDatasource>> selectAll(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize) {
+//        BaseForm<JobJdbcDatasource> baseForm = new BaseForm();
+//        Long userId = getCurrentUser().getId();
+//        IPage<JobJdbcDatasource> page = this.jobJdbcDatasourceService.page(baseForm.getPlusPagingQueryEntity(), pageQueryWrapperCustom(baseForm.getParameters()));
+//        List<JobJdbcDatasource> records = page.getRecords();
+//        List<JobJdbcDatasource> list = new ArrayList<>();
+//        if (!CollectionUtils.isEmpty(records)) {
+//            records.forEach(t-> {
+//                if (userId.equals(t.getUserId())) {
+//                    list.add(t);
+//                }
+//            });
+//        }
+//        if (!CollectionUtils.isEmpty(list)) {
+//            return response()
+//        }
+//        return response();
+        Long userId = getCurrentUser().getId();
+        return response(jobJdbcDatasourceService.selectAll(userId, pageNum, pageSize));
     }
 
     /**
@@ -105,9 +118,9 @@ public class JobJdbcDatasourceController extends ApiController {
      * @return 单条数据
      */
     @ApiOperation("通过主键查询单条数据")
-    @GetMapping("{id}")
-    public R<JobJdbcDatasource> selectOne(@PathVariable Serializable id) {
-        return success(this.jobJdbcDatasourceService.getById(id));
+    @GetMapping("/id")
+    public ResponseData<JobJdbcDatasource> selectOne(@RequestParam("id") Long id) {
+        return response(this.jobJdbcDatasourceService.getById(id));
     }
 
     /**
@@ -117,9 +130,12 @@ public class JobJdbcDatasourceController extends ApiController {
      * @return 新增结果
      */
     @ApiOperation("新增数据")
-    @PostMapping
-    public R<Boolean> insert(@RequestBody JobJdbcDatasource entity) {
-        return success(this.jobJdbcDatasourceService.save(entity));
+    @PostMapping("/add")
+    public ResponseData<Boolean> insert(@RequestBody JobJdbcDatasource entity) {
+        entity.setUserId(getCurrentUser().getId());
+        String ipAddress = IpUtils.getIpAddress(request);
+        entity.setIpAddress(ipAddress);
+        return response(this.jobJdbcDatasourceService.save(entity));
     }
 
     /**
@@ -128,10 +144,10 @@ public class JobJdbcDatasourceController extends ApiController {
      * @param entity 实体对象
      * @return 修改结果
      */
-    @PutMapping
+    @PostMapping("/update")
     @ApiOperation("修改数据")
-    public R<Boolean> update(@RequestBody JobJdbcDatasource entity) {
-        return success(this.jobJdbcDatasourceService.updateById(entity));
+    public ResponseData<Boolean> update(@RequestBody JobJdbcDatasource entity) {
+        return response(this.jobJdbcDatasourceService.updateById(entity));
     }
 
     /**
@@ -140,9 +156,9 @@ public class JobJdbcDatasourceController extends ApiController {
      * @param idList 主键结合
      * @return 删除结果
      */
-    @DeleteMapping
+    @GetMapping("/delete")
     @ApiOperation("删除数据")
-    public R<Boolean> delete(@RequestParam("idList") List<Long> idList) {
-        return success(this.jobJdbcDatasourceService.removeByIds(idList));
+    public ResponseData<Boolean> delete(@RequestParam("idList") List<Long> idList) {
+        return response(this.jobJdbcDatasourceService.removeByIds(idList));
     }
 }

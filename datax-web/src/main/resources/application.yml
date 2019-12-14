@@ -16,9 +16,26 @@ spring:
     #    password: JjWkXz2018DEV
     port: 6379
 
+
+security:
+  oauth2:
+    resource:
+      token-info-uri: http://localhost:9527/oauth/token
+    client:
+      client-id: 3e3dbb44a45b11f2
+      client-secret: 123456
+
 management:
     security:
     enabled: false
+
+#pagehelper
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+  #returnPageInfo: check
 
 mybatis-plus:
   # mapper.xml文件扫描

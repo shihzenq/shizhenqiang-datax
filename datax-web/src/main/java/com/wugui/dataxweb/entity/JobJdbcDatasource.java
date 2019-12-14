@@ -31,6 +31,12 @@ public class JobJdbcDatasource extends Model<JobJdbcDatasource> {
     private Long id;
 
     /**
+     * 用户id
+     */
+    @ApiModelProperty(value = "用户id")
+    private Long userId;
+
+    /**
      * 数据源名称
      */
     @ApiModelProperty(value = "数据源名称")
@@ -53,6 +59,18 @@ public class JobJdbcDatasource extends Model<JobJdbcDatasource> {
      */
     @ApiModelProperty(value = "密码")
     private String jdbcPassword;
+
+    /**
+     * ip地址
+     */
+    @ApiModelProperty(value = "ip地址")
+    private String ipAddress;
+
+    /**
+     * 端口号
+     */
+    @ApiModelProperty(value = "端口号")
+    private String port;
 
     /**
      * jdbc url

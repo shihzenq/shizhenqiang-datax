@@ -2,16 +2,15 @@ package com.wugui.dataxweb.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.wugui.dataxweb.dto.datasource.DataSourceDTO;
+import com.github.pagehelper.PageInfo;
 import com.wugui.dataxweb.dto.group.GroupDTO;
 import com.wugui.dataxweb.dto.user.ModifyPasswordDTO;
+import com.wugui.dataxweb.dto.user.UserSearchDTO;
 import com.wugui.dataxweb.dto.user.UserUpdateDTO;
-import com.wugui.dataxweb.entity.JobDataSourceEntity;
 import com.wugui.dataxweb.entity.JobGroupEntity;
 import com.wugui.dataxweb.entity.Role;
 import com.wugui.dataxweb.entity.UserEntity;
 import com.wugui.dataxweb.export.UserErrorExcel;
-import com.wugui.dataxweb.service.JobDataSourceService;
 import com.wugui.dataxweb.service.JobGroupService;
 import com.wugui.dataxweb.service.RoleService;
 import com.wugui.dataxweb.service.UserService;
@@ -43,8 +42,6 @@ public class SystemManagementController extends BaseController {
 
     private JobGroupService JobGroupService;
 
-    private JobDataSourceService jobDataSourceService;
-
     private RoleService roleService;
 
     private UserService userService;
@@ -61,17 +58,20 @@ public class SystemManagementController extends BaseController {
         return response(entity);
     }
 
-    @PostMapping("/add-datasource")
-    @ApiOperation(value = "数据源新建连接")
-    public ResponseData<?> addDatasource(@RequestBody @Validated({UpdateChecks.class}) DataSourceDTO dto, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return responseFormError(bindingResult);
-        }
-        JobDataSourceEntity dataSourceEntity = new JobDataSourceEntity();
-        BeanUtils.copyProperties(dto, dataSourceEntity);
-        JobDataSourceEntity jobDataSourceEntity = jobDataSourceService.add(dataSourceEntity);
-        return response(jobDataSourceEntity);
-    }
+
+//    @PostMapping("/add-datasource")
+//    @ApiOperation(value = "数据源新建连接")
+//    public ResponseData<?> addDatasource(@RequestBody @Validated({UpdateChecks.class}) DataSourceDTO dto, BindingResult bindingResult) {
+//        if (bindingResult.hasErrors()) {
+//            return responseFormError(bindingResult);
+//        }
+//        JobDataSourceEntity dataSourceEntity = new JobDataSourceEntity();
+//        BeanUtils.copyProperties(dto, dataSourceEntity);
+//        JobDataSourceEntity jobDataSourceEntity = jobDataSourceService.add(dataSourceEntity);
+//        return response(jobDataSourceEntity);
+//    }
+
+
 
     @PostMapping("/role-list")
     @ApiOperation(value = "角色列表")
@@ -128,9 +128,9 @@ public class SystemManagementController extends BaseController {
 
     @PostMapping("/user-list")
     @ApiOperation(value = "用户列表")
-    public ResponseData<?> userList() {
-        List<UserEntity> userEntityList = userService.getAll();
-        return response(userEntityList);
+    public ResponseData<PageInfo<UserEntity>> userList(@RequestBody UserSearchDTO dto) {
+        PageInfo<UserEntity> all = userService.getAll(dto.getUsername(), dto.getPageNum(), dto.getPageSize());
+        return response(all);
     }
 
 
@@ -186,11 +186,6 @@ public class SystemManagementController extends BaseController {
     @Autowired
     public void setRoleService(RoleService roleService) {
         this.roleService = roleService;
-    }
-
-    @Autowired
-    public void setJobDataSourceService(JobDataSourceService jobDataSourceService) {
-        this.jobDataSourceService = jobDataSourceService;
     }
 
     @Autowired

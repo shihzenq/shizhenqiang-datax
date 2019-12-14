@@ -1,9 +1,12 @@
 package com.wugui.dataxweb.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.wugui.dataxweb.dao.JobJdbcDatasourceMapper;
 import com.wugui.dataxweb.entity.JobJdbcDatasource;
 import com.wugui.dataxweb.service.IJobJdbcDatasourceService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,4 +21,19 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class JobJdbcDatasourceServiceImpl extends ServiceImpl<JobJdbcDatasourceMapper, JobJdbcDatasource> implements IJobJdbcDatasourceService {
 
+    private JobJdbcDatasourceMapper jobJdbcDatasourceMapper;
+
+    @Override
+    public PageInfo<JobJdbcDatasource> selectAll(Long userId, Integer pageNum, Integer pageSize) {
+        if (null != pageNum && pageSize != null) {
+            PageHelper.startPage(pageNum, pageSize);
+
+        }
+        return new PageInfo<>(jobJdbcDatasourceMapper.selectAll(userId));
+    }
+
+    @Autowired
+    public void setJobJdbcDatasourceMapper(JobJdbcDatasourceMapper jobJdbcDatasourceMapper) {
+        this.jobJdbcDatasourceMapper = jobJdbcDatasourceMapper;
+    }
 }

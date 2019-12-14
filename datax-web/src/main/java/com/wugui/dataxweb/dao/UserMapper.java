@@ -16,7 +16,7 @@ public interface UserMapper extends BaseMapper<UserEntity> {
 
     int insertSelective(UserEntity userEntity);
 
-    List<UserEntity> getAll();
+    List<UserEntity> getAll(@Param("username") String username);
 
     int updateByPrimaryKeySelective(UserEntity userEntity);
 

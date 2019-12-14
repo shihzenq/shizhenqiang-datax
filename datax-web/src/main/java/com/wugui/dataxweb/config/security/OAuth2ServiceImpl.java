@@ -62,8 +62,10 @@ public class OAuth2ServiceImpl implements OAuth2Service {
         HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<>(map, requestHeaders);
         AccessToken accessToken = null;
         try {
-            accessToken = restTemplate.postForObject("//AUTH-SERVER/oauth/token", httpEntity, AccessToken.class);
+            accessToken = restTemplate.postForObject("http://localhost:9527", httpEntity, AccessToken.class);
+//            accessToken = restTemplate.postForObject("http://127.0.0.1:9527", httpEntity, AccessToken.class);
         } catch (HttpClientErrorException e) {
+            e.printStackTrace();
             if(e.getRawStatusCode() == 401) {
                 throw new UsernameNotFoundException("当前用户手机号不存在，请重新输入！");
             } else if (e.getRawStatusCode() == 400) {
@@ -110,11 +112,11 @@ public class OAuth2ServiceImpl implements OAuth2Service {
             e.printStackTrace();
         }
 
-        return restTemplate.postForObject("//AUTH-SERVER/oauth/logout", httpEntity, String.class, map);
+        return restTemplate.postForObject("/oauth/logout", httpEntity, String.class, map);
     }
 
     public boolean addUser(UserEntity enterpriseUser) {
-        Map map = restTemplate.postForObject("//AUTH-SERVER/user/create", packageUser(enterpriseUser, password), Map.class);
+        Map map = restTemplate.postForObject("/user/create", packageUser(enterpriseUser, password), Map.class);
         assert map != null;
         if ((Boolean) map.get("result")) {
             enterpriseUser.setUcUid(Long.valueOf(String.valueOf(map.get("value"))));
@@ -125,7 +127,7 @@ public class OAuth2ServiceImpl implements OAuth2Service {
     @Override
     public boolean addUser(UserEntity accountSetUser, String password) {
         Map map= packageUser(accountSetUser, password);
-        Map res = restTemplate.postForObject("//AUTH-SERVER/user/create", map, Map.class);
+        Map res = restTemplate.postForObject("/user/create", map, Map.class);
         assert res != null;
         if ((Boolean) res.get("result")) {
             accountSetUser.setUcUid(Long.valueOf(res.get("value").toString()));
@@ -135,7 +137,7 @@ public class OAuth2ServiceImpl implements OAuth2Service {
 
 
     public boolean updateUser(UserEntity enterpriseUser, String password) {
-        Map map = restTemplate.postForObject("//AUTH-SERVER/user/update", packageUser(enterpriseUser, password), Map.class);
+        Map map = restTemplate.postForObject("/user/update", packageUser(enterpriseUser, password), Map.class);
         assert map != null;
         if ((Boolean) map.get("result")) {
             enterpriseUser.setUcUid(Long.valueOf(String.valueOf(map.get("value"))));
@@ -156,7 +158,7 @@ public class OAuth2ServiceImpl implements OAuth2Service {
         data.put("personStatus", status);
         data.put("onJob", true); // erp当前暂时不支持离职状态后返聘
 //        data.put("outId", "wkxz-" + enterpriseUser.getEnterpriseId());
-        JSONObject res = restTemplate.postForObject("//AUTH-SERVER/user/person-status", data, JSONObject.class);
+        JSONObject res = restTemplate.postForObject("/user/person-status", data, JSONObject.class);
         return res != null && res.getBoolean("result");
     }
 

@@ -3,6 +3,8 @@ package com.wugui.dataxweb.service.impl;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.wugui.dataxweb.config.security.OAuth2Service;
 import com.wugui.dataxweb.dao.UserMapper;
 import com.wugui.dataxweb.entity.UserEntity;
@@ -10,6 +12,7 @@ import com.wugui.dataxweb.service.UserService;
 import com.wugui.dataxweb.util.StringUtil;
 import com.wugui.dataxweb.validator.PattensValidator;
 import com.wugui.dataxweb.validator.annotation.Patterns;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -114,8 +117,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
     }
 
     @Override
-    public List<UserEntity> getAll() {
-        return userMapper.getAll();
+    public PageInfo<UserEntity> getAll(String username, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        if (StringUtils.isNotBlank(username)) {
+            return new PageInfo<>(userMapper.getAll(username));
+        } else {
+            return new PageInfo<>(Arrays.asList(userMapper.getByUsername(username)));
+        }
     }
 
     @Override

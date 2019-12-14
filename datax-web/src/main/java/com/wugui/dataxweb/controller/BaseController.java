@@ -4,6 +4,8 @@ package com.wugui.dataxweb.controller;
 import com.wugui.dataxweb.config.security.IAuthenticationFacade;
 import com.wugui.dataxweb.entity.UserEntity;
 import com.wugui.dataxweb.vo.ResponseData;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.validation.BindingResult;
@@ -13,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public abstract class BaseController {
+
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     HttpServletRequest request;
 
