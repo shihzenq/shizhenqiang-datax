@@ -1,5 +1,6 @@
 package com.wugui.dataxweb.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -28,8 +29,12 @@ public class JobJdbcDatasourceServiceImpl extends ServiceImpl<JobJdbcDatasourceM
         if (null != pageNum && pageSize != null) {
             PageHelper.startPage(pageNum, pageSize);
 
+        } else {
+            PageHelper.startPage(1, 10);
         }
-        return new PageInfo<>(jobJdbcDatasourceMapper.selectAll(userId));
+        QueryWrapper<JobJdbcDatasource> wrapper = new QueryWrapper<>();
+        wrapper.eq("user_id", userId);
+        return new PageInfo<>(jobJdbcDatasourceMapper.selectList(wrapper));
     }
 
     @Autowired

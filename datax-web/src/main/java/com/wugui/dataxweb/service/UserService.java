@@ -22,4 +22,6 @@ public interface UserService extends IService<UserEntity> {
     Boolean updateUser(UserEntity userEntity);
 
     Boolean deleteUpdate(Long id);
+
+    UserEntity add(UserEntity userEntity);
 }

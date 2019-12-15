@@ -8,17 +8,17 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface UserMapper extends BaseMapper<UserEntity> {
+public interface UserMapper extends BaseMapper<UserEntity>{
 
     UserEntity getByUsername(@Param("username") String username);
 
     int countByUsername(@Param("username") String username);
 
-    int insertSelective(UserEntity userEntity);
+    int insertSelectiveUser(UserEntity userEntity);
 
     List<UserEntity> getAll(@Param("username") String username);
 
-    int updateByPrimaryKeySelective(UserEntity userEntity);
+    int updateByPrimaryKeySelectiveUser(UserEntity userEntity);
 
-    int deleteUpdate(Long id);
+    //int deleteUpdate(Long id);
 }

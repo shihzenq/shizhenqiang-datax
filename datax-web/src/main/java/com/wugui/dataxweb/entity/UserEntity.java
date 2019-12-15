@@ -6,7 +6,7 @@ import lombok.Data;
 import javax.persistence.Table;
 
 @Data
-@Table(name = "user")
+@Table(name = "user_entity")
 public class UserEntity extends BaseEntity{
 
     @ApiModelProperty(value = "姓名", notes = "姓名")

@@ -24,16 +24,8 @@ public class AuthInfo {
 
     private StringRedisTemplate template;
 
-    public void setAccountSetId(String requestNo, Long accountSetId) {
-        setValue(requestNo, accountSetId, ACCOUNT_SET_ID);
-    }
-
     public void setUserId(String requestNo, Long userId) {
         setValue(requestNo, userId, USER_ID);
-    }
-
-    public Long getAccountSetId(String requestNo) {
-        return getValue(requestNo, ACCOUNT_SET_ID);
     }
 
     public Long getUserId(String requestNo) {
@@ -49,13 +41,14 @@ public class AuthInfo {
         JSONObject object;
         if (StringUtil.isEmpty(authInfo)) {
             object = new JSONObject();
-            if (USER_ID.equals(key)) {
-                object.put(ACCOUNT_SET_ID, 0);
-                object.put(USER_ID, value);
-            } else {
-                object.put(ACCOUNT_SET_ID, value);
-                object.put(USER_ID, 0);
-            }
+//            if (USER_ID.equals(key)) {
+//                object.put(ACCOUNT_SET_ID, 0);
+//                object.put(USER_ID, value);
+//            } else {
+//                object.put(ACCOUNT_SET_ID, value);
+//                object.put(USER_ID, 0);
+//            }
+            object.put(USER_ID,value);
         } else {
             object = JSON.parseObject(authInfo);
             object.put(key, value);

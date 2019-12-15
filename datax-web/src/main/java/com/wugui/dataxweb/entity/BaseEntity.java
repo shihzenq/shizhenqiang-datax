@@ -24,7 +24,7 @@ public class BaseEntity implements Serializable {
             pattern = "yyyy-MM-dd HH:mm:ss",
             timezone = "GMT+8"
     )
-    protected Date createTime;
+    protected Date createTime = new Date();
     @DateTimeFormat(
             pattern = "yyyy-MM-dd HH:mm:ss"
     )
@@ -32,7 +32,7 @@ public class BaseEntity implements Serializable {
             pattern = "yyyy-MM-dd HH:mm:ss",
             timezone = "GMT+8"
     )
-    protected Date updateTime;
+    protected Date updateTime = new Date();
 
     public BaseEntity() {
     }

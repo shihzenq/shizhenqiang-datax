@@ -13,4 +13,5 @@ public class JobGroupEntity extends BaseEntity{
     private String name;
 
     private String remark;
+
 }

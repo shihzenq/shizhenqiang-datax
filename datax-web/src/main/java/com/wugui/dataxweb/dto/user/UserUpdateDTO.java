@@ -1,6 +1,7 @@
 package com.wugui.dataxweb.dto.user;
 
 import com.wugui.dataxweb.validator.annotation.Patterns;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -8,6 +9,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Data
+@ApiModel(value = "用户修改接受类")
 public class UserUpdateDTO {
 
     @ApiModelProperty(value = "用户id", notes = "用户id")

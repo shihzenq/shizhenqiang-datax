@@ -17,77 +17,43 @@
   </resultMap>
 
   <sql id="Base_Column_List">
-    id, uc_uid, enterprise_id, username, is_admin, status, phone, password_hash, login_failure_count,
-    name, email, organization_id, organization_path, gender, create_user_id, create_time, 
+    id, uc_uid, username, admin, phone, password_hash,
+    name, sex, create_user_id, create_time,
     update_time
   </sql>
 
   <select id="getByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from user
-    where username = #{username,jdbcType=VARCHAR} and deleted = 0
+    from user_entity
+    where username = #{username,jdbcType=VARCHAR}
   </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from enterprise_user
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" keyProperty="id" useGeneratedKeys="true" parameterType="com.wukongxiaozi.api.model.EnterpriseUser">
-    insert into enterprise_user (uc_uid, enterprise_id, username,
-      is_admin, status, phone,
-      password_hash, login_failure_count, name,
-      email, organization_id, organization_path,
-      gender, create_user_id, create_time,
-      update_time)
-    values (#{ucUid,jdbcType=BIGINT}, #{enterpriseId,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR},
-      #{isAdmin,jdbcType=BIT}, #{status,jdbcType=SMALLINT}, #{phone,jdbcType=VARCHAR},
-      #{passwordHash,jdbcType=VARCHAR}, #{loginFailureCount,jdbcType=SMALLINT}, #{name,jdbcType=VARCHAR},
-      #{email,jdbcType=VARCHAR}, #{organizationId,jdbcType=BIGINT}, #{organizationPath,jdbcType=VARCHAR},
-      #{gender,jdbcType=BIT}, #{createUserId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP},
-      #{updateTime,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.wugui.dataxweb.entity.UserEntity" keyProperty="id" useGeneratedKeys="true">
-    insert into enterprise_user
+
+  <insert id="insertSelectiveUser" parameterType="com.wugui.dataxweb.entity.UserEntity" keyProperty="id" useGeneratedKeys="true">
+    insert into user_entity
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="ucUid != null">
-        uc_uid,
-      </if>
-      <if test="enterpriseId != null">
-        enterprise_id,
-      </if>
+
       <if test="username != null">
         username,
       </if>
-      <if test="isAdmin != null">
-        is_admin,
+      <if test="admin != null">
+        admin,
       </if>
-      <if test="status != null">
-        status,
-      </if>
+
       <if test="phone != null">
         phone,
       </if>
       <if test="passwordHash != null">
         password_hash,
       </if>
-      <if test="loginFailureCount != null">
-        login_failure_count,
-      </if>
+
       <if test="name != null">
         name,
       </if>
-      <if test="email != null">
-        email,
-      </if>
-      <if test="organizationId != null">
-        organization_id,
-      </if>
-      <if test="organizationPath != null">
-        organization_path,
-      </if>
-      <if test="gender != null">
-        gender,
+
+      <if test="sex != null">
+        sex,
       </if>
       <if test="createUserId != null">
         create_user_id,
@@ -103,44 +69,27 @@
       <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="ucUid != null">
-        #{ucUid,jdbcType=BIGINT},
-      </if>
-      <if test="enterpriseId != null">
-        #{enterpriseId,jdbcType=BIGINT},
-      </if>
+
       <if test="username != null">
         #{username,jdbcType=VARCHAR},
       </if>
-      <if test="isAdmin != null">
-        #{isAdmin,jdbcType=BIT},
+      <if test="admin != null">
+        #{admin,jdbcType=BIT},
       </if>
-      <if test="status != null">
-        #{status,jdbcType=SMALLINT},
-      </if>
+
       <if test="phone != null">
         #{phone,jdbcType=VARCHAR},
       </if>
       <if test="passwordHash != null">
         #{passwordHash,jdbcType=VARCHAR},
       </if>
-      <if test="loginFailureCount != null">
-        #{loginFailureCount,jdbcType=SMALLINT},
-      </if>
+
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="email != null">
-        #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="organizationId != null">
-        #{organizationId,jdbcType=BIGINT},
-      </if>
-      <if test="organizationPath != null">
-        #{organizationPath,jdbcType=VARCHAR},
-      </if>
-      <if test="gender != null">
-        #{gender,jdbcType=BIT},
+
+      <if test="sex != null">
+        #{sex,jdbcType=BIT},
       </if>
       <if test="createUserId != null">
         #{createUserId,jdbcType=BIGINT},
@@ -153,47 +102,31 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.wugui.dataxweb.entity.UserEntity">
-    update enterprise_user
+
+  <update id="updateByPrimaryKeySelectiveUser" parameterType="com.wugui.dataxweb.entity.UserEntity">
+    update user_entity
     <set>
-      <if test="ucUid != null">
-        uc_uid = #{ucUid,jdbcType=BIGINT},
-      </if>
-      <if test="enterpriseId != null">
-        enterprise_id = #{enterpriseId,jdbcType=BIGINT},
-      </if>
+
       <if test="username != null">
         username = #{username,jdbcType=VARCHAR},
       </if>
-      <if test="isAdmin != null">
-        is_admin = #{isAdmin,jdbcType=BIT},
+      <if test="admin != null">
+        admin = #{admin,jdbcType=BIT},
       </if>
-      <if test="status != null">
-        status = #{status,jdbcType=SMALLINT},
-      </if>
+
       <if test="phone != null">
         phone = #{phone,jdbcType=VARCHAR},
       </if>
       <if test="passwordHash != null">
         password_hash = #{passwordHash,jdbcType=VARCHAR},
       </if>
-      <if test="loginFailureCount != null">
-        login_failure_count = #{loginFailureCount,jdbcType=SMALLINT},
-      </if>
+
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="email != null">
-        email = #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="organizationId != null">
-        organization_id = #{organizationId,jdbcType=BIGINT},
-      </if>
-      <if test="organizationPath != null">
-        organization_path = #{organizationPath,jdbcType=VARCHAR},
-      </if>
-      <if test="gender != null">
-        gender = #{gender,jdbcType=BIT},
+
+      <if test="sex != null">
+        sex = #{sex,jdbcType=BIT},
       </if>
       <if test="createUserId != null">
         create_user_id = #{createUserId,jdbcType=BIGINT},
@@ -212,11 +145,11 @@
     select
     <include refid="Base_Column_List" />
     from
-    user
+    user_entity
   </select>
 
   <select id="countByUsername" resultType="java.lang.Integer">
-    select count(id) from enterprise_user
+    select count(id) from user_entity
     where username = #{username}
   </select>
 

@@ -3,6 +3,8 @@ package com.wugui.dataxweb.controller;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageInfo;
+import com.wugui.dataxweb.config.security.RequiredPermission;
+import com.wugui.dataxweb.constants.Permissions;
 import com.wugui.dataxweb.entity.JobJdbcDatasource;
 import com.wugui.dataxweb.service.IJobJdbcDatasourceService;
 import com.wugui.dataxweb.util.IpUtils;
@@ -144,6 +146,7 @@ public class JobJdbcDatasourceController extends BaseController {
      * @param entity 实体对象
      * @return 修改结果
      */
+    @RequiredPermission(value = Permissions.DATA_SOURCE_DETAIL)
     @PostMapping("/update")
     @ApiOperation("修改数据")
     public ResponseData<Boolean> update(@RequestBody JobJdbcDatasource entity) {
@@ -156,6 +159,7 @@ public class JobJdbcDatasourceController extends BaseController {
      * @param idList 主键结合
      * @return 删除结果
      */
+    @RequiredPermission(value = Permissions.DATA_SOURCE_delete)
     @GetMapping("/delete")
     @ApiOperation("删除数据")
     public ResponseData<Boolean> delete(@RequestParam("idList") List<Long> idList) {

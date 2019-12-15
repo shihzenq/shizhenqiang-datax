@@ -15,6 +15,7 @@ import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceS
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -62,8 +63,9 @@ public class OAuth2ServiceImpl implements OAuth2Service {
         HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<>(map, requestHeaders);
         AccessToken accessToken = null;
         try {
-            accessToken = restTemplate.postForObject("http://localhost:9527", httpEntity, AccessToken.class);
-//            accessToken = restTemplate.postForObject("http://127.0.0.1:9527", httpEntity, AccessToken.class);
+//            accessToken = restTemplate.postForObject("http://localhost:9527/oauth/token", httpEntity, AccessToken.class);
+//             accessToken = restTemplate.exchange("http://localhost:9527/", HttpMethod.POST,httpEntity,AccessToken.class, new Object[]{}).getBody();
+            accessToken = restTemplate.postForObject("http://127.0.0.1:9527", httpEntity, AccessToken.class);
         } catch (HttpClientErrorException e) {
             e.printStackTrace();
             if(e.getRawStatusCode() == 401) {

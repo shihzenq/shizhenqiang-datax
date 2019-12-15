@@ -13,16 +13,16 @@ import com.alibaba.datax.core.util.container.CoreConstant;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import com.wugui.dataxweb.dao.DataXJobMapper;
 import com.wugui.dataxweb.dto.RunJobDto;
 import com.wugui.dataxweb.entity.DataXLog;
 import com.wugui.dataxweb.entity.JobLog;
 import com.wugui.dataxweb.service.IDataxJobService;
 import com.wugui.dataxweb.service.IJobLogService;
 import com.wugui.dataxweb.util.ProcessUtil;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -44,9 +44,8 @@ import java.util.concurrent.*;
  * @author: huzekang
  * @create: 2019-06-17 11:26
  **/
-@Slf4j
 @Service
-public class IDataxJobServiceImpl implements IDataxJobService {
+public class IDataxJobServiceImpl extends ServiceImpl<DataXJobMapper, DataXLog> implements IDataxJobService {
 
     private final static ConcurrentMap<String, String> jobTmpFiles = Maps.newConcurrentMap();
 
@@ -56,6 +55,10 @@ public class IDataxJobServiceImpl implements IDataxJobService {
 
     private ExecutorService jobPool = new ThreadPoolExecutor(5, 200, 0L, TimeUnit.MILLISECONDS,
             new LinkedBlockingQueue<Runnable>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
+
+
+    @Autowired
+    private DataXJobMapper dataXJobMapper;
 
     /**
      * 日志文件保存目录
@@ -178,9 +181,10 @@ public class IDataxJobServiceImpl implements IDataxJobService {
                 // 执行日志插入
                 DataXLog dataXLog = new DataXLog();
                 BeanUtils.copyProperties(source, dataXLog);
-
+                dataXJobMapper.insert(dataXLog);
+                return "success";
             }
         }
-        return null;
+        return "fail";
     }
 }

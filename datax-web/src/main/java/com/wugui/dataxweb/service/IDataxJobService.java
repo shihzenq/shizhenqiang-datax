@@ -1,7 +1,9 @@
 package com.wugui.dataxweb.service;
 
 import com.alibaba.datax.common.log.LogResult;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.wugui.dataxweb.dto.RunJobDto;
+import com.wugui.dataxweb.entity.DataXLog;
 
 import java.util.List;
 
@@ -10,7 +12,7 @@ import java.util.List;
  * @author: huzekang
  * @create: 2019-06-17 11:25
  **/
-public interface IDataxJobService {
+public interface IDataxJobService extends IService<DataXLog> {
     /**
      * 根据json字符串用线程池启动一个datax作业
      *

@@ -2,6 +2,8 @@ package com.wugui.dataxweb.service.impl;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -21,6 +23,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.sql.Wrapper;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -101,7 +104,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
             }
 
             if (array.size() == 0 && !CollectionUtils.isEmpty(userEntityList)) {
-                userEntityList.forEach(t-> userMapper.insertSelective(t));
+                userEntityList.forEach(t-> userMapper.insert(t));
                 json.put("code", 0);
                 json.put("msg", "用户导入成功！");
             } else {
@@ -120,10 +123,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
     public PageInfo<UserEntity> getAll(String username, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         if (StringUtils.isNotBlank(username)) {
-            return new PageInfo<>(userMapper.getAll(username));
-        } else {
-            return new PageInfo<>(Arrays.asList(userMapper.getByUsername(username)));
+            QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("username", username);
+            return new PageInfo<>(userMapper.selectList(queryWrapper));
         }
+        return new PageInfo<>(userMapper.selectList(null));
     }
 
     @Override
@@ -134,17 +138,27 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
 //        if (null != userEntity.getDeleted()) {
 //            oAuth2Service.status(userEntity, userEntity.getDeleted(), true);
 //        }
-        return userMapper.updateByPrimaryKeySelective(userEntity) > 0;
+        UpdateWrapper<UserEntity> wrapper = new UpdateWrapper<>();
+        wrapper.eq("id", userEntity.getId());
+        return userMapper.update(userEntity, wrapper) > 0;
     }
 
     @Override
     public Boolean updateUser(UserEntity userEntity) {
-        return userMapper.updateByPrimaryKeySelective(userEntity) > 0;
+        UpdateWrapper<UserEntity> wrapper = new UpdateWrapper<>();
+        wrapper.eq("id", userEntity.getId());
+        return userMapper.update(userEntity, wrapper) > 0;
     }
 
     @Override
     public Boolean deleteUpdate(Long id) {
         return userMapper.deleteById(id) > 0;
+    }
+
+    @Override
+    public UserEntity add(UserEntity userEntity) {
+        userMapper.insert(userEntity);
+        return userEntity;
     }
 
     private boolean checkRow(Row row, JSONObject jsonError, List<String> sexList) {

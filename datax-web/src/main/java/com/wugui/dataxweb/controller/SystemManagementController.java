@@ -3,14 +3,21 @@ package com.wugui.dataxweb.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
+import com.wugui.dataxweb.config.security.RequiredPermission;
+import com.wugui.dataxweb.constants.Permissions;
+import com.wugui.dataxweb.dto.SearchDTO;
 import com.wugui.dataxweb.dto.group.GroupDTO;
+import com.wugui.dataxweb.dto.group.GroupSearchDTO;
+import com.wugui.dataxweb.dto.group.GroupUpdateDTO;
 import com.wugui.dataxweb.dto.user.ModifyPasswordDTO;
 import com.wugui.dataxweb.dto.user.UserSearchDTO;
 import com.wugui.dataxweb.dto.user.UserUpdateDTO;
+import com.wugui.dataxweb.entity.DataXLog;
 import com.wugui.dataxweb.entity.JobGroupEntity;
 import com.wugui.dataxweb.entity.Role;
 import com.wugui.dataxweb.entity.UserEntity;
 import com.wugui.dataxweb.export.UserErrorExcel;
+import com.wugui.dataxweb.service.DataXLogService;
 import com.wugui.dataxweb.service.JobGroupService;
 import com.wugui.dataxweb.service.RoleService;
 import com.wugui.dataxweb.service.UserService;
@@ -32,6 +39,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -46,16 +54,52 @@ public class SystemManagementController extends BaseController {
 
     private UserService userService;
 
+    private DataXLogService dataXLogService;
+
+    @RequiredPermission(value = Permissions.USER_MANAGER)
     @ApiOperation(value = "作业组管理新增" , notes = "作业组管理新增")
     @PostMapping("/add-group")
     public ResponseData<?> addGroup(@RequestBody @Validated({AddChecks.class}) GroupDTO dto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return responseFormError(bindingResult);
         }
+
         JobGroupEntity groupEntity = new JobGroupEntity();
         BeanUtils.copyProperties(dto, groupEntity);
+        groupEntity.setCreateUserId(getCurrentUser().getId());
+        groupEntity.setCreateTime(new Date());
+        groupEntity.setUpdateTime(new Date());
+
+        if (!JobGroupService.countGroupName(dto.getName(), getCurrentUser().getId())) {
+            return responseError("组名重复！");
+        }
         JobGroupEntity entity = JobGroupService.add(groupEntity);
         return response(entity);
+    }
+
+    @RequiredPermission(value = Permissions.USER_MANAGER)
+    @ApiOperation(value = "作业组管理列表" , notes = "作业组管理列表")
+    @PostMapping("/list-group")
+    public ResponseData<PageInfo<JobGroupEntity>> groupList(@RequestBody  GroupSearchDTO dto) {
+        PageInfo<JobGroupEntity> pageInfo = JobGroupService.getAll(dto, getCurrentUser().getId());
+        return response(pageInfo);
+    }
+
+    @RequiredPermission(value = Permissions.USER_MANAGER)
+    @ApiOperation(value = "作业组管理修改" , notes = "作业组管理修改")
+    @PostMapping("/update-group")
+    public ResponseData<?> updateGroup(@RequestBody @Validated({AddChecks.class}) GroupUpdateDTO dto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return responseFormError(bindingResult);
+        }
+        return response(JobGroupService.update(dto));
+    }
+
+    @RequiredPermission(value = Permissions.USER_MANAGER)
+    @ApiOperation(value = "作业组管理删除" , notes = "作业组管理删除")
+    @PostMapping("/update-delete")
+    public ResponseData<?> deleteGroup(@RequestParam("id") Long id) {
+        return response(JobGroupService.deleteById(id));
     }
 
 
@@ -89,6 +133,7 @@ public class SystemManagementController extends BaseController {
         return response(roleList);
     }
 
+    @RequiredPermission(value = Permissions.USER_MANAGER)
     @ApiOperation(value = "用户导入" , notes = "用户导入接口")
     @RequestMapping(value = "/import-user", method = RequestMethod.POST)
     public ResponseData<?> importVoucher(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -119,6 +164,7 @@ public class SystemManagementController extends BaseController {
         return  response(object);
     }
 
+    @RequiredPermission(value = Permissions.USER_MANAGER)
     @GetMapping("/user-search")
     @ApiOperation(value = "用户搜索")
     public ResponseData<?> userSearch(@RequestParam("username") String username) {
@@ -126,6 +172,7 @@ public class SystemManagementController extends BaseController {
         return response(userEntity);
     }
 
+    @RequiredPermission(value = Permissions.USER_MANAGER)
     @PostMapping("/user-list")
     @ApiOperation(value = "用户列表")
     public ResponseData<PageInfo<UserEntity>> userList(@RequestBody UserSearchDTO dto) {
@@ -133,7 +180,7 @@ public class SystemManagementController extends BaseController {
         return response(all);
     }
 
-
+    @RequiredPermission(value = Permissions.USER_MANAGER)
     @PostMapping("/update-user-password")
     @ApiOperation(value = "修改用户密码")
     public ResponseData<?> updateUserPassword(@Validated(UpdateChecks.class) @RequestBody ModifyPasswordDTO dto, BindingResult result) {
@@ -147,6 +194,7 @@ public class SystemManagementController extends BaseController {
         return response();
     }
 
+    @RequiredPermission(value = Permissions.USER_MANAGER)
     @PostMapping("/update-user")
     @ApiOperation(value = "用户修改")
     public ResponseData<?> updateUser(@Validated(UpdateChecks.class) @RequestBody UserUpdateDTO dto, BindingResult result) {
@@ -165,10 +213,28 @@ public class SystemManagementController extends BaseController {
         return response(userService.updateUser(userEntity));
     }
 
+    @RequiredPermission(value = Permissions.USER_MANAGER)
     @PostMapping("/delete-user")
     @ApiOperation(value = "用户删除")
     public ResponseData<?> deleteUser(@RequestParam("id") Long id) {
         return response(userService.deleteUpdate(id));
+    }
+
+
+    @RequiredPermission(value = Permissions.LOG_DELETE)
+    @PostMapping("/delete-log")
+    @ApiOperation(value = "日志删除")
+    public ResponseData<?> deleteLog(@RequestParam("id") Long id) {
+
+        return response(dataXLogService.delete(id));
+    }
+
+    @RequiredPermission(value = Permissions.LOG_DETAIL)
+    @PostMapping("/list-log")
+    @ApiOperation(value = "日志查看")
+    public ResponseData<PageInfo<DataXLog>> listLog(@RequestBody SearchDTO dto) {
+
+        return response(dataXLogService.list(getCurrentUser().getId(), dto.getPageNum(), dto.getPageSize()));
     }
 
     private void errorInfoExcel(HttpServletRequest request, JSONArray array, HttpServletResponse response, String fileName) throws  IOException{
@@ -196,5 +262,10 @@ public class SystemManagementController extends BaseController {
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
+    }
+
+    @Autowired
+    public void setDataXLogService(DataXLogService dataXLogService) {
+        this.dataXLogService = dataXLogService;
     }
 }
