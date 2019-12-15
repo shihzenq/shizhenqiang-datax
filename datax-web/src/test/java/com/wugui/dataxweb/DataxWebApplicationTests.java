@@ -3,13 +3,19 @@ package com.wugui.dataxweb;
 import com.github.pagehelper.PageInfo;
 import com.wugui.dataxweb.dao.JobConfigMapper;
 import com.wugui.dataxweb.entity.JobConfig;
+import com.wugui.dataxweb.entity.Permission;
+import com.wugui.dataxweb.entity.Role;
 import com.wugui.dataxweb.entity.UserEntity;
+import com.wugui.dataxweb.service.PermissionService;
+import com.wugui.dataxweb.service.RoleService;
 import com.wugui.dataxweb.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -20,6 +26,12 @@ public class DataxWebApplicationTests {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private PermissionService permissionService;
+
+    @Autowired
+    private RoleService roleService;
 
     @Test
     public void contextLoads() {
@@ -63,6 +75,18 @@ public class DataxWebApplicationTests {
         System.out.println(all);
     }
 
+
+    @Test
+    public void listPermission() {
+        List<Permission> all = permissionService.getAll();
+        System.out.println(all);
+    }
+
+    @Test
+    public void listRole() {
+        List<Role> allByUserId = roleService.getAllByUserId(378L);
+        System.out.println(allByUserId);
+    }
 
 
 

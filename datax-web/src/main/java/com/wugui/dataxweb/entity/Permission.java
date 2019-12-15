@@ -11,12 +11,4 @@ public class Permission extends BaseEntity {
     private String name;
 
     private String path;
-
-    private Boolean isLeaf;
-
-    private Long parentId;
-
-    private Short level;
-
-    private Integer sort;
 }

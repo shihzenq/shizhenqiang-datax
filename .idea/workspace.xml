@@ -2,45 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e98e63a5-a44d-4c3f-b084-720bfeb89bbe" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/config/MyUserDetailsService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/config/SwaggerConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/config/security/OAuth2SecurityConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/DataXJobMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dto/SearchDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dto/group/GroupSearchDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dto/group/GroupUpdateDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/RolePermissionMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/UserRoleMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/RolePermission.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/UserRole.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datax-web/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/DataxWebApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/DataxWebApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/config/security/AccessToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/config/security/AccessToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/config/security/AuthInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/config/security/AuthInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/config/security/OAuth2ServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/config/security/OAuth2ServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/config/security/ResourceServerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/config/security/ResourceServerConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/controller/JobJdbcDatasourceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/controller/JobJdbcDatasourceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/controller/SystemManagementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/controller/SystemManagementController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/JobConfigMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/JobConfigMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/UserMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/mapping/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/mapping/UserMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dto/group/GroupDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dto/group/GroupDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dto/user/UserSearchDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dto/user/UserSearchDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dto/user/UserUpdateDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dto/user/UserUpdateDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/BaseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/BaseEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/JobGroupEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/JobGroupEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/UserEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/DataXLogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/DataXLogService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/IDataxJobService.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/IDataxJobService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/JobGroupService.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/JobGroupService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/DataXLogServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/DataXLogServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/IDataxJobServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/IDataxJobServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/JobGroupServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/JobGroupServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/JobJdbcDatasourceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/JobJdbcDatasourceServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/mapping/RoleMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/mapping/RoleMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/Permission.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/Permission.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/Role.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/PermissionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/PermissionServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/RoleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/RoleServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datax-web/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datax-web/src/main/resources/static/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/datax-web/src/main/resources/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/main/resources/static/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/datax-web/src/test/java/com/wugui/dataxweb/DataxWebApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/datax-web/src/test/java/com/wugui/dataxweb/DataxWebApplicationTests.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
@@ -79,64 +50,75 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/PermissionServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="604">
-              <caret line="58" column="51" selection-start-line="58" selection-start-column="51" selection-end-line="58" selection-end-column="51" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/RoleServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="21" column="24" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/UserServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
-              <caret line="142" column="24" lean-forward="true" selection-start-line="142" selection-start-column="24" selection-end-line="142" selection-end-column="24" />
+            <state relative-caret-position="351">
+              <caret line="52" column="32" selection-start-line="52" selection-start-column="32" selection-end-line="52" selection-end-column="32" />
               <folding>
-                <element signature="e#5973#5974#0" expanded="true" />
-                <element signature="e#6025#6026#0" expanded="true" />
-                <element signature="e#8160#8161#0" expanded="true" />
-                <element signature="e#8204#8205#0" expanded="true" />
-                <element signature="e#8290#8291#0" expanded="true" />
-                <element signature="e#8344#8345#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#1182#1183#0" expanded="true" />
+                <element signature="e#1234#1235#0" expanded="true" />
+                <element signature="e#2590#2591#0" expanded="true" />
+                <element signature="e#2646#2647#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/RoleMapper.java">
+        <entry file="file://$PROJECT_DIR$/datax-web/src/test/java/com/wugui/dataxweb/DataxWebApplicationTests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="490">
-              <caret line="53" column="15" selection-start-line="53" selection-start-column="15" selection-end-line="53" selection-end-column="15" />
+            <state relative-caret-position="204">
+              <caret line="86" column="26" selection-start-line="86" selection-start-column="26" selection-end-line="86" selection-end-column="26" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/mapping/RoleMapper.xml">
+        <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/RolePermission.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="388">
-              <caret line="183" column="36" lean-forward="true" selection-start-line="183" selection-start-column="36" selection-end-line="183" selection-end-column="36" />
+            <state relative-caret-position="136">
+              <caret line="8" column="27" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="27" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/PermissionService.java">
+        <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/RolePermissionMapper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="15" column="23" lean-forward="true" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
+            <state relative-caret-position="119">
+              <caret line="7" column="53" selection-start-line="7" selection-start-column="53" selection-end-line="7" selection-end-column="53" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/UserRole.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="7" column="26" lean-forward="true" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/UserRoleMapper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="11" lean-forward="true" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -144,35 +126,35 @@
       <file pinned="false" current-in-tab="false">
         <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-core/3.0.7.1/mybatis-plus-core-3.0.7.1.jar!/com/baomidou/mybatisplus/core/mapper/BaseMapper.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="509">
+            <state relative-caret-position="175">
               <caret line="40" column="12" selection-start-line="40" selection-start-column="12" selection-end-line="40" selection-end-column="12" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/PermissionMapper.java">
+        <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/RoleMapper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="20" column="32" lean-forward="true" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
+            <state relative-caret-position="141">
+              <caret line="53" column="15" selection-start-line="53" selection-start-column="15" selection-end-line="53" selection-end-column="15" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/mapping/PermissionMapper.xml">
+        <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/PermissionService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="67" lean-forward="true" selection-start-line="3" selection-start-column="67" selection-end-line="3" selection-end-column="67" />
+            <state relative-caret-position="173">
+              <caret line="15" column="23" lean-forward="true" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/Permission.java">
+        <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/mapping/RoleMapper.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+            <state relative-caret-position="17">
+              <caret line="182" column="2" selection-start-line="182" selection-start-column="2" selection-end-line="182" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -182,8 +164,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -206,13 +188,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/controller/JobController.java" />
-        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/JobDataSourceService.java" />
-        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/JobDataSourceServiceImpl.java" />
-        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/JobDataSourceMapper.java" />
-        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/JobJdbcDatasource.java" />
-        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/controller/BaseController.java" />
-        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/IJobJdbcDatasourceService.java" />
         <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/JobJdbcDatasourceMapper.java" />
         <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/mapping/JobJdbcDatasourceMapper.xml" />
         <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dto/user/LoginForm.java" />
@@ -246,7 +221,6 @@
         <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/DataxWebApplication.java" />
         <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/UserMapper.java" />
         <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/mapping/UserMapper.xml" />
-        <option value="$PROJECT_DIR$/datax-web/src/test/java/com/wugui/dataxweb/DataxWebApplicationTests.java" />
         <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/UserEntity.java" />
         <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/UserServiceImpl.java" />
         <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/DataXLogServiceImpl.java" />
@@ -255,7 +229,15 @@
         <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/config/security/OAuth2ServiceImpl.java" />
         <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/IDataxJobServiceImpl.java" />
         <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/JobJdbcDatasourceServiceImpl.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/mapping/RoleMapper.xml" />
         <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/PermissionServiceImpl.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/Permission.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/UserRole.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/UserRole.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/test/java/com/wugui/dataxweb/DataxWebApplicationTests.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/Role.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/RolePermission.java" />
+        <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/RolePermissionMapper.java" />
         <option value="$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/RoleServiceImpl.java" />
       </list>
     </option>
@@ -448,6 +430,17 @@
               <item name="dataxweb" type="462c0819:PsiDirectoryNode" />
               <item name="dao" type="462c0819:PsiDirectoryNode" />
               <item name="mapping" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="datax-all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shizhenqiang-datax" type="462c0819:PsiDirectoryNode" />
+              <item name="datax-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="wugui" type="462c0819:PsiDirectoryNode" />
+              <item name="dataxweb" type="462c0819:PsiDirectoryNode" />
+              <item name="entity" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="datax-all" type="b2602c69:ProjectViewProjectNode" />
@@ -652,7 +645,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.DataxWebApplicationTests.listUser">
+  <component name="RunManager" selected="JUnit.DataxWebApplicationTests.listRole">
     <configuration name="DataxWebApplicationTests.addUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="datax-web" />
       <option name="PACKAGE_NAME" value="com.wugui.dataxweb" />
@@ -663,11 +656,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DataxWebApplicationTests.contextLoads" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DataxWebApplicationTests.listPermission" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="datax-web" />
       <option name="PACKAGE_NAME" value="com.wugui.dataxweb" />
       <option name="MAIN_CLASS_NAME" value="com.wugui.dataxweb.DataxWebApplicationTests" />
-      <option name="METHOD_NAME" value="contextLoads" />
+      <option name="METHOD_NAME" value="listPermission" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DataxWebApplicationTests.listRole" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="datax-web" />
+      <option name="PACKAGE_NAME" value="com.wugui.dataxweb" />
+      <option name="MAIN_CLASS_NAME" value="com.wugui.dataxweb.DataxWebApplicationTests" />
+      <option name="METHOD_NAME" value="listRole" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -702,10 +705,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.DataxWebApplicationTests.listRole" />
+        <item itemvalue="JUnit.DataxWebApplicationTests.listPermission" />
         <item itemvalue="JUnit.DataxWebApplicationTests.listUser" />
         <item itemvalue="JUnit.DataxWebApplicationTests.updateUser" />
         <item itemvalue="JUnit.DataxWebApplicationTests.addUser" />
-        <item itemvalue="JUnit.DataxWebApplicationTests.contextLoads" />
       </list>
     </recent_temporary>
   </component>
@@ -719,44 +723,44 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1576236129840</updated>
-      <workItem from="1576236133649" duration="69622000" />
+      <workItem from="1576236133649" duration="72508000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="DataxWebApplicationTests_addUser - 2019.12.15 at 21h 17m 40s.xml">
-      <configuration name="DataxWebApplicationTests.addUser" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="DataxWebApplicationTests_addUser - 2019.12.15 at 21h 21m 05s.xml">
-      <configuration name="DataxWebApplicationTests.addUser" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="DataxWebApplicationTests_addUser - 2019.12.15 at 21h 23m 26s.xml">
-      <configuration name="DataxWebApplicationTests.addUser" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="DataxWebApplicationTests_updateUser - 2019.12.15 at 21h 25m 25s.xml">
-      <configuration name="DataxWebApplicationTests.updateUser" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="DataxWebApplicationTests_updateUser - 2019.12.15 at 21h 31m 27s.xml">
-      <configuration name="DataxWebApplicationTests.updateUser" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="DataxWebApplicationTests_updateUser - 2019.12.15 at 21h 40m 05s.xml">
-      <configuration name="DataxWebApplicationTests.updateUser" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="DataxWebApplicationTests_updateUser - 2019.12.15 at 21h 48m 57s.xml">
-      <configuration name="DataxWebApplicationTests.updateUser" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="DataxWebApplicationTests_listUser - 2019.12.15 at 21h 53m 31s.xml">
-      <configuration name="DataxWebApplicationTests.listUser" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="DataxWebApplicationTests_listUser - 2019.12.15 at 21h 55m 04s.xml">
       <configuration name="DataxWebApplicationTests.listUser" configurationId="JUnit" />
     </history-entry>
     <history-entry file="DataxWebApplicationTests_listUser - 2019.12.15 at 21h 57m 14s.xml">
       <configuration name="DataxWebApplicationTests.listUser" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="DataxWebApplicationTests_listPermission - 2019.12.15 at 22h 40m 28s.xml">
+      <configuration name="DataxWebApplicationTests.listPermission" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DataxWebApplicationTests_listPermission - 2019.12.15 at 22h 41m 06s.xml">
+      <configuration name="DataxWebApplicationTests.listPermission" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DataxWebApplicationTests_listPermission - 2019.12.15 at 22h 41m 56s.xml">
+      <configuration name="DataxWebApplicationTests.listPermission" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DataxWebApplicationTests_listRole - 2019.12.15 at 22h 45m 45s.xml">
+      <configuration name="DataxWebApplicationTests.listRole" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DataxWebApplicationTests_listRole - 2019.12.15 at 22h 55m 06s.xml">
+      <configuration name="DataxWebApplicationTests.listRole" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DataxWebApplicationTests_listRole - 2019.12.15 at 22h 55m 38s.xml">
+      <configuration name="DataxWebApplicationTests.listRole" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DataxWebApplicationTests_listRole - 2019.12.15 at 22h 56m 27s.xml">
+      <configuration name="DataxWebApplicationTests.listRole" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DataxWebApplicationTests_listRole - 2019.12.15 at 22h 59m 01s.xml">
+      <configuration name="DataxWebApplicationTests.listRole" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69622000" />
+    <option name="totallyTimeSpent" value="72508000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="947" extended-state="0" />
@@ -779,7 +783,7 @@
       <window_info anchor="bottom" id="FindBugs-IDEA" order="9" />
       <window_info anchor="bottom" id="Message" order="10" />
       <window_info anchor="bottom" id="Find" order="11" weight="0.32982457" />
-      <window_info anchor="bottom" id="Run" order="12" weight="0.73099416" />
+      <window_info anchor="bottom" id="Run" order="12" visible="true" weight="0.44795322" />
       <window_info anchor="bottom" id="Debug" order="13" sideWeight="0.4993895" weight="0.47251463" />
       <window_info anchor="bottom" id="Cvs" order="14" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="15" weight="0.4" />
@@ -930,69 +934,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-core/5.0.6.RELEASE/spring-security-core-5.0.6.RELEASE.jar!/org/springframework/security/core/AuthenticationException.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/config/security/AuthToken.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="21" column="11" lean-forward="true" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/controller/LoginController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="43" column="9" selection-start-line="43" selection-start-column="9" selection-end-line="43" selection-end-column="9" />
-          <folding>
-            <element signature="e#2587#2588#0" expanded="true" />
-            <element signature="e#2627#2628#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/controller/JobManagementController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/controller/JobController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="163" column="16" selection-start-line="163" selection-start-column="16" selection-end-line="163" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/DataXLogMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dto/SearchDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="7" column="5" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/constants/Permissions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="23" column="41" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/controller/SystemManagementController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -1104,13 +1045,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="98">
           <caret line="24" selection-start-line="24" selection-end-line="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/datax-web/src/test/java/com/wugui/dataxweb/DataxWebApplicationTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="42" column="5" lean-forward="true" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -1242,20 +1176,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/PermissionService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="15" column="23" lean-forward="true" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-core/3.0.7.1/mybatis-plus-core-3.0.7.1.jar!/com/baomidou/mybatisplus/core/mapper/BaseMapper.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="509">
-          <caret line="40" column="12" selection-start-line="40" selection-start-column="12" selection-end-line="40" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/PermissionMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -1270,45 +1190,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/Permission.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/PermissionServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="604">
-          <caret line="58" column="51" selection-start-line="58" selection-start-column="51" selection-end-line="58" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/RoleMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="490">
-          <caret line="53" column="15" selection-start-line="53" selection-start-column="15" selection-end-line="53" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/mapping/RoleMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="183" column="36" lean-forward="true" selection-start-line="183" selection-start-column="36" selection-end-line="183" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/RoleServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="21" column="24" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/UserServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="142" column="24" lean-forward="true" selection-start-line="142" selection-start-column="24" selection-end-line="142" selection-end-column="24" />
+        <state relative-caret-position="354">
+          <caret line="144" lean-forward="true" selection-start-line="144" selection-end-line="144" />
           <folding>
             <element signature="e#5973#5974#0" expanded="true" />
             <element signature="e#6025#6026#0" expanded="true" />
@@ -1316,6 +1201,141 @@
             <element signature="e#8204#8205#0" expanded="true" />
             <element signature="e#8290#8291#0" expanded="true" />
             <element signature="e#8344#8345#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/constants/Permissions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/Permission.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="24" lean-forward="true" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/RoleService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="9" column="15" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/PermissionServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="26" column="24" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="24" />
+          <folding>
+            <element signature="e#661#662#0" expanded="true" />
+            <element signature="e#688#689#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/PermissionService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="15" column="23" lean-forward="true" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/mapping/RoleMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="182" column="2" selection-start-line="182" selection-start-column="2" selection-end-line="182" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/RoleMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="53" column="15" selection-start-line="53" selection-start-column="15" selection-end-line="53" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-core/3.0.7.1/mybatis-plus-core-3.0.7.1.jar!/com/baomidou/mybatisplus/core/mapper/BaseMapper.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="40" column="12" selection-start-line="40" selection-start-column="12" selection-end-line="40" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/UserRole.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="26" lean-forward="true" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/UserRoleMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="11" lean-forward="true" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-extension/3.0.7.1/mybatis-plus-extension-3.0.7.1.jar!/com/baomidou/mybatisplus/extension/service/impl/ServiceImpl.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/Role.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/test/java/com/wugui/dataxweb/DataxWebApplicationTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="86" column="26" selection-start-line="86" selection-start-column="26" selection-end-line="86" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/entity/RolePermission.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="27" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/dao/RolePermissionMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="53" selection-start-line="7" selection-start-column="53" selection-end-line="7" selection-end-column="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datax-web/src/main/java/com/wugui/dataxweb/service/impl/RoleServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="52" column="32" selection-start-line="52" selection-start-column="32" selection-end-line="52" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1182#1183#0" expanded="true" />
+            <element signature="e#1234#1235#0" expanded="true" />
+            <element signature="e#2590#2591#0" expanded="true" />
+            <element signature="e#2646#2647#0" expanded="true" />
           </folding>
         </state>
       </provider>

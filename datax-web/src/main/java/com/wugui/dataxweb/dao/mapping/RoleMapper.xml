@@ -182,7 +182,7 @@
 
   <select id="selectRoleListByUserId" resultMap="BaseResultMap">
     select * from role where id in (
-      select role_id from enterprise_user_role where user_id = #{userId}
+      select role_id from user_role where user_id = #{userId}
     )
   </select>
 

@@ -20,7 +20,7 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permiss
 
     @Override
     public List<Permission> getAll() {
-        return null;
+        return permissionMapper.selectList(null);
     }
 
     @Override
