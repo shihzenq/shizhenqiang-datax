@@ -7,23 +7,17 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.wugui.dataxweb.config.security.OAuth2Service;
 import com.wugui.dataxweb.dao.UserMapper;
 import com.wugui.dataxweb.entity.UserEntity;
 import com.wugui.dataxweb.service.UserService;
-import com.wugui.dataxweb.util.StringUtil;
-import com.wugui.dataxweb.validator.PattensValidator;
-import com.wugui.dataxweb.validator.annotation.Patterns;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.sql.Wrapper;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -35,14 +29,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
 
     private UserMapper userMapper;
 
-
-    private PasswordEncoder passwordEncoder;
-
-    private OAuth2Service oAuth2Service;
-
     @Override
     public UserEntity getByUsername(String username) {
-        return userMapper.getByUsername(username);
+        QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("username", username);
+        return userMapper.selectOne(queryWrapper);
     }
 
     @Override
@@ -132,12 +123,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
 
     @Override
     public Boolean updatePassword(UserEntity userEntity, String newPassword) {
-        if(null != newPassword) {
-            userEntity.setPasswordHash(passwordEncoder.encode(newPassword));
-        }
-//        if (null != userEntity.getDeleted()) {
-//            oAuth2Service.status(userEntity, userEntity.getDeleted(), true);
-//        }
         UpdateWrapper<UserEntity> wrapper = new UpdateWrapper<>();
         wrapper.eq("id", userEntity.getId());
         return userMapper.update(userEntity, wrapper) > 0;
@@ -159,6 +144,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
     public UserEntity add(UserEntity userEntity) {
         userMapper.insert(userEntity);
         return userEntity;
+    }
+
+    @Override
+    public UserEntity getByUsernameAndPassword(String username, String password) {
+        QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("username", username);
+        queryWrapper.eq("password", password);
+        return userMapper.selectOne(queryWrapper);
     }
 
     private boolean checkRow(Row row, JSONObject jsonError, List<String> sexList) {
@@ -227,8 +220,4 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
         this.userMapper = userMapper;
     }
 
-    @Autowired
-    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
-    }
 }

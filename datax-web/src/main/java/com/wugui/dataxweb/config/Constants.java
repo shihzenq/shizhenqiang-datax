@@ -19,4 +19,7 @@ public class Constants {
     public static final int DEFAULT_PAGE_SIZE = 10;
     public static final long ACCESS_KEY_VALIDITY_SECONDS = 2*60*60;
     public static final String LOG_KEY = "zhongkeyuan-operate-log";// 操作日志在Redis中缓存的key值
+
+    // JWT生成token时的密码
+    public final static String TOKEN_SALT = "mW*RzA";
 }

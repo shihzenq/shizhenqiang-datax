@@ -11,14 +11,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @author: huzekang
  * @create: 2019-06-17 10:40
  **/
-//@Configuration
-//
-//public class WebConfig implements WebMvcConfigurer {
-//
-//
-//    @Override
-//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        registry.addResourceHandler("/index.html").addResourceLocations("classpath:/static/index.html");
-//        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/static/");
-//    }
-//}
+@Configuration
+
+public class WebConfig implements WebMvcConfigurer {
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/index.html").addResourceLocations("classpath:/static/index.html");
+        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/static/");
+    }
+}

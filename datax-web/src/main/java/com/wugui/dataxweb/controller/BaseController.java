@@ -1,9 +1,11 @@
 package com.wugui.dataxweb.controller;
 
 
-import com.wugui.dataxweb.config.security.IAuthenticationFacade;
 import com.wugui.dataxweb.entity.UserEntity;
+import com.wugui.dataxweb.service.UserService;
+import com.wugui.dataxweb.util.KlksRedisUtils;
 import com.wugui.dataxweb.vo.ResponseData;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,15 +14,21 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
+@Slf4j
 public abstract class BaseController {
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     HttpServletRequest request;
 
-    private IAuthenticationFacade authenticationFacade;
+    @Autowired
+    private KlksRedisUtils redis;
+
+    @Autowired
+    private UserService userService;
 
     StringRedisTemplate template;
 
@@ -54,7 +62,15 @@ public abstract class BaseController {
     }
 
     UserEntity getCurrentUser() {
-        return authenticationFacade.getUser();
+//        return authenticationFacade.getUser();
+        HttpSession session = request.getSession();
+        String userId = (String)session.getAttribute("userId");
+        UserEntity userInfo = redis.getUserInfoFromCache(userId);
+        if (userInfo == null) {
+            userInfo = userService.getById(userId);
+            redis.saveUserInfoToCache(userId, userInfo);
+        }
+        return userInfo;
     }
 
     @Autowired
@@ -62,10 +78,6 @@ public abstract class BaseController {
         this.request = request;
     }
 
-    @Autowired
-    public void setAuthenticationFacade(IAuthenticationFacade authenticationFacade) {
-        this.authenticationFacade = authenticationFacade;
-    }
 
     @Autowired
     public void setTemplate(StringRedisTemplate template){

@@ -50,7 +50,6 @@ public final class DBUtil {
         try {
             return RetryUtil.executeWithRetry(new Callable<String>() {
 
-                @Override
                 public String call() throws Exception {
                     boolean connOK = false;
                     for (String url : jdbcUrls) {
@@ -326,7 +325,6 @@ public final class DBUtil {
 
         try {
             return RetryUtil.executeWithRetry(new Callable<Connection>() {
-                @Override
                 public Connection call() throws Exception {
                     return DBUtil.connect(dataBaseType, jdbcUrl, username,
                             password, socketTimeout);
@@ -647,7 +645,6 @@ public final class DBUtil {
     public static boolean isOracleMaster(final String url, final String user, final String pass) {
         try {
             return RetryUtil.executeWithRetry(new Callable<Boolean>() {
-                @Override
                 public Boolean call() throws Exception {
                     Connection conn = null;
                     try {

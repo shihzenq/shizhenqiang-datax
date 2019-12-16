@@ -2,6 +2,7 @@ package com.wugui.dataxweb.config.security;
 
 import com.wugui.dataxweb.entity.UserEntity;
 import com.wugui.dataxweb.service.PermissionService;
+import com.wugui.dataxweb.util.KlksRedisUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
@@ -10,14 +11,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class PermissionInterceptor implements HandlerInterceptor {
 
     @Autowired
     private PermissionService permissionService;
 
-    private IAuthenticationFacade authenticationFacade;
-
+    @Autowired
+    private KlksRedisUtils redis;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -37,10 +39,6 @@ public class PermissionInterceptor implements HandlerInterceptor {
 
     }
 
-    @Autowired
-    public void setAuthenticationFacade(IAuthenticationFacade authenticationFacade) {
-        this.authenticationFacade = authenticationFacade;
-    }
 
     private boolean checkPermission(HttpServletRequest request, HttpServletResponse response, Object handler) {
         if (handler instanceof HandlerMethod) {
@@ -51,7 +49,9 @@ public class PermissionInterceptor implements HandlerInterceptor {
             if (requiredPermission == null) {
                 requiredPermission = handlerMethod.getMethod().getDeclaringClass().getAnnotation(RequiredPermission.class);
             }
-            UserEntity user = authenticationFacade.getUser();
+            HttpSession session = request.getSession();
+            String userId = (String)session.getAttribute("userId");
+            UserEntity user = redis.getUserInfoFromCache(userId);
             // 如果标记了注解，则判断权限
             if (requiredPermission != null && StringUtils.isNotBlank(requiredPermission.value())) {
                 return permissionService.validatePermissionCodeExist(user, requiredPermission.value());

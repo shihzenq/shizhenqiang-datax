@@ -31,4 +31,6 @@ public class UserEntity extends BaseEntity{
 
     @ApiModelProperty(value = "密码哈希", notes = "密码哈希")
     private String passwordHash;
+
+    private String token;
 }

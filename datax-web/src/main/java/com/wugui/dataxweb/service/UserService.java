@@ -24,4 +24,6 @@ public interface UserService extends IService<UserEntity> {
     Boolean deleteUpdate(Long id);
 
     UserEntity add(UserEntity userEntity);
+
+    UserEntity getByUsernameAndPassword(String username, String password);
 }

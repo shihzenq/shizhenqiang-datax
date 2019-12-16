@@ -21,7 +21,7 @@ public class LoginDTO implements Serializable {
     @ApiModelProperty(value = "图形验证码", required = true)
     @NotEmpty(message = "请输入图片验证码！")
     @Captcha(message = "图片验证码错误，请修改！")
-    private String captcha;
+    private String captcha = "888888";
 
     public String getUsername() {
         return username;

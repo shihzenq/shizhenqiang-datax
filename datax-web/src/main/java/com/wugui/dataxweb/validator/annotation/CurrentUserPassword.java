@@ -1,7 +1,5 @@
 package com.wugui.dataxweb.validator.annotation;
 
-import com.wugui.dataxweb.validator.CurrentUserPasswordValidator;
-
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.Documented;
@@ -13,7 +11,6 @@ import static java.lang.annotation.ElementType.*;
 
 @Target({ FIELD, METHOD, PARAMETER, ANNOTATION_TYPE })
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = CurrentUserPasswordValidator.class)
 @Documented
 public @interface CurrentUserPassword {
     String message() default "密码错误";

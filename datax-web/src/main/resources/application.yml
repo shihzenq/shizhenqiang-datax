@@ -30,18 +30,18 @@ logging:
 #      client-id: 3e3dbb44a45b11f2
 #      client-secret: 123456
 
-security:
-  oauth2:
-    resource:
-          token-info-uri: http://localhost:9527/oauth/check_token
-    client:
-      clientId: client_2
-      id: client_2
-      clientSecret: 123456
-      userAuthorizationUri: http://localhost:9527/oauth/authorize
-      accessTokenUri: http://localhost:9527/oauth/token
-      grantType: client_credentials
-      scope: server
+#security:
+#  oauth2:
+#    resource:
+#          token-info-uri: http://localhost:9527/oauth/check_token
+#    client:
+#      clientId: client_2
+#      id: client_2
+#      clientSecret: 123456
+#      userAuthorizationUri: http://localhost:9527/oauth/authorize
+#      accessTokenUri: http://localhost:9527/oauth/token
+#      grantType: client_credentials
+#      scope: server
 
 management:
     security:

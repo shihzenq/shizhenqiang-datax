@@ -22,17 +22,14 @@ public class JdbcConnectionFactory implements ConnectionFactory {
         this.password = password;
     }
 
-    @Override
     public Connection getConnecttion() {
         return DBUtil.getConnection(dataBaseType, jdbcUrl, userName, password);
     }
 
-    @Override
     public Connection getConnecttionWithoutRetry() {
         return DBUtil.getConnectionWithoutRetry(dataBaseType, jdbcUrl, userName, password);
     }
 
-    @Override
     public String getConnectionInfo() {
         return "jdbcUrl:" + jdbcUrl;
     }
