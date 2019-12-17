@@ -18,11 +18,6 @@ public class LoginDTO implements Serializable {
     @NotEmpty(message = "请输入密码！")
     private String password;
 
-    @ApiModelProperty(value = "图形验证码", required = true)
-    @NotEmpty(message = "请输入图片验证码！")
-    @Captcha(message = "图片验证码错误，请修改！")
-    private String captcha = "888888";
-
     public String getUsername() {
         return username;
     }
@@ -37,13 +32,5 @@ public class LoginDTO implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getCaptcha() {
-        return captcha;
-    }
-
-    public void setCaptcha(String captcha) {
-        this.captcha = captcha;
     }
 }

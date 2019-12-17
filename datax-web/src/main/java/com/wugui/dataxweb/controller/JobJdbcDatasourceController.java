@@ -3,16 +3,21 @@ package com.wugui.dataxweb.controller;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageInfo;
+import com.wugui.dataxweb.config.Constants;
 import com.wugui.dataxweb.config.security.RequiredPermission;
 import com.wugui.dataxweb.constants.Permissions;
+import com.wugui.dataxweb.dto.datasource.CreatTableDTO;
 import com.wugui.dataxweb.entity.JobJdbcDatasource;
 import com.wugui.dataxweb.service.IJobJdbcDatasourceService;
+import com.wugui.dataxweb.util.DriverUtils;
 import com.wugui.dataxweb.util.IpUtils;
 import com.wugui.dataxweb.util.PageUtils;
 import com.wugui.dataxweb.vo.ResponseData;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -119,9 +124,9 @@ public class JobJdbcDatasourceController extends BaseController {
      * @param id 主键
      * @return 单条数据
      */
-    @ApiOperation("通过主键查询单条数据")
+    @ApiOperation("jdbc数据源详情")
     @GetMapping("/id")
-    public ResponseData<JobJdbcDatasource> selectOne(@RequestParam("id") Long id) {
+    public ResponseData<?> selectOne(@RequestParam("id") Long id) {
         return response(this.jobJdbcDatasourceService.getById(id));
     }
 
@@ -131,12 +136,16 @@ public class JobJdbcDatasourceController extends BaseController {
      * @param entity 实体对象
      * @return 新增结果
      */
-    @ApiOperation("新增数据")
+    @ApiOperation("新增jdbc数据源")
     @PostMapping("/add")
-    public ResponseData<Boolean> insert(@RequestBody JobJdbcDatasource entity) {
+    public ResponseData<?> insert(@RequestBody JobJdbcDatasource entity) {
         entity.setUserId(getCurrentUser().getId());
-        String ipAddress = IpUtils.getIpAddress(request);
-        entity.setIpAddress(ipAddress);
+//        String ipAddress = IpUtils.getIpAddress(request);
+//        entity.setIpAddress(ipAddress);
+        String type = DriverUtils.driverMap.get(entity.getType().toUpperCase());
+        entity.setJdbcDriverClass(type);
+        // jdbc:mysql://127.0.0.1:3306/wkxz_3_dev
+        entity.setJdbcUrl("jdbc:"+entity.getType()+"://"+ entity.getIpAddress()+":"+ entity.getPort() +"/"+entity.getJdbcUsername());
         return response(this.jobJdbcDatasourceService.save(entity));
     }
 
@@ -148,8 +157,12 @@ public class JobJdbcDatasourceController extends BaseController {
      */
     @RequiredPermission(value = Permissions.DATA_SOURCE_DETAIL)
     @PostMapping("/update")
-    @ApiOperation("修改数据")
-    public ResponseData<Boolean> update(@RequestBody JobJdbcDatasource entity) {
+    @ApiOperation("修改jdbc数据源")
+    public ResponseData<?> update(@RequestBody JobJdbcDatasource entity) {
+        String type = DriverUtils.driverMap.get(entity.getType().toUpperCase());
+        entity.setJdbcDriverClass(type);
+        // jdbc:mysql://127.0.0.1:3306/wkxz_3_dev
+        entity.setJdbcUrl("jdbc:"+entity.getType()+"://"+ entity.getIpAddress()+":"+ entity.getPort() +"/"+entity.getJdbcUsername());
         return response(this.jobJdbcDatasourceService.updateById(entity));
     }
 
@@ -161,8 +174,22 @@ public class JobJdbcDatasourceController extends BaseController {
      */
     @RequiredPermission(value = Permissions.DATA_SOURCE_delete)
     @GetMapping("/delete")
-    @ApiOperation("删除数据")
-    public ResponseData<Boolean> delete(@RequestParam("idList") List<Long> idList) {
+    @ApiOperation("删除jdbc数据源")
+    public ResponseData<?> delete(@RequestParam("idList") List<Long> idList) {
         return response(this.jobJdbcDatasourceService.removeByIds(idList));
+    }
+
+
+    @GetMapping("/create-table")
+    @ApiOperation("创建表")
+    public ResponseData<?> createTable(@RequestBody @Validated CreatTableDTO dto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return responseFormError(bindingResult);
+        }
+        JobJdbcDatasource jobJdbcDatasource = jobJdbcDatasourceService.getById(dto.getId());
+        if (null == jobJdbcDatasource) {
+            return responseError("无此数据源！");
+        }
+        return response(jobJdbcDatasourceService.createTable(jobJdbcDatasource, dto));
     }
 }

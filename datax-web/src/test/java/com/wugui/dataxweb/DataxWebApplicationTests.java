@@ -46,7 +46,7 @@ public class DataxWebApplicationTests {
         UserEntity entity = new UserEntity();
         entity.setPhone("15652182014");
         entity.setUsername("时贞强");
-        entity.setSex(1);
+        entity.setSex("男");
         entity.setPassword("123456");
         entity.setAdmin(true);
         entity.setCreateUserId(0L);
@@ -60,7 +60,7 @@ public class DataxWebApplicationTests {
         entity.setId(379L);
         entity.setPhone("15652182014");
         entity.setUsername("时贞强update");
-        entity.setSex(1);
+        entity.setSex("男");
         entity.setPassword("123456");
         entity.setAdmin(true);
         entity.setCreateUserId(0L);

@@ -9,6 +9,7 @@ import com.wugui.dataxweb.dto.SearchDTO;
 import com.wugui.dataxweb.dto.group.GroupDTO;
 import com.wugui.dataxweb.dto.group.GroupSearchDTO;
 import com.wugui.dataxweb.dto.group.GroupUpdateDTO;
+import com.wugui.dataxweb.dto.role.RoleUpdatePermissionDTO;
 import com.wugui.dataxweb.dto.user.ModifyPasswordDTO;
 import com.wugui.dataxweb.dto.user.UserSearchDTO;
 import com.wugui.dataxweb.dto.user.UserUpdateDTO;
@@ -125,11 +126,22 @@ public class SystemManagementController extends BaseController {
     }
 
     @PostMapping("/permission-list")
-    @ApiOperation(value = "权限列表")
+    @ApiOperation(value = "当前用户的权限列表")
     public ResponseData<?> permissionList() {
         Long userId = getCurrentUser().getId();
         List<Role> roleList = roleService.getAllByUserId(userId);
         return response(roleList);
+    }
+
+    @PostMapping("/update-role-permission")
+    @ApiOperation(value = "修改角色的权限")
+    public ResponseData<?> updateRolePermission(@RequestBody @Validated({UpdateChecks.class}) RoleUpdatePermissionDTO dto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return responseFormError(bindingResult);
+        }
+        Role role = roleService.getById(dto.getRoleId());
+        if (null == role) return responseError("查询不到此角色！");
+        return response(roleService.updateRolePermission(dto));
     }
 
     @RequiredPermission(value = Permissions.USER_MANAGER)
@@ -202,7 +214,7 @@ public class SystemManagementController extends BaseController {
         }
         UserEntity currentUser = getCurrentUser();
         UserEntity userEntity = userService.getById(dto.getId());
-        if (null != userEntity) {
+        if (null == userEntity) {
             return responseError("用户不存在! ", 400);
         }
         userEntity.setUsername(dto.getUsername());
@@ -211,6 +223,32 @@ public class SystemManagementController extends BaseController {
         userEntity.setUpdateUserId(currentUser.getId());
         return response(userService.updateUser(userEntity));
     }
+
+    @RequiredPermission(value = Permissions.USER_MANAGER)
+    @PostMapping("/add-user")
+    @ApiOperation(value = "用户新增")
+    public ResponseData<?> addUser(@Validated(AddChecks.class) @RequestBody UserUpdateDTO dto, BindingResult result) {
+        if(result.hasErrors()) {
+            return responseFormError(result);
+        }
+        UserEntity byUsername = userService.getByUsername(dto.getUsername());
+        if (null != byUsername) {
+            return responseError("用户名重复！");
+        }
+        UserEntity userEntity = new UserEntity();
+        BeanUtils.copyProperties(dto, userEntity);
+        userEntity.setPassword("123456");
+        userEntity.setCreateUserId(getCurrentUser().getId());
+        return response(userService.add(userEntity));
+    }
+
+    @RequiredPermission(value = Permissions.USER_MANAGER)
+    @PostMapping("/detail-user")
+    @ApiOperation(value = "用户详情")
+    public ResponseData<?> detailUser(@RequestParam("id") Long id) {
+        return response(userService.getById(id));
+    }
+
 
     @RequiredPermission(value = Permissions.USER_MANAGER)
     @PostMapping("/delete-user")

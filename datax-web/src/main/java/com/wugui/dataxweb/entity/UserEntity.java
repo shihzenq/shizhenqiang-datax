@@ -19,18 +19,15 @@ public class UserEntity extends BaseEntity{
      * 0：女
      * 1：男
      */
-    private int sex;
+    private String sex;
 
     private String phone;
 
     private String password;
 
-    private Long ucUid;
-
     private Boolean admin;
 
-    @ApiModelProperty(value = "密码哈希", notes = "密码哈希")
-    private String passwordHash;
-
     private String token;
+
+    private String remark;
 }

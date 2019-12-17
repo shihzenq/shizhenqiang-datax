@@ -8,6 +8,7 @@ import com.wugui.dataxweb.dto.group.GroupSearchDTO;
 import com.wugui.dataxweb.dto.group.GroupUpdateDTO;
 import com.wugui.dataxweb.entity.JobGroupEntity;
 import com.wugui.dataxweb.service.JobGroupService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,8 +41,10 @@ public class JobGroupServiceImpl extends ServiceImpl<GroupMapper, JobGroupEntity
     @Override
     public PageInfo<JobGroupEntity> getAll(GroupSearchDTO dto, Long userId) {
         Map<String, Object> map = new HashMap<>();
-        map.put("name", dto.getName());
-        map.put("createUserId", userId);
+        if (StringUtils.isNotBlank(dto.getName())) {
+            map.put("name", dto.getName());
+        }
+        map.put("create_user_id", userId);
         PageHelper.startPage(dto.getPageNum(), dto.getPageSize());
         return new PageInfo<>(groupMapper.selectByMap(map));
     }

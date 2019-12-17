@@ -73,6 +73,12 @@ public class JobJdbcDatasource extends Model<JobJdbcDatasource> {
     private String port;
 
     /**
+     * 数据库类型
+     */
+    @ApiModelProperty(value = "数据库类型")
+    private String type;
+
+    /**
      * jdbc url
      */
     @ApiModelProperty(value = "jdbc url")

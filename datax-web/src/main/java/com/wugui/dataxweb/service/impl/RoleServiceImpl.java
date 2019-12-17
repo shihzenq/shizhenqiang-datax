@@ -1,11 +1,13 @@
 package com.wugui.dataxweb.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wugui.dataxweb.dao.PermissionMapper;
 import com.wugui.dataxweb.dao.RoleMapper;
 import com.wugui.dataxweb.dao.RolePermissionMapper;
 import com.wugui.dataxweb.dao.UserRoleMapper;
+import com.wugui.dataxweb.dto.role.RoleUpdatePermissionDTO;
 import com.wugui.dataxweb.entity.Permission;
 import com.wugui.dataxweb.entity.Role;
 import com.wugui.dataxweb.entity.RolePermission;
@@ -13,8 +15,10 @@ import com.wugui.dataxweb.entity.UserRole;
 import com.wugui.dataxweb.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -55,6 +59,24 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
             return null;
         }
         return null;
+    }
+
+    @Transactional
+    @Override
+    public Boolean updateRolePermission(RoleUpdatePermissionDTO dto) {
+        QueryWrapper<RolePermission> permissionQueryWrapper = new QueryWrapper<>();
+        permissionQueryWrapper.eq("role_id", dto.getRoleId());
+        int delete = rolePermissionMapper.delete(permissionQueryWrapper);
+        if (delete > 0) {
+            dto.getPermissionList().stream().forEach(t-> {
+                RolePermission rolePermission = new RolePermission();
+                rolePermission.setRoleId(dto.getRoleId());
+                rolePermission.setPermissionId(t);
+                rolePermissionMapper.insert(rolePermission);
+            });
+            return true;
+        }
+        return false;
     }
 
     @Autowired

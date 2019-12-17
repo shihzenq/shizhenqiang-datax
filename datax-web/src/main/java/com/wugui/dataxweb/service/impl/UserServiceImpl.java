@@ -83,8 +83,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
                         userEntity.setName(getValue(row.getCell(1)));
                         userEntity.setPassword("123456");
                         userEntity.setPhone(getValue(row.getCell(3)));
-                        userEntity.setSex(getValue(row.getCell(2)).equals("男") ? 1 : 0);
-                        userEntity.setUcUid(0L);
+                        userEntity.setSex(getValue(row.getCell(2)));
                         userEntity.setUsername(getValue(row.getCell(1)));
                         userEntityList.add(userEntity);
                     }else{

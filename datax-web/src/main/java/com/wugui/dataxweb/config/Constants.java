@@ -22,4 +22,6 @@ public class Constants {
 
     // JWT生成token时的密码
     public final static String TOKEN_SALT = "mW*RzA";
+
+    public final static String MYSQL = "?serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false&useSSL=false&nullNamePatternMatchesAll=true&useUnicode=true&characterEncoding=UTF-8";
 }

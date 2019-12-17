@@ -2,6 +2,7 @@ package com.wugui.dataxweb.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.pagehelper.PageInfo;
+import com.wugui.dataxweb.dto.datasource.CreatTableDTO;
 import com.wugui.dataxweb.entity.JobJdbcDatasource;
 
 /**
@@ -14,4 +15,6 @@ import com.wugui.dataxweb.entity.JobJdbcDatasource;
 public interface IJobJdbcDatasourceService extends IService<JobJdbcDatasource> {
 
     PageInfo<JobJdbcDatasource> selectAll(Long userId, Integer pageNum, Integer pageSize);
+
+    Boolean createTable(JobJdbcDatasource jdbcDatasource, CreatTableDTO dto);
 }
