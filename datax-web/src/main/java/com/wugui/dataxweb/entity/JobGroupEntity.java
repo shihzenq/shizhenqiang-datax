@@ -5,7 +5,7 @@ import lombok.Data;
 import javax.persistence.Table;
 
 @Data
-@Table(name = "job_group")
+@Table(name = "job_group_entity")
 public class JobGroupEntity extends BaseEntity{
 
     private Long id;

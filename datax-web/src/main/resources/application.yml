@@ -43,9 +43,9 @@ logging:
 #      grantType: client_credentials
 #      scope: server
 
-management:
-    security:
-    enabled: true
+#management:
+#    security:
+#    enabled: true
 
 #pagehelper
 pagehelper:

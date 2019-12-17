@@ -44,7 +44,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/system-manage")
-@Api("系统管理")
+@Api(tags = "系统管理")
 public class SystemManagementController extends BaseController {
 
 
@@ -69,7 +69,6 @@ public class SystemManagementController extends BaseController {
         groupEntity.setCreateUserId(getCurrentUser().getId());
         groupEntity.setCreateTime(new Date());
         groupEntity.setUpdateTime(new Date());
-
         if (!JobGroupService.countGroupName(dto.getName(), getCurrentUser().getId())) {
             return responseError("组名重复！");
         }

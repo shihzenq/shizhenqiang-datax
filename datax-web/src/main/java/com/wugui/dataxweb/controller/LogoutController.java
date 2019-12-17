@@ -5,6 +5,7 @@ import com.wugui.dataxweb.entity.UserEntity;
 import com.wugui.dataxweb.service.UserService;
 import com.wugui.dataxweb.util.KlksRedisUtils;
 import com.wugui.dataxweb.vo.ResponseData;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/logout")
+@Api(tags = "退出接口")
 public class LogoutController extends BaseController{
 
     private UserService userService;

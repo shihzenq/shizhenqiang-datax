@@ -32,7 +32,7 @@ public class JobGroupServiceImpl extends ServiceImpl<GroupMapper, JobGroupEntity
     public Boolean countGroupName(String name, Long userId) {
         Map<String, Object> map = new HashMap<>();
         map.put("name", name);
-        map.put("createUserId", userId);
+        map.put("create_user_id", userId);
         List<JobGroupEntity> jobGroupEntities = groupMapper.selectByMap(map);
         return CollectionUtils.isEmpty(jobGroupEntities);
     }

@@ -48,7 +48,7 @@ public class RedisConfig
         RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration
                 .defaultCacheConfig()
                 .entryTtl(Duration.ofSeconds(60))
-                .prefixKeysWith("klks:")
+                .prefixKeysWith("dataX:")
                 .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer(Charset.forName("UTF-8"))))
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericFastJsonRedisSerializer()));
 

@@ -4,26 +4,25 @@ package com.wugui.dataxweb.controller;
 import com.wugui.dataxweb.config.Constants;
 import com.wugui.dataxweb.dto.user.LoginDTO;
 import com.wugui.dataxweb.entity.UserEntity;
+import com.wugui.dataxweb.interceptor.ExcludeInterceptor;
 import com.wugui.dataxweb.service.UserService;
 import com.wugui.dataxweb.util.JwtUtil;
 import com.wugui.dataxweb.util.KlksRedisUtils;
 import com.wugui.dataxweb.vo.ResponseData;
-import io.swagger.annotations.ApiOperation;
+//import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.AuthenticationException;
+//import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
-import static com.wugui.dataxweb.config.Constants.CAPTCHA_ID_HEADER;
 
 @RestController
 @RequestMapping("/login")
+@Api(tags = "登录接口")
 public class LoginController extends BaseController{
 
     private UserService userService;
@@ -31,7 +30,7 @@ public class LoginController extends BaseController{
     @Resource
     KlksRedisUtils klksRedisUtils;
 
-    @ApiOperation(value = "登录接口", notes = "登录接口，请求头中必须携带 "+CAPTCHA_ID_HEADER+" 参数，该参数从[图形验证码接口]的响应头中获取")
+    @ExcludeInterceptor
     @PostMapping
     public ResponseData<?> login(@Validated @RequestBody LoginDTO loginForm, BindingResult bindingResult) {
 
@@ -55,7 +54,7 @@ public class LoginController extends BaseController{
             // 缓存
             klksRedisUtils.saveUserInfoToCache(userId.toString(), enterpriseUser);
             return response(enterpriseUser);
-        } catch (AuthenticationException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return responseError("用户名或密码错误！", 401);
         }

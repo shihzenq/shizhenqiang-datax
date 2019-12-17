@@ -3,9 +3,11 @@ package com.wugui.dataxweb.controller;
 
 import com.wugui.dataxweb.entity.UserEntity;
 import com.wugui.dataxweb.service.UserService;
+import com.wugui.dataxweb.util.JwtUtil;
 import com.wugui.dataxweb.util.KlksRedisUtils;
 import com.wugui.dataxweb.vo.ResponseData;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,14 +65,19 @@ public abstract class BaseController {
 
     UserEntity getCurrentUser() {
 //        return authenticationFacade.getUser();
-        HttpSession session = request.getSession();
-        String userId = (String)session.getAttribute("userId");
-        UserEntity userInfo = redis.getUserInfoFromCache(userId);
-        if (userInfo == null) {
-            userInfo = userService.getById(userId);
-            redis.saveUserInfoToCache(userId, userInfo);
+        String token = request.getHeader("Authorization");
+        if (StringUtils.isNotBlank(token)) {
+            String[] split = token.split(" ");
+            String userId = JwtUtil.getUsername(split[1]);
+            if (StringUtils.isNotBlank(userId)) {
+                // uid存入session
+                UserEntity entity = userService.getById(Long.parseLong(userId));
+                if (null != entity) {
+                    return entity;
+                }
+            }
         }
-        return userInfo;
+        return null;
     }
 
     @Autowired
