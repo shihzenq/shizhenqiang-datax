@@ -24,4 +24,6 @@ public class DasColumn {
     private String columnClassName;
 
     private String columnComment;
+
+    private Integer columnSize;
 }

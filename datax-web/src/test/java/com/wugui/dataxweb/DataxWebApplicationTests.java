@@ -2,13 +2,13 @@ package com.wugui.dataxweb;
 
 import com.github.pagehelper.PageInfo;
 import com.wugui.dataxweb.dao.JobConfigMapper;
+import com.wugui.dataxweb.dto.datasource.CreatTableSyncDTO;
 import com.wugui.dataxweb.entity.JobConfig;
 import com.wugui.dataxweb.entity.Permission;
 import com.wugui.dataxweb.entity.Role;
 import com.wugui.dataxweb.entity.UserEntity;
-import com.wugui.dataxweb.service.PermissionService;
-import com.wugui.dataxweb.service.RoleService;
-import com.wugui.dataxweb.service.UserService;
+import com.wugui.dataxweb.service.*;
+import com.wugui.tool.database.TableInfo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +32,12 @@ public class DataxWebApplicationTests {
 
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private JdbcDatasourceQueryService jdbcDatasourceQueryService;
+
+    @Autowired
+    private IJobJdbcDatasourceService iJobJdbcDatasourceService;
 
     @Test
     public void contextLoads() {
@@ -89,5 +95,19 @@ public class DataxWebApplicationTests {
     }
 
 
+    @Test
+    public void getTableAndColumnsDetails() {
+        TableInfo tableInfo = jdbcDatasourceQueryService.getTableAndColumnsDetails(3L, "voucher");
+        System.out.println(tableInfo);
+    }
 
+    @Test
+    public void creatTableSync() {
+        CreatTableSyncDTO dto = new CreatTableSyncDTO();
+        dto.setSourceId(3L);
+        dto.setSourceTableName("voucher");
+        dto.setTargetId(2L);
+        dto.setTargetTableName("voucher");
+        iJobJdbcDatasourceService.createTableSync(dto);
+    }
 }

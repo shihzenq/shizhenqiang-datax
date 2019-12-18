@@ -28,4 +28,17 @@ public class ColumnInfo {
      * 是否是主键列
      */
     private Boolean ifPrimaryKey;
+
+    private Integer columnSize;
+
+    @Override
+    public String toString() {
+        return "ColumnInfo{" +
+                "name='" + name + '\'' +
+                ", comment='" + comment + '\'' +
+                ", type='" + type + '\'' +
+                ", ifPrimaryKey=" + ifPrimaryKey +
+                ", columnSize=" + columnSize +
+                '}';
+    }
 }

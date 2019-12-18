@@ -1,5 +1,7 @@
 package com.wugui.dataxweb.service;
 
+import com.wugui.tool.database.TableInfo;
+
 import java.util.List;
 
 /**
@@ -39,4 +41,5 @@ public interface JdbcDatasourceQueryService {
     List<String> getColumnsByQuerySql(Long datasourceId, String querySql);
 
 
+    TableInfo getTableAndColumnsDetails(Long datasourceId, String tableName);
 }

@@ -7,9 +7,12 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.wugui.dataxweb.dao.JobJdbcDatasourceMapper;
 import com.wugui.dataxweb.dto.datasource.CreatTableDTO;
+import com.wugui.dataxweb.dto.datasource.CreatTableSyncDTO;
 import com.wugui.dataxweb.entity.JobJdbcDatasource;
 import com.wugui.dataxweb.service.IJobJdbcDatasourceService;
+import com.wugui.dataxweb.service.JdbcDatasourceQueryService;
 import com.wugui.dataxweb.util.JDBCUtils;
+import com.wugui.tool.database.TableInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +34,8 @@ import java.sql.Timestamp;
 public class JobJdbcDatasourceServiceImpl extends ServiceImpl<JobJdbcDatasourceMapper, JobJdbcDatasource> implements IJobJdbcDatasourceService {
 
     private JobJdbcDatasourceMapper jobJdbcDatasourceMapper;
+
+    private JdbcDatasourceQueryService jdbcDatasourceQueryService;
 
     @Override
     public PageInfo<JobJdbcDatasource> selectAll(Long userId, Integer pageNum, Integer pageSize) {
@@ -66,8 +71,36 @@ public class JobJdbcDatasourceServiceImpl extends ServiceImpl<JobJdbcDatasourceM
         return true;
     }
 
+    @Override
+    public Boolean createTableSync(CreatTableSyncDTO dto) {
+        TableInfo sourceTableInfo = jdbcDatasourceQueryService.getTableAndColumnsDetails(dto.getSourceId(), dto.getSourceTableName());
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        try {
+            JobJdbcDatasource targetJdbcDatasource = jobJdbcDatasourceMapper.selectById(dto.getTargetId());
+            conn= JDBCUtils.getConn(targetJdbcDatasource.getJdbcUrl(), targetJdbcDatasource.getJdbcUsername(), targetJdbcDatasource.getJdbcPassword());
+            String sql = JDBCUtils.createTableSync(sourceTableInfo, dto.getTargetTableName());
+            pstmt = JDBCUtils.getPStmt(conn, sql);
+            pstmt.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally{
+            JDBCUtils.closeStmt(pstmt);
+            JDBCUtils.closeConn(conn);
+        }
+        return true;
+    }
+
     @Autowired
     public void setJobJdbcDatasourceMapper(JobJdbcDatasourceMapper jobJdbcDatasourceMapper) {
         this.jobJdbcDatasourceMapper = jobJdbcDatasourceMapper;
+    }
+
+    @Autowired
+    public void setJdbcDatasourceQueryService(JdbcDatasourceQueryService jdbcDatasourceQueryService) {
+        this.jdbcDatasourceQueryService = jdbcDatasourceQueryService;
     }
 }

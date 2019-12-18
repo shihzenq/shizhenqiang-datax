@@ -5,8 +5,10 @@ import com.google.common.collect.Lists;
 import com.wugui.dataxweb.entity.JobJdbcDatasource;
 import com.wugui.dataxweb.service.IJobJdbcDatasourceService;
 import com.wugui.dataxweb.service.JdbcDatasourceQueryService;
+import com.wugui.tool.database.TableInfo;
 import com.wugui.tool.query.BaseQueryTool;
 import com.wugui.tool.query.QueryToolFactory;
+import com.wugui.tool.util.DasUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,6 +50,17 @@ public class JdbcDatasourceQueryServiceImpl implements JdbcDatasourceQueryServic
         }
         BaseQueryTool queryTool = QueryToolFactory.getByDbType(jdbcDatasource);
         return queryTool.getColumnNames(tableName);
+    }
+
+
+    @Override
+    public TableInfo getTableAndColumnsDetails(Long datasourceId, String tableName) {
+        JobJdbcDatasource jdbcDatasource = jobJdbcDatasourceService.getById(datasourceId);
+        if (null == jdbcDatasource) {
+            return null;
+        }
+        DasUtil dasUtil = new DasUtil(jdbcDatasource);
+        return dasUtil.buildTableInfo(tableName);
     }
 
     @Override

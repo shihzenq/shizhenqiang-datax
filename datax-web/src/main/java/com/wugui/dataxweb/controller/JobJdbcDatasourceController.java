@@ -7,6 +7,7 @@ import com.wugui.dataxweb.config.Constants;
 import com.wugui.dataxweb.config.security.RequiredPermission;
 import com.wugui.dataxweb.constants.Permissions;
 import com.wugui.dataxweb.dto.datasource.CreatTableDTO;
+import com.wugui.dataxweb.dto.datasource.CreatTableSyncDTO;
 import com.wugui.dataxweb.entity.JobJdbcDatasource;
 import com.wugui.dataxweb.service.IJobJdbcDatasourceService;
 import com.wugui.dataxweb.util.DriverUtils;
@@ -180,8 +181,8 @@ public class JobJdbcDatasourceController extends BaseController {
     }
 
 
-    @GetMapping("/create-table")
-    @ApiOperation("创建表")
+    @PostMapping("/create-table")
+    @ApiOperation("创建表，用户选定要创建的字段")
     public ResponseData<?> createTable(@RequestBody @Validated CreatTableDTO dto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return responseFormError(bindingResult);
@@ -191,5 +192,22 @@ public class JobJdbcDatasourceController extends BaseController {
             return responseError("无此数据源！");
         }
         return response(jobJdbcDatasourceService.createTable(jobJdbcDatasource, dto));
+    }
+
+    @PostMapping("/create-table-sync")
+    @ApiOperation("创建表，将源数据库表及字段信息同步创建目标源数据库表中")
+    public ResponseData<?> createTableSync(@RequestBody @Validated CreatTableSyncDTO dto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return responseFormError(bindingResult);
+        }
+        JobJdbcDatasource sourceJdbcDatasource = jobJdbcDatasourceService.getById(dto.getSourceId());
+        if (null == sourceJdbcDatasource) {
+            return responseError("无此源数据源！");
+        }
+        JobJdbcDatasource targetJdbcDatasource = jobJdbcDatasourceService.getById(dto.getTargetId());
+        if (null == targetJdbcDatasource) {
+            return responseError("无此目标数据源！");
+        }
+        return response(jobJdbcDatasourceService.createTableSync(dto));
     }
 }

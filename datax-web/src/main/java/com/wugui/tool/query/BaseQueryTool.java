@@ -200,6 +200,7 @@ public abstract class BaseQueryTool implements QueryToolInterface {
             columnInfo.setName(e.getColumnName());
             columnInfo.setComment(e.getColumnComment());
             columnInfo.setType(e.getColumnClassName());
+            columnInfo.setColumnSize(e.getColumnSize());
             res.add(columnInfo);
         });
         return res;
@@ -215,9 +216,9 @@ public abstract class BaseQueryTool implements QueryToolInterface {
                 dasColumn.setColumnClassName(metaData.getColumnClassName(i));
                 dasColumn.setColumnTypeName(metaData.getColumnTypeName(i));
                 dasColumn.setColumnName(metaData.getColumnName(i));
+                dasColumn.setColumnSize(metaData.getColumnDisplaySize(i));
                 res.add(dasColumn);
             }
-
             Statement statement = connection.createStatement();
             res.forEach(e -> {
                 String sqlQueryComment = sqlBuilder.getSQLQueryComment(currentSchema, tableName, e.getColumnName());

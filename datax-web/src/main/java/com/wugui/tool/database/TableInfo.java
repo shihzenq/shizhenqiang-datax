@@ -2,6 +2,7 @@ package com.wugui.tool.database;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ import java.util.List;
  * @since 2019/7/30
  */
 @Data
-public class TableInfo {
+public class TableInfo implements Serializable {
     /**
      * 表名
      */
@@ -26,4 +27,13 @@ public class TableInfo {
      * 所有列
      */
     private List<ColumnInfo> columns;
+
+    @Override
+    public String toString() {
+        return "TableInfo{" +
+                "name='" + name + '\'' +
+                ", comment='" + comment + '\'' +
+                ", columns=" + columns +
+                '}';
+    }
 }
