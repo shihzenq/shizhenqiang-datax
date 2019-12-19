@@ -6,9 +6,13 @@ import com.github.pagehelper.PageInfo;
 import com.wugui.dataxweb.config.Constants;
 import com.wugui.dataxweb.config.security.RequiredPermission;
 import com.wugui.dataxweb.constants.Permissions;
+import com.wugui.dataxweb.dto.SearchDTO;
 import com.wugui.dataxweb.dto.datasource.CreatTableDTO;
 import com.wugui.dataxweb.dto.datasource.CreatTableSyncDTO;
+import com.wugui.dataxweb.dto.datasource.DataSourceIdDTO;
+import com.wugui.dataxweb.dto.datasource.DataSourceIdListDTO;
 import com.wugui.dataxweb.entity.JobJdbcDatasource;
+import com.wugui.dataxweb.log.OperateLog;
 import com.wugui.dataxweb.service.IJobJdbcDatasourceService;
 import com.wugui.dataxweb.util.DriverUtils;
 import com.wugui.dataxweb.util.IpUtils;
@@ -48,6 +52,7 @@ public class JobJdbcDatasourceController extends BaseController {
      */
     @GetMapping("/list")
     @ApiOperation("分页查询所有数据")
+    @OperateLog(content = "数据源查询")
 //    @ApiImplicitParams(
 //            {@ApiImplicitParam(paramType = "query", dataType = "String", name = "current", value = "当前页", defaultValue = "1", required = true),
 //                    @ApiImplicitParam(paramType = "query", dataType = "String", name = "size", value = "一页大小", defaultValue = "10", required = true),
@@ -55,7 +60,7 @@ public class JobJdbcDatasourceController extends BaseController {
 //                    @ApiImplicitParam(paramType = "query", dataType = "String", name = "ascs", value = "升序字段，多个用逗号分隔"),
 //                    @ApiImplicitParam(paramType = "query", dataType = "String", name = "descs", value = "降序字段，多个用逗号分隔")
 //            })
-    public ResponseData<PageInfo<JobJdbcDatasource>> selectAll(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize) {
+    public ResponseData<PageInfo<JobJdbcDatasource>> selectAll(@RequestBody SearchDTO dto) {
 //        BaseForm<JobJdbcDatasource> baseForm = new BaseForm();
 //        Long userId = getCurrentUser().getId();
 //        IPage<JobJdbcDatasource> page = this.jobJdbcDatasourceService.page(baseForm.getPlusPagingQueryEntity(), pageQueryWrapperCustom(baseForm.getParameters()));
@@ -73,7 +78,7 @@ public class JobJdbcDatasourceController extends BaseController {
 //        }
 //        return response();
         Long userId = getCurrentUser().getId();
-        return response(jobJdbcDatasourceService.selectAll(userId, pageNum, pageSize));
+        return response(jobJdbcDatasourceService.selectAll(userId, dto.getPageNum(), dto.getPageSize()));
     }
 
     /**
@@ -127,8 +132,9 @@ public class JobJdbcDatasourceController extends BaseController {
      */
     @ApiOperation("jdbc数据源详情")
     @GetMapping("/id")
-    public ResponseData<?> selectOne(@RequestParam("id") Long id) {
-        return response(this.jobJdbcDatasourceService.getById(id));
+    @OperateLog(content = "数据源详情")
+    public ResponseData<?> selectOne(@RequestBody DataSourceIdDTO dto) {
+        return response(this.jobJdbcDatasourceService.getById(dto.getId()));
     }
 
     /**
@@ -139,6 +145,7 @@ public class JobJdbcDatasourceController extends BaseController {
      */
     @ApiOperation("新增jdbc数据源")
     @PostMapping("/add")
+    @OperateLog(content = "数据源新增")
     public ResponseData<?> insert(@RequestBody JobJdbcDatasource entity) {
         entity.setUserId(getCurrentUser().getId());
 //        String ipAddress = IpUtils.getIpAddress(request);
@@ -159,6 +166,7 @@ public class JobJdbcDatasourceController extends BaseController {
     @RequiredPermission(value = Permissions.DATA_SOURCE_DETAIL)
     @PostMapping("/update")
     @ApiOperation("修改jdbc数据源")
+    @OperateLog(content = "数据源修改")
     public ResponseData<?> update(@RequestBody JobJdbcDatasource entity) {
         String type = DriverUtils.driverMap.get(entity.getType().toUpperCase());
         entity.setJdbcDriverClass(type);
@@ -170,19 +178,20 @@ public class JobJdbcDatasourceController extends BaseController {
     /**
      * 删除数据
      *
-     * @param idList 主键结合
      * @return 删除结果
      */
     @RequiredPermission(value = Permissions.DATA_SOURCE_delete)
     @GetMapping("/delete")
     @ApiOperation("删除jdbc数据源")
-    public ResponseData<?> delete(@RequestParam("idList") List<Long> idList) {
-        return response(this.jobJdbcDatasourceService.removeByIds(idList));
+    @OperateLog(content = "数据源删除")
+    public ResponseData<?> delete(@RequestBody DataSourceIdListDTO dto) {
+        return response(this.jobJdbcDatasourceService.removeByIds(dto.getIdList()));
     }
 
 
     @PostMapping("/create-table")
     @ApiOperation("创建表，用户选定要创建的字段")
+    @OperateLog(content = "目标数据库创建表")
     public ResponseData<?> createTable(@RequestBody @Validated CreatTableDTO dto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return responseFormError(bindingResult);
@@ -196,6 +205,7 @@ public class JobJdbcDatasourceController extends BaseController {
 
     @PostMapping("/create-table-sync")
     @ApiOperation("创建表，将源数据库表及字段信息同步创建目标源数据库表中")
+    @OperateLog(content = "源数据库表及字段信息同步创建目标源数据库表中")
     public ResponseData<?> createTableSync(@RequestBody @Validated CreatTableSyncDTO dto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return responseFormError(bindingResult);

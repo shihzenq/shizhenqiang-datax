@@ -5,6 +5,7 @@ import com.wugui.dataxweb.config.Constants;
 import com.wugui.dataxweb.dto.user.LoginDTO;
 import com.wugui.dataxweb.entity.UserEntity;
 import com.wugui.dataxweb.interceptor.ExcludeInterceptor;
+import com.wugui.dataxweb.log.OperateLog;
 import com.wugui.dataxweb.service.UserService;
 import com.wugui.dataxweb.util.JwtUtil;
 import com.wugui.dataxweb.util.KlksRedisUtils;
@@ -32,6 +33,7 @@ public class LoginController extends BaseController{
 
     @ExcludeInterceptor
     @PostMapping
+    @OperateLog(content = "登录")
     public ResponseData<?> login(@Validated @RequestBody LoginDTO loginForm, BindingResult bindingResult) {
 
         if(bindingResult.hasErrors()) {

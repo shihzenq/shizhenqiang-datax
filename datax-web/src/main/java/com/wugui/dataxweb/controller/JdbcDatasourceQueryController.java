@@ -2,6 +2,7 @@ package com.wugui.dataxweb.controller;
 
 import com.baomidou.mybatisplus.extension.api.ApiController;
 import com.baomidou.mybatisplus.extension.api.R;
+import com.wugui.dataxweb.log.OperateLog;
 import com.wugui.dataxweb.service.JdbcDatasourceQueryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -36,6 +37,7 @@ public class JdbcDatasourceQueryController extends ApiController {
      */
     @GetMapping("/getTables")
     @ApiOperation("根据数据源id获取可用表名")
+    @OperateLog(content = "获取可用表名")
     public R<List<String>> getTableNames(Long datasourceId) {
         return success(jdbcDatasourceQueryService.getTables(datasourceId));
     }
@@ -49,6 +51,7 @@ public class JdbcDatasourceQueryController extends ApiController {
      */
     @GetMapping("/getColumns")
     @ApiOperation("根据数据源id和表名获取所有字段")
+    @OperateLog(content = "获取表下所有字段")
     public R<List<String>> getColumns(Long datasourceId, String tableName) {
         return success(jdbcDatasourceQueryService.getColumns(datasourceId, tableName));
     }
@@ -62,6 +65,7 @@ public class JdbcDatasourceQueryController extends ApiController {
      */
     @GetMapping("/getColumnsByQuerySql")
     @ApiOperation("根据数据源id和sql语句获取所有字段")
+    @OperateLog(content = "获取表下所有字段")
     public R<List<String>> getColumnsByQuerySql(Long datasourceId, String querySql) {
         return success(jdbcDatasourceQueryService.getColumnsByQuerySql(datasourceId, querySql));
     }

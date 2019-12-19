@@ -1,7 +1,10 @@
 package com.wugui.dataxweb.controller;
 
 import com.wugui.dataxweb.dto.LogOffDTO;
+import com.wugui.dataxweb.entity.SystemLogEntity;
 import com.wugui.dataxweb.entity.UserEntity;
+import com.wugui.dataxweb.log.OperateLog;
+import com.wugui.dataxweb.service.SystemLogService;
 import com.wugui.dataxweb.service.UserService;
 import com.wugui.dataxweb.util.KlksRedisUtils;
 import com.wugui.dataxweb.vo.ResponseData;
@@ -24,6 +27,8 @@ public class LogoutController extends BaseController{
 
     @Autowired
     private KlksRedisUtils redisUtils;
+    @Autowired
+    private SystemLogService systemLogService;
 
     @ApiOperation(value = "系统退出", notes = "系统退出")
     @PostMapping("/do")
@@ -36,6 +41,13 @@ public class LogoutController extends BaseController{
         if (user == null) {
             return responseError("未找到此用户！");
         }
+        SystemLogEntity systemLogEntity = new SystemLogEntity();
+        systemLogEntity.setName(user.getName());
+        systemLogEntity.setUserId(user.getId());
+        systemLogEntity.setIp(getIpAddress(request));
+        systemLogEntity.setOperation("退出登录");
+        systemLogEntity.setCreateUserId(user.getId());
+        systemLogService.save(systemLogEntity);
         return response(redisUtils.deleteToken(user.getId().toString()));
     }
 

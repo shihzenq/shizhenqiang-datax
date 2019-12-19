@@ -3,6 +3,7 @@ package com.wugui.dataxweb.controller;
 import com.alibaba.datax.common.log.LogResult;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.wugui.dataxweb.dto.RunJobDto;
+import com.wugui.dataxweb.log.OperateLog;
 import com.wugui.dataxweb.service.IDataxJobService;
 import com.wugui.dataxweb.util.IpUtils;
 import io.swagger.annotations.Api;
@@ -136,6 +137,7 @@ public class JobController extends BaseController{
      */
     @ApiOperation("通过传入json配置启动一个datax作业")
     @PostMapping("/runJob")
+    @OperateLog(content = "开启作业任务")
     public R<String> runJob(@RequestBody RunJobDto runJobDto) {
         List<com.alibaba.datax.core.DataXLog> result = iDataxJobService.startJobByJsonStr(runJobDto.getJobJson());
         String ipAddress = IpUtils.getIpAddress(request);
@@ -151,6 +153,7 @@ public class JobController extends BaseController{
      */
     @ApiOperation("通过传入 runJobDto 实体启动一个datax作业，并记录日志")
     @PostMapping("/runJobLog")
+    @OperateLog(content = "开启作业任务")
     public R<String> runJobLog(@RequestBody RunJobDto runJobDto) {
         List<com.alibaba.datax.core.DataXLog> result = iDataxJobService.startJobLog(runJobDto);
         String ipAddress = IpUtils.getIpAddress(request);
@@ -166,12 +169,14 @@ public class JobController extends BaseController{
      */
     @ApiOperation("查看任务抽取日志,id为任务id，fromLineNum为读取的行数")
     @GetMapping("/viewJobLog")
+    @OperateLog(content = "查看作业任务")
     public R<LogResult> viewJogLog(Long id, int fromLineNum) {
         return R.ok(iDataxJobService.viewJogLog(id, fromLineNum));
     }
 
     @ApiOperation("通过传入 进程ID 停止该job作业")
     @GetMapping("/killJob/{pid}/{id}")
+    @OperateLog(content = "停止作业进程")
     public R<Boolean> killJob(@PathVariable(value ="pid") String pid,@PathVariable(value = "id") Long id){
         return R.ok(iDataxJobService.killJob(pid,id));
     }
