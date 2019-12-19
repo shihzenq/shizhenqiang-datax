@@ -28,7 +28,7 @@ public class UserUpdateDTO implements Serializable {
 
     @ApiModelProperty(value = "用户名称", notes = "用户名称")
     @NotEmpty(message = "手机号不能为空！")
-    @Patterns(pattern = "phone")
+    @Patterns(pattern = "phone", message = "手机号格式不正确！")
     private String phone;
 
     @ApiModelProperty(value = "备注", notes = "备注")

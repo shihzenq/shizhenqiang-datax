@@ -51,7 +51,7 @@ public class JobJdbcDatasourceController extends BaseController {
      * @return 所有数据
      */
     @GetMapping("/list")
-    @ApiOperation("分页查询所有数据")
+    @ApiOperation("分页查询所有数据，系统管理模块-数据源管理页面-数据源分页查询接口")
     @OperateLog(content = "数据源查询")
 //    @ApiImplicitParams(
 //            {@ApiImplicitParam(paramType = "query", dataType = "String", name = "current", value = "当前页", defaultValue = "1", required = true),
@@ -127,10 +127,9 @@ public class JobJdbcDatasourceController extends BaseController {
     /**
      * 通过主键查询单条数据
      *
-     * @param id 主键
      * @return 单条数据
      */
-    @ApiOperation("jdbc数据源详情")
+    @ApiOperation("jdbc数据源详情，系统管理模块-数据源管理页面-数据源详情接口")
     @GetMapping("/id")
     @OperateLog(content = "数据源详情")
     public ResponseData<?> selectOne(@RequestBody DataSourceIdDTO dto) {
@@ -143,7 +142,7 @@ public class JobJdbcDatasourceController extends BaseController {
      * @param entity 实体对象
      * @return 新增结果
      */
-    @ApiOperation("新增jdbc数据源")
+    @ApiOperation("新增jdbc数据源，系统管理模块-数据源管理页面-数据源新增接口")
     @PostMapping("/add")
     @OperateLog(content = "数据源新增")
     public ResponseData<?> insert(@RequestBody JobJdbcDatasource entity) {
@@ -165,7 +164,7 @@ public class JobJdbcDatasourceController extends BaseController {
      */
     @RequiredPermission(value = Permissions.DATA_SOURCE_DETAIL)
     @PostMapping("/update")
-    @ApiOperation("修改jdbc数据源")
+    @ApiOperation("修改jdbc数据源，系统管理模块-数据源管理页面-数据源修改接口")
     @OperateLog(content = "数据源修改")
     public ResponseData<?> update(@RequestBody JobJdbcDatasource entity) {
         String type = DriverUtils.driverMap.get(entity.getType().toUpperCase());
@@ -182,7 +181,7 @@ public class JobJdbcDatasourceController extends BaseController {
      */
     @RequiredPermission(value = Permissions.DATA_SOURCE_delete)
     @GetMapping("/delete")
-    @ApiOperation("删除jdbc数据源")
+    @ApiOperation("删除jdbc数据源，系统管理模块-数据源管理页面-数据源删除接口")
     @OperateLog(content = "数据源删除")
     public ResponseData<?> delete(@RequestBody DataSourceIdListDTO dto) {
         return response(this.jobJdbcDatasourceService.removeByIds(dto.getIdList()));
@@ -201,23 +200,5 @@ public class JobJdbcDatasourceController extends BaseController {
             return responseError("无此数据源！");
         }
         return response(jobJdbcDatasourceService.createTable(jobJdbcDatasource, dto));
-    }
-
-    @PostMapping("/create-table-sync")
-    @ApiOperation("创建表，将源数据库表及字段信息同步创建目标源数据库表中")
-    @OperateLog(content = "源数据库表及字段信息同步创建目标源数据库表中")
-    public ResponseData<?> createTableSync(@RequestBody @Validated CreatTableSyncDTO dto, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return responseFormError(bindingResult);
-        }
-        JobJdbcDatasource sourceJdbcDatasource = jobJdbcDatasourceService.getById(dto.getSourceId());
-        if (null == sourceJdbcDatasource) {
-            return responseError("无此源数据源！");
-        }
-        JobJdbcDatasource targetJdbcDatasource = jobJdbcDatasourceService.getById(dto.getTargetId());
-        if (null == targetJdbcDatasource) {
-            return responseError("无此目标数据源！");
-        }
-        return response(jobJdbcDatasourceService.createTableSync(dto));
     }
 }

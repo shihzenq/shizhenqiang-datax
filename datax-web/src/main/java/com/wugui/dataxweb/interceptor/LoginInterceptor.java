@@ -60,9 +60,19 @@ public class LoginInterceptor extends BaseController implements HandlerIntercept
 		}
 
 		String token = request.getHeader("Authorization");
+//		String token = request.getHeader("Admin-Token");
+//		if (StringUtils.isNotBlank(token)) {
+//			String[] split = token.split(" ");
+//			String userId = JwtUtil.getUsername(split[1]);
+//			if (StringUtils.isNotBlank(userId)) {
+//				String redisToken = redis.getToken(userId);
+//				if (StringUtils.isNotBlank(redisToken)) {
+//					return true;
+//				}
+//			}
+//		}
 		if (StringUtils.isNotBlank(token)) {
-			String[] split = token.split(" ");
-			String userId = JwtUtil.getUsername(split[1]);
+			String userId = JwtUtil.getUsername(token);
 			if (StringUtils.isNotBlank(userId)) {
 				String redisToken = redis.getToken(userId);
 				if (StringUtils.isNotBlank(redisToken)) {

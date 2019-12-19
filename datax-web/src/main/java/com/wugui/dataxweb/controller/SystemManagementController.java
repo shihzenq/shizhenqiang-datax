@@ -58,7 +58,7 @@ public class SystemManagementController extends BaseController {
     private SystemLogService systemLogService;
 
     @RequiredPermission(value = Permissions.USER_MANAGER)
-    @ApiOperation(value = "作业组管理新增" , notes = "作业组管理新增")
+    @ApiOperation(value = "作业组管理新增， 系统管理模块-作业组管理页面上的新增" , notes = "作业组管理新增")
     @OperateLog(content = "作业组管理新增")
     @PostMapping("/add-group")
     public ResponseData<?> addGroup(@RequestBody @Validated({AddChecks.class}) GroupDTO dto, BindingResult bindingResult) {
@@ -79,7 +79,7 @@ public class SystemManagementController extends BaseController {
     }
 
     @RequiredPermission(value = Permissions.USER_MANAGER)
-    @ApiOperation(value = "作业组管理列表" , notes = "作业组管理列表")
+    @ApiOperation(value = "作业组管理列表，系统管理模块-作业组管理页面上的列表查询接口，根据组名查询也是这个接口" , notes = "作业组管理列表")
     @OperateLog(content = "作业组管理列表")
     @PostMapping("/list-group")
     public ResponseData<PageInfo<JobGroupEntity>> groupList(@RequestBody  GroupSearchDTO dto) {
@@ -88,7 +88,7 @@ public class SystemManagementController extends BaseController {
     }
 
     @RequiredPermission(value = Permissions.USER_MANAGER)
-    @ApiOperation(value = "作业组管理修改" , notes = "作业组管理修改")
+    @ApiOperation(value = "作业组管理修改，系统管理模块-作业组管理页面上的修改接口" , notes = "作业组管理修改")
     @OperateLog(content = "作业组管理修改")
     @PostMapping("/update-group")
     public ResponseData<?> updateGroup(@RequestBody @Validated({AddChecks.class}) GroupUpdateDTO dto, BindingResult bindingResult) {
@@ -99,7 +99,7 @@ public class SystemManagementController extends BaseController {
     }
 
     @RequiredPermission(value = Permissions.USER_MANAGER)
-    @ApiOperation(value = "作业组管理删除" , notes = "作业组管理删除")
+    @ApiOperation(value = "作业组管理删除，系统管理模块-作业组管理页面上的删除接口" , notes = "作业组管理删除")
     @OperateLog(content = "作业组管理删除")
     @PostMapping("/update-delete")
     public ResponseData<?> deleteGroup(@RequestBody @Validated GroupDeleteDTO dto, BindingResult bindingResult) {
@@ -125,7 +125,7 @@ public class SystemManagementController extends BaseController {
 
 
     @PostMapping("/role-list")
-    @ApiOperation(value = "角色列表")
+    @ApiOperation(value = "角色列表，角色管理页面展示")
     @OperateLog(content = "角色列表")
     public ResponseData<?> roleList() {
         Long userId = getCurrentUser().getId();
@@ -134,7 +134,7 @@ public class SystemManagementController extends BaseController {
     }
 
     @PostMapping("/permission-list")
-    @OperateLog(content = "权限列表")
+    @OperateLog(content = "权限列表，角色管理页面展示")
     @ApiOperation(value = "当前用户的权限列表")
     public ResponseData<?> permissionList() {
         Long userId = getCurrentUser().getId();
@@ -143,7 +143,7 @@ public class SystemManagementController extends BaseController {
     }
 
     @PostMapping("/update-role-permission")
-    @ApiOperation(value = "修改角色的权限")
+    @ApiOperation(value = "修改角色的权限，角色管理页面展示")
     @OperateLog(content = "角色权限修改")
     public ResponseData<?> updateRolePermission(@RequestBody @Validated({UpdateChecks.class}) RoleUpdatePermissionDTO dto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -155,7 +155,7 @@ public class SystemManagementController extends BaseController {
     }
 
     @RequiredPermission(value = Permissions.USER_MANAGER)
-    @ApiOperation(value = "用户导入" , notes = "用户导入接口")
+    @ApiOperation(value = "用户导入，用户管理页面的导入接口" , notes = "用户导入接口")
     @OperateLog(content = "用户导入")
     @RequestMapping(value = "/import-user", method = RequestMethod.POST)
     public ResponseData<?> importVoucher(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -188,7 +188,7 @@ public class SystemManagementController extends BaseController {
 
     @RequiredPermission(value = Permissions.USER_MANAGER)
     @PostMapping("/user-search")
-    @ApiOperation(value = "用户搜索")
+    @ApiOperation(value = "用户搜索，用户管理页面，搜索查询接口")
     @OperateLog(content = "用户搜索")
     public ResponseData<?> userSearch(@RequestBody UserSearchDTO dto) {
         UserEntity userEntity = userService.getByUsername(dto.getUsername());
@@ -197,7 +197,7 @@ public class SystemManagementController extends BaseController {
 
     @RequiredPermission(value = Permissions.USER_MANAGER)
     @PostMapping("/user-list")
-    @ApiOperation(value = "用户列表")
+    @ApiOperation(value = "用户列表，用户管理页面，列表查询接口")
     @OperateLog(content = "用户列表")
     public ResponseData<PageInfo<UserEntity>> userList(@RequestBody UserSearchDTO dto) {
         PageInfo<UserEntity> all = userService.getAll(dto.getUsername(), dto.getPageNum(), dto.getPageSize());
@@ -206,7 +206,7 @@ public class SystemManagementController extends BaseController {
 
     @RequiredPermission(value = Permissions.USER_MANAGER)
     @PostMapping("/update-user-password")
-    @ApiOperation(value = "修改用户密码")
+    @ApiOperation(value = "修改用户密码，密码修改页面，修改密码接口")
     @OperateLog(content = "修改密码")
     public ResponseData<?> updateUserPassword(@RequestBody @Validated(UpdateChecks.class) ModifyPasswordDTO dto, BindingResult result) {
         if(result.hasErrors()) {
@@ -221,7 +221,7 @@ public class SystemManagementController extends BaseController {
 
     @RequiredPermission(value = Permissions.USER_MANAGER)
     @PostMapping("/update-user")
-    @ApiOperation(value = "用户修改")
+    @ApiOperation(value = "用户修改，用户管理页面，修改接口")
     @OperateLog(content = "用户修改")
     public ResponseData<?> updateUser(@RequestBody @Validated(UpdateChecks.class) UserUpdateDTO dto, BindingResult result) {
         if(result.hasErrors()) {
@@ -241,9 +241,9 @@ public class SystemManagementController extends BaseController {
 
     @RequiredPermission(value = Permissions.USER_MANAGER)
     @PostMapping("/add-user")
-    @ApiOperation(value = "用户新增")
+    @ApiOperation(value = "用户新增，用户管理页面，新增接口")
     @OperateLog(content = "用户信息")
-    public ResponseData<?> addUser(@RequestBody @Validated UserUpdateDTO dto, BindingResult result) {
+    public ResponseData<?> addUser(@RequestBody @Validated(AddChecks.class) UserUpdateDTO dto, BindingResult result) {
         if(result.hasErrors()) {
             return responseFormError(result);
         }
@@ -260,7 +260,7 @@ public class SystemManagementController extends BaseController {
 
     @RequiredPermission(value = Permissions.USER_MANAGER)
     @PostMapping("/detail-user")
-    @ApiOperation(value = "用户详情")
+    @ApiOperation(value = "用户详情，用户管理页面，详情接口")
     @OperateLog(content = "用户详情")
     public ResponseData<?> detailUser(@RequestBody @Validated UserIdDTO dto, BindingResult result) {
         if(result.hasErrors()) {
@@ -272,7 +272,7 @@ public class SystemManagementController extends BaseController {
 
     @RequiredPermission(value = Permissions.USER_MANAGER)
     @PostMapping("/delete-user")
-    @ApiOperation(value = "用户删除")
+    @ApiOperation(value = "用户删除，用户管理页面，删除接口")
     @OperateLog(content = "用户删除")
     public ResponseData<?> deleteUser(@RequestBody @Validated UserUpdateDTO dto, BindingResult result) {
         if(result.hasErrors()) {
@@ -284,7 +284,7 @@ public class SystemManagementController extends BaseController {
 
     @RequiredPermission(value = Permissions.LOG_DELETE)
     @PostMapping("/delete-log")
-    @ApiOperation(value = "dataX日志删除")
+    @ApiOperation(value = "dataX日志删除，日志管理页面-dataX日志，dataX日志删除接口")
     @OperateLog(content = "dataX日志删除")
     public ResponseData<?> deleteLog(@RequestBody @Validated LogIdDTO dto, BindingResult result) {
         if(result.hasErrors()) {
@@ -295,7 +295,7 @@ public class SystemManagementController extends BaseController {
 
     @RequiredPermission(value = Permissions.LOG_DETAIL)
     @PostMapping("/list-log")
-    @ApiOperation(value = "dataX日志查看")
+    @ApiOperation(value = "dataX日志查看，日志管理页面-dataX日志，dataX日志查看接口")
     @OperateLog(content = "dataX日志查看")
     public ResponseData<PageInfo<DataXLog>> listLog(@RequestBody SearchDTO dto) {
         return response(dataXLogService.list(getCurrentUser().getId(), dto.getPageNum(), dto.getPageSize()));
@@ -304,7 +304,7 @@ public class SystemManagementController extends BaseController {
 
     @RequiredPermission(value = Permissions.LOG_DELETE)
     @PostMapping("/delete-system-log")
-    @ApiOperation(value = "系统日志删除")
+    @ApiOperation(value = "系统日志删除，日志管理页面-系统日志，系统日志删除接口")
     @OperateLog(content = "系统日志删除")
     public ResponseData<?> deleteSystemLog(@RequestBody @Validated LogIdDTO dto, BindingResult result) {
         if(result.hasErrors()) {
@@ -315,7 +315,7 @@ public class SystemManagementController extends BaseController {
 
     @RequiredPermission(value = Permissions.LOG_DETAIL)
     @PostMapping("/list-system-log")
-    @ApiOperation(value = "系统日志查看")
+    @ApiOperation(value = "系统日志查看，日志管理页面-系统日志，系统日志查看接口")
     @OperateLog(content = "系统日志查看")
     public ResponseData<PageInfo<SystemLogEntity>> listSystemLog(@RequestBody SearchDTO dto) {
         return response(systemLogService.list(getCurrentUser().getId(), dto.getPageNum(), dto.getPageSize()));

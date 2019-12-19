@@ -16,6 +16,6 @@ public class LogOffDTO implements Serializable{
     private Long userId;
 
 
-    @ApiModelProperty("手机号")
-    private String phone;
+    @ApiModelProperty("用户名")
+    private String username;
 }

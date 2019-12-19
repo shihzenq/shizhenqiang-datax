@@ -66,9 +66,19 @@ public abstract class BaseController {
     UserEntity getCurrentUser() {
 //        return authenticationFacade.getUser();
         String token = request.getHeader("Authorization");
+//        if (StringUtils.isNotBlank(token)) {
+//            String[] split = token.split(" ");
+//            String userId = JwtUtil.getUsername(split[1]);
+//            if (StringUtils.isNotBlank(userId)) {
+//                // uid存入session
+//                UserEntity entity = userService.getById(Long.parseLong(userId));
+//                if (null != entity) {
+//                    return entity;
+//                }
+//            }
+//        }
         if (StringUtils.isNotBlank(token)) {
-            String[] split = token.split(" ");
-            String userId = JwtUtil.getUsername(split[1]);
+            String userId = JwtUtil.getUsername(token);
             if (StringUtils.isNotBlank(userId)) {
                 // uid存入session
                 UserEntity entity = userService.getById(Long.parseLong(userId));
