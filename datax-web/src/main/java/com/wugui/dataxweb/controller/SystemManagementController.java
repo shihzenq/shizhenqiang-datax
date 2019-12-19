@@ -16,16 +16,10 @@ import com.wugui.dataxweb.dto.user.ModifyPasswordDTO;
 import com.wugui.dataxweb.dto.user.UserIdDTO;
 import com.wugui.dataxweb.dto.user.UserSearchDTO;
 import com.wugui.dataxweb.dto.user.UserUpdateDTO;
-import com.wugui.dataxweb.entity.DataXLog;
-import com.wugui.dataxweb.entity.JobGroupEntity;
-import com.wugui.dataxweb.entity.Role;
-import com.wugui.dataxweb.entity.UserEntity;
+import com.wugui.dataxweb.entity.*;
 import com.wugui.dataxweb.export.UserErrorExcel;
 import com.wugui.dataxweb.log.OperateLog;
-import com.wugui.dataxweb.service.DataXLogService;
-import com.wugui.dataxweb.service.JobGroupService;
-import com.wugui.dataxweb.service.RoleService;
-import com.wugui.dataxweb.service.UserService;
+import com.wugui.dataxweb.service.*;
 import com.wugui.dataxweb.validator.group.AddChecks;
 import com.wugui.dataxweb.validator.group.UpdateChecks;
 import com.wugui.dataxweb.vo.ResponseData;
@@ -60,6 +54,8 @@ public class SystemManagementController extends BaseController {
     private UserService userService;
 
     private DataXLogService dataXLogService;
+
+    private SystemLogService systemLogService;
 
     @RequiredPermission(value = Permissions.USER_MANAGER)
     @ApiOperation(value = "作业组管理新增" , notes = "作业组管理新增")
@@ -288,8 +284,8 @@ public class SystemManagementController extends BaseController {
 
     @RequiredPermission(value = Permissions.LOG_DELETE)
     @PostMapping("/delete-log")
-    @ApiOperation(value = "日志删除")
-    @OperateLog(content = "日志删除")
+    @ApiOperation(value = "dataX日志删除")
+    @OperateLog(content = "dataX日志删除")
     public ResponseData<?> deleteLog(@RequestBody @Validated LogIdDTO dto, BindingResult result) {
         if(result.hasErrors()) {
             return responseFormError(result);
@@ -299,11 +295,33 @@ public class SystemManagementController extends BaseController {
 
     @RequiredPermission(value = Permissions.LOG_DETAIL)
     @PostMapping("/list-log")
-    @ApiOperation(value = "日志查看")
-    @OperateLog(content = "日志查看")
+    @ApiOperation(value = "dataX日志查看")
+    @OperateLog(content = "dataX日志查看")
     public ResponseData<PageInfo<DataXLog>> listLog(@RequestBody SearchDTO dto) {
         return response(dataXLogService.list(getCurrentUser().getId(), dto.getPageNum(), dto.getPageSize()));
     }
+
+
+    @RequiredPermission(value = Permissions.LOG_DELETE)
+    @PostMapping("/delete-system-log")
+    @ApiOperation(value = "系统日志删除")
+    @OperateLog(content = "系统日志删除")
+    public ResponseData<?> deleteSystemLog(@RequestBody @Validated LogIdDTO dto, BindingResult result) {
+        if(result.hasErrors()) {
+            return responseFormError(result);
+        }
+        return response(systemLogService.removeById(dto.getId()));
+    }
+
+    @RequiredPermission(value = Permissions.LOG_DETAIL)
+    @PostMapping("/list-system-log")
+    @ApiOperation(value = "系统日志查看")
+    @OperateLog(content = "系统日志查看")
+    public ResponseData<PageInfo<SystemLogEntity>> listSystemLog(@RequestBody SearchDTO dto) {
+        return response(systemLogService.list(getCurrentUser().getId(), dto.getPageNum(), dto.getPageSize()));
+    }
+
+
 
     private void errorInfoExcel(HttpServletRequest request, JSONArray array, HttpServletResponse response, String fileName) throws  IOException{
         sendExcelHeader(response, fileName);
@@ -335,5 +353,10 @@ public class SystemManagementController extends BaseController {
     @Autowired
     public void setDataXLogService(DataXLogService dataXLogService) {
         this.dataXLogService = dataXLogService;
+    }
+
+    @Autowired
+    public void setSystemLogService(SystemLogService systemLogService) {
+        this.systemLogService = systemLogService;
     }
 }
