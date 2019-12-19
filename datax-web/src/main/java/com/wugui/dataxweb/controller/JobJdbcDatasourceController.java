@@ -37,7 +37,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api/jobJdbcDatasource")
-@Api(tags = "jdbc数据源配置接口")
+@Api(tags = "系统管理模块-数据源管理页面")
 public class JobJdbcDatasourceController extends BaseController {
     /**
      * 服务对象
