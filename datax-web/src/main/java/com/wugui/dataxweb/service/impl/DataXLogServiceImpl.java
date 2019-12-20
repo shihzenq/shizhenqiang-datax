@@ -1,5 +1,6 @@
 package com.wugui.dataxweb.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -31,10 +32,10 @@ public class DataXLogServiceImpl extends ServiceImpl<DataXLogMapper, DataXLog> i
 
     @Override
     public PageInfo<DataXLog> list(Long userId, Integer pageNum, Integer pageSize) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("creat_user_id", userId);
+        QueryWrapper<DataXLog> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("create_user_id", userId);
         PageHelper.startPage(pageNum, pageSize);
-        return new PageInfo<>(dataXLogMapper.selectByMap(map));
+        return new PageInfo<>(dataXLogMapper.selectList(queryWrapper));
     }
 
     @Autowired

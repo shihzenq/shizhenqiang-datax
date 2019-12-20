@@ -63,11 +63,13 @@ public class LogAspect {
                 String token = request.getHeader("Authorization");
                 UserEntity userEntity = null;
                 if (StringUtils.isNotBlank(token)) {
-                    String[] split = token.split(" ");
-                    String userId = JwtUtil.getUsername(split[1]);
+                    String userId = JwtUtil.getUsername(token);
                     if (StringUtils.isNotBlank(userId)) {
                         // uid存入session
-                        userEntity = userService.getById(Long.parseLong(userId));
+                        UserEntity entity = userService.getById(Long.parseLong(userId));
+                        if (null != entity) {
+                            userEntity = entity;
+                        }
                     }
                 }
                 if (null == userEntity) return;

@@ -37,12 +37,12 @@ public class JobController extends BaseController{
     @Autowired
     private JobManagerService jobManagerService;
 
-    @GetMapping("/testStartJob")
-    public void testStartJob() {
-        // 指定获取作业配置json的接口，此处用下面mock出来的接口提供
-        String jobPath = "http://localhost:8066/mock_stream2stream";
-        iDataxJobService.startJobByJsonStr(jobPath);
-    }
+//    @GetMapping("/testStartJob")
+//    public void testStartJob() {
+//        // 指定获取作业配置json的接口，此处用下面mock出来的接口提供
+//        String jobPath = "http://localhost:8066/mock_stream2stream";
+//        iDataxJobService.startJobByJsonStr(jobPath, IpUtils.getIpAddress(request));
+//    }
 
     @GetMapping("/mock_oracle2mongodb")
     public String mock() {
@@ -174,11 +174,8 @@ public class JobController extends BaseController{
         }
         JobManagerEntity jobManagerEntity = jobManagerService.getById(runJobDto.getJobManagerId());
         if (null == jobManagerEntity) return responseError("作业数据不存在！");
-        List<com.alibaba.datax.core.DataXLog> result = iDataxJobService.startJobLog(jobManagerEntity);
-        String ipAddress = IpUtils.getIpAddress(request);
-        iDataxJobService.addExecutorLog(ipAddress, result, jobManagerEntity.getId());
-        jobManagerEntity.setStatus(1);
-        return response(jobManagerService.updateById(jobManagerEntity));
+        List<com.alibaba.datax.core.DataXLog> result = iDataxJobService.startJobLog(jobManagerEntity, IpUtils.getIpAddress(request));
+        return response(result);
     }
 
     /**
@@ -194,7 +191,7 @@ public class JobController extends BaseController{
     }
 
     @ApiOperation("在作业管理列表页面，每一行数据有停止按钮，通过传入 进程ID，作业数据id 停止该job作业")
-    @GetMapping("/killJob")
+    @PostMapping("/killJob")
     @OperateLog(content = "停止作业进程")
     public ResponseData<?> killJob(@RequestBody @Validated JobKillDTO dto, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {

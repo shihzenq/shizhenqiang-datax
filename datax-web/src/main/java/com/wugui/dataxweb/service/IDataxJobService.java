@@ -20,10 +20,10 @@ public interface IDataxJobService extends IService<DataXLog> {
      * @author: huzekang
      * @Date: 2019-06-17
      */
-    List<com.alibaba.datax.core.DataXLog> startJobByJsonStr(String jobJson);
+    List<com.alibaba.datax.core.DataXLog> startJobByJsonStr(String jobJson, String ipAddress, Long jobManagerId);
 
 //    List<com.alibaba.datax.core.DataXLog> startJobLog(RunJobDto runJobDto);
-    List<com.alibaba.datax.core.DataXLog> startJobLog(JobManagerEntity runJobDto);
+    List<com.alibaba.datax.core.DataXLog> startJobLog(JobManagerEntity runJobDto, String ipAddress);
 
     LogResult viewJogLog(Long id, int fromLineNum);
 
@@ -35,5 +35,5 @@ public interface IDataxJobService extends IService<DataXLog> {
      */
     Boolean killJob(String pid,Long id);
 
-    Boolean addExecutorLog(String ipAddress, List<com.alibaba.datax.core.DataXLog> logList, Long jobId);
+    Boolean addExecutorLog(String ipAddress, com.alibaba.datax.core.DataXLog log, Long jobId);
 }

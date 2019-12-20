@@ -22,6 +22,7 @@ import com.wugui.dataxweb.entity.JobLog;
 import com.wugui.dataxweb.entity.JobManagerEntity;
 import com.wugui.dataxweb.service.IDataxJobService;
 import com.wugui.dataxweb.service.IJobLogService;
+import com.wugui.dataxweb.service.JobManagerService;
 import com.wugui.dataxweb.util.ProcessUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +37,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.*;
 
@@ -72,9 +74,16 @@ public class IDataxJobServiceImpl extends ServiceImpl<DataXJobMapper, DataXLog> 
     @Autowired
     private IJobLogService jobLogService;
 
+    @Autowired
+    private JobManagerService jobManagerService;
+
+    @Autowired
+    private IDataxJobService iDataxJobService;
+
+
 
     @Override
-    public List<com.alibaba.datax.core.DataXLog> startJobByJsonStr(String jobJson) {
+    public List<com.alibaba.datax.core.DataXLog> startJobByJsonStr(String jobJson, String ip, Long jobManagerId) {
         List<com.alibaba.datax.core.DataXLog> logList = new ArrayList<>();
         jobPool.submit(() -> {
 
@@ -92,14 +101,18 @@ public class IDataxJobServiceImpl extends ServiceImpl<DataXJobMapper, DataXLog> 
                     writer.close();
                 }
             }
-
             try {
                 // 使用临时本地文件启动datax作业
                 com.alibaba.datax.core.DataXLog log = Engine.entry(tmpFilePath);
                 FileUtil.del(new File(tmpFilePath));
                 // 执行日志
                 if (null != log) {
-                    logList.add(log);
+                    JobManagerEntity jobManagerEntity = jobManagerService.getById(jobManagerId);
+                    if (null != jobManagerEntity) {
+                        iDataxJobService.addExecutorLog(ip, log, jobManagerEntity.getId());
+                        jobManagerEntity.setStatus(1);
+                        jobManagerService.updateById(jobManagerEntity);
+                    }
                 }
                 //  删除临时文件
             } catch (Throwable e) {
@@ -121,7 +134,7 @@ public class IDataxJobServiceImpl extends ServiceImpl<DataXJobMapper, DataXLog> 
 
 
     @Override
-    public List<com.alibaba.datax.core.DataXLog> startJobLog(JobManagerEntity runJobDto) {
+    public List<com.alibaba.datax.core.DataXLog> startJobLog(JobManagerEntity runJobDto, String ipAddress) {
         //取出 jobJson，并转为json对象
         JSONObject json = JSONObject.parseObject(runJobDto.getJobJson());
         //根据jobId和当前时间戳生成日志文件名
@@ -135,7 +148,7 @@ public class IDataxJobServiceImpl extends ServiceImpl<DataXJobMapper, DataXLog> 
         //将路径放进去
         json.put(CoreConstant.LOG_FILE_PATH, logFilePath);
         //启动任务
-        return startJobByJsonStr(JSON.toJSONString(json));
+        return startJobByJsonStr(JSON.toJSONString(json), ipAddress, runJobDto.getId());
     }
 
     @Override
@@ -168,22 +181,17 @@ public class IDataxJobServiceImpl extends ServiceImpl<DataXJobMapper, DataXLog> 
     }
 
     @Override
-    public Boolean addExecutorLog(String ipAddress, List<com.alibaba.datax.core.DataXLog> logList, Long jobId) {
-        if (!CollectionUtils.isEmpty(logList)) {
-            com.alibaba.datax.core.DataXLog source = new com.alibaba.datax.core.DataXLog();
-            for (com.alibaba.datax.core.DataXLog log : logList) {
-                if (null != log) {
-                    source = log;
-                }
-            }
-            if (null != source) {
-                // 执行日志插入
-                DataXLog dataXLog = new DataXLog();
-                BeanUtils.copyProperties(source, dataXLog);
-                dataXLog.setJobId(jobId);
-                dataXJobMapper.insert(dataXLog);
-                return true;
-            }
+    public Boolean addExecutorLog(String ipAddress, com.alibaba.datax.core.DataXLog log, Long jobId) {
+        if (null != log) {
+            // 执行日志插入
+            DataXLog dataXLog = new DataXLog();
+            BeanUtils.copyProperties(log, dataXLog);
+            dataXLog.setJobId(jobId);
+            JobManagerEntity jobManagerEntity = jobManagerService.getById(jobId);
+            dataXLog.setCreateUserId(jobManagerEntity.getCreateUserId());
+            dataXLog.setUserName(jobManagerEntity.getCreateUserName());
+            dataXJobMapper.insert(dataXLog);
+            return true;
         }
         return false;
     }

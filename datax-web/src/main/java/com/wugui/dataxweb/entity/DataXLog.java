@@ -1,11 +1,15 @@
 package com.wugui.dataxweb.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import javax.persistence.Table;
+
 @Data
 @ApiModel(value = "dataX日志类")
+@Table(name = "data_x_log")
 public class DataXLog extends BaseEntity {
 
     @ApiModelProperty(value = "作业数据id")
@@ -39,13 +43,17 @@ public class DataXLog extends BaseEntity {
     private Long totalErrorRecords;
 
     //成功记录总数
-    @ApiModelProperty(value = "成功记录总数")
-    private Long transformerSucceedRecords;
-    // 失败记录总数
-    @ApiModelProperty(value = "失败记录总数")
-    private Long transformerFailedRecords;
+//    @ApiModelProperty(value = "成功记录总数")
+//    @TableName(value = "transformer_succeed_records")
+//    private Long transformerSucceedRecords;
+//    // 失败记录总数
+//    @ApiModelProperty(value = "失败记录总数")
+//    private Long transformerFailedRecords;
+//
+//    // 过滤记录总数
+//    @ApiModelProperty(value = "过滤记录总数")
+//    @TableName(value = "")
+//    private Long transformerFilterRecords;
 
-    // 过滤记录总数
-    @ApiModelProperty(value = "过滤记录总数")
-    private Long transformerFilterRecords;
+    private String userName;
 }
