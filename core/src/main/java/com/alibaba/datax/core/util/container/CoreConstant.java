@@ -156,7 +156,8 @@ public class CoreConstant {
 	/**
 	 * 通过启动时设置 -Ddatax.home=/Users/huzekang/openSource/DataX/target/datax/datax  获取
 	 */
-	public static String DATAX_HOME = System.getProperty("datax.home");
+//	public static String DATAX_HOME = System.getProperty("datax.home");
+	public static String DATAX_HOME = "/Users/shizhenqiang/Documents/dataX/datax";
 
 	public static String DATAX_CONF_PATH = StringUtils.join(new String[] {
 			DATAX_HOME, "conf", "core.json" }, File.separator);
@@ -190,5 +191,9 @@ public class CoreConstant {
 
 	public static String DATAX_STORAGE_PLUGIN_WRITER_HOME = StringUtils.join(
 			new String[] { DATAX_HOME, "local_storage", "plugin","writer" }, File.separator);
+
+	public static void main(String[] args) {
+		System.out.println(System.getProperty("datax.home"));
+	}
 
 }

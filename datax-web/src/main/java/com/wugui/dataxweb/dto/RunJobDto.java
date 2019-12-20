@@ -1,7 +1,9 @@
 package com.wugui.dataxweb.dto;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -13,25 +15,9 @@ import java.io.Serializable;
  * @since 2019/6/27 16:12
  */
 @Data
+@ApiModel(value = "执行作业接受类")
 public class RunJobDto implements Serializable {
 
-    private String jobJson;
-
-    private Long jobConfigId;
-
-    public String getJobJson() {
-        return jobJson;
-    }
-
-    public void setJobJson(String jobJson) {
-        this.jobJson = jobJson;
-    }
-
-    public Long getJobConfigId() {
-        return jobConfigId;
-    }
-
-    public void setJobConfigId(Long jobConfigId) {
-        this.jobConfigId = jobConfigId;
-    }
+    @NotNull(message = "作业id不能为空！")
+    private Long jobManagerId;
 }

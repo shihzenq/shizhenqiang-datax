@@ -19,6 +19,8 @@ import com.wugui.dataxweb.util.IpUtils;
 import com.wugui.dataxweb.util.PageUtils;
 import com.wugui.dataxweb.vo.ResponseData;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -53,14 +55,11 @@ public class JobJdbcDatasourceController extends BaseController {
     @GetMapping("/list")
     @ApiOperation("分页查询所有数据，系统管理模块-数据源管理页面-数据源分页查询接口")
     @OperateLog(content = "数据源查询")
-//    @ApiImplicitParams(
-//            {@ApiImplicitParam(paramType = "query", dataType = "String", name = "current", value = "当前页", defaultValue = "1", required = true),
-//                    @ApiImplicitParam(paramType = "query", dataType = "String", name = "size", value = "一页大小", defaultValue = "10", required = true),
-//                    @ApiImplicitParam(paramType = "query", dataType = "Boolean", name = "ifCount", value = "是否查询总数", defaultValue = "true"),
-//                    @ApiImplicitParam(paramType = "query", dataType = "String", name = "ascs", value = "升序字段，多个用逗号分隔"),
-//                    @ApiImplicitParam(paramType = "query", dataType = "String", name = "descs", value = "降序字段，多个用逗号分隔")
-//            })
-    public ResponseData<PageInfo<JobJdbcDatasource>> selectAll(@RequestBody SearchDTO dto) {
+    @ApiImplicitParams(
+            {@ApiImplicitParam(paramType = "query", dataType = "Integer", name = "current", value = "当前页", defaultValue = "1", required = true),
+                    @ApiImplicitParam(paramType = "query", dataType = "Integer", name = "size", value = "一页大小", defaultValue = "10", required = true)
+            })
+    public ResponseData<PageInfo<JobJdbcDatasource>> selectAll(Integer current, Integer size) {
 //        BaseForm<JobJdbcDatasource> baseForm = new BaseForm();
 //        Long userId = getCurrentUser().getId();
 //        IPage<JobJdbcDatasource> page = this.jobJdbcDatasourceService.page(baseForm.getPlusPagingQueryEntity(), pageQueryWrapperCustom(baseForm.getParameters()));
@@ -78,7 +77,7 @@ public class JobJdbcDatasourceController extends BaseController {
 //        }
 //        return response();
         Long userId = getCurrentUser().getId();
-        return response(jobJdbcDatasourceService.selectAll(userId, dto.getPageNum(), dto.getPageSize()));
+        return response(jobJdbcDatasourceService.selectAll(userId, current, size));
     }
 
     /**
@@ -130,7 +129,7 @@ public class JobJdbcDatasourceController extends BaseController {
      * @return 单条数据
      */
     @ApiOperation("jdbc数据源详情，系统管理模块-数据源管理页面-数据源详情接口")
-    @GetMapping("/id")
+    @PostMapping("/id")
     @OperateLog(content = "数据源详情")
     public ResponseData<?> selectOne(@RequestBody DataSourceIdDTO dto) {
         return response(this.jobJdbcDatasourceService.getById(dto.getId()));
@@ -180,11 +179,11 @@ public class JobJdbcDatasourceController extends BaseController {
      * @return 删除结果
      */
     @RequiredPermission(value = Permissions.DATA_SOURCE_delete)
-    @GetMapping("/delete")
+    @PostMapping("/delete")
     @ApiOperation("删除jdbc数据源，系统管理模块-数据源管理页面-数据源删除接口")
     @OperateLog(content = "数据源删除")
-    public ResponseData<?> delete(@RequestBody DataSourceIdListDTO dto) {
-        return response(this.jobJdbcDatasourceService.removeByIds(dto.getIdList()));
+    public ResponseData<?> delete(@RequestBody DataSourceIdDTO dto) {
+        return response(this.jobJdbcDatasourceService.removeById(dto.getId()));
     }
 
 

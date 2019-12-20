@@ -3,6 +3,7 @@ package com.wugui.dataxweb.entity;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -91,7 +92,7 @@ public class JobJdbcDatasource extends Model<JobJdbcDatasource> {
     private String jdbcDriverClass;
 
     /**
-     * 状态：0删除 1启用 2禁用
+     * 状态：0未使用 1已启用
      */
     @TableLogic
     @ApiModelProperty(value = "状态：0删除 1启用 2禁用")
@@ -107,7 +108,10 @@ public class JobJdbcDatasource extends Model<JobJdbcDatasource> {
      * 创建时间
      */
     @TableField(fill = FieldFill.INSERT)
-    @JSONField(format = "yyyy/MM/dd")
+    @JsonFormat(
+            pattern = "yyyy-MM-dd HH:mm:ss",
+            timezone = "GMT+8"
+    )
     @ApiModelProperty(value = "创建时间", hidden = true)
     private Date createDate;
 
@@ -121,7 +125,10 @@ public class JobJdbcDatasource extends Model<JobJdbcDatasource> {
      * 更新时间
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    @JSONField(format = "yyyy/MM/dd")
+    @JsonFormat(
+            pattern = "yyyy-MM-dd HH:mm:ss",
+            timezone = "GMT+8"
+    )
     @ApiModelProperty(value = "更新时间", hidden = true)
     private Date updateDate;
 

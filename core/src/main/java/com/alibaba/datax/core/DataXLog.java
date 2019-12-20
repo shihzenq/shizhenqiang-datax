@@ -1,7 +1,9 @@
 package com.alibaba.datax.core;
 
 
+
 public class DataXLog {
+
     //任务启动时刻
     private Long startTimeStamp;
     //任务结束时刻

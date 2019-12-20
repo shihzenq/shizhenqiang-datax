@@ -2,8 +2,8 @@ package com.wugui.dataxweb.service;
 
 import com.alibaba.datax.common.log.LogResult;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.wugui.dataxweb.dto.RunJobDto;
 import com.wugui.dataxweb.entity.DataXLog;
+import com.wugui.dataxweb.entity.JobManagerEntity;
 
 import java.util.List;
 
@@ -22,7 +22,8 @@ public interface IDataxJobService extends IService<DataXLog> {
      */
     List<com.alibaba.datax.core.DataXLog> startJobByJsonStr(String jobJson);
 
-    List<com.alibaba.datax.core.DataXLog> startJobLog(RunJobDto runJobDto);
+//    List<com.alibaba.datax.core.DataXLog> startJobLog(RunJobDto runJobDto);
+    List<com.alibaba.datax.core.DataXLog> startJobLog(JobManagerEntity runJobDto);
 
     LogResult viewJogLog(Long id, int fromLineNum);
 
@@ -34,5 +35,5 @@ public interface IDataxJobService extends IService<DataXLog> {
      */
     Boolean killJob(String pid,Long id);
 
-    String addExecutorLog(String ipAddress,List<com.alibaba.datax.core.DataXLog> logList);
+    Boolean addExecutorLog(String ipAddress, List<com.alibaba.datax.core.DataXLog> logList, Long jobId);
 }

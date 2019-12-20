@@ -17,9 +17,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.wugui.dataxweb.dao.DataXJobMapper;
-import com.wugui.dataxweb.dto.RunJobDto;
 import com.wugui.dataxweb.entity.DataXLog;
 import com.wugui.dataxweb.entity.JobLog;
+import com.wugui.dataxweb.entity.JobManagerEntity;
 import com.wugui.dataxweb.service.IDataxJobService;
 import com.wugui.dataxweb.service.IJobLogService;
 import com.wugui.dataxweb.util.ProcessUtil;
@@ -78,7 +78,7 @@ public class IDataxJobServiceImpl extends ServiceImpl<DataXJobMapper, DataXLog> 
         List<com.alibaba.datax.core.DataXLog> logList = new ArrayList<>();
         jobPool.submit(() -> {
 
-            final String tmpFilePath = "/xcloud/gpDataTest/temp_json/jobTmp-" + System.currentTimeMillis() + ".json";
+            final String tmpFilePath = etlLogDir+"/jobTmp-" + System.currentTimeMillis() + ".json";
             // 根据json写入到临时本地文件
             PrintWriter writer = null;
             try {
@@ -121,20 +121,19 @@ public class IDataxJobServiceImpl extends ServiceImpl<DataXJobMapper, DataXLog> 
 
 
     @Override
-    public List<com.alibaba.datax.core.DataXLog> startJobLog(RunJobDto runJobDto) {
+    public List<com.alibaba.datax.core.DataXLog> startJobLog(JobManagerEntity runJobDto) {
         //取出 jobJson，并转为json对象
         JSONObject json = JSONObject.parseObject(runJobDto.getJobJson());
         //根据jobId和当前时间戳生成日志文件名
-        String logFileName = runJobDto.getJobConfigId().toString().concat("_").concat(StrUtil.toString(System.currentTimeMillis()).concat(".log"));
+        String logFileName = runJobDto.getId().toString().concat("_").concat(StrUtil.toString(System.currentTimeMillis()).concat(".log"));
         String logFilePath = etlLogDir.concat(logFileName);
         //记录日志
         JobLog jobLog = new JobLog();
-        jobLog.setJobId(runJobDto.getJobConfigId());
+        jobLog.setJobId(runJobDto.getId());
         jobLog.setLogFilePath(logFilePath);
         jobLogService.save(jobLog);
         //将路径放进去
         json.put(CoreConstant.LOG_FILE_PATH, logFilePath);
-
         //启动任务
         return startJobByJsonStr(JSON.toJSONString(json));
     }
@@ -164,12 +163,12 @@ public class IDataxJobServiceImpl extends ServiceImpl<DataXJobMapper, DataXLog> 
                 FileUtil.del(new File(pathname));
             }
         }
-        //jobLogService.update(null, Wrappers.<JobLog>lambdaUpdate().set(JobLog::getHandleMsg, "job running，killed").set(JobLog::getHandleCode, 500).eq(JobLog::getId, id));
+//        jobLogService.update(null, Wrappers.<JobLog>lambdaUpdate().set(JobLog::getHandleMsg, "job running，killed").set(JobLog::getHandleCode, 500).eq(JobLog::getId, id));
         return result;
     }
 
     @Override
-    public String addExecutorLog(String ipAddress, List<com.alibaba.datax.core.DataXLog> logList) {
+    public Boolean addExecutorLog(String ipAddress, List<com.alibaba.datax.core.DataXLog> logList, Long jobId) {
         if (!CollectionUtils.isEmpty(logList)) {
             com.alibaba.datax.core.DataXLog source = new com.alibaba.datax.core.DataXLog();
             for (com.alibaba.datax.core.DataXLog log : logList) {
@@ -181,10 +180,11 @@ public class IDataxJobServiceImpl extends ServiceImpl<DataXJobMapper, DataXLog> 
                 // 执行日志插入
                 DataXLog dataXLog = new DataXLog();
                 BeanUtils.copyProperties(source, dataXLog);
+                dataXLog.setJobId(jobId);
                 dataXJobMapper.insert(dataXLog);
-                return "success";
+                return true;
             }
         }
-        return "fail";
+        return false;
     }
 }

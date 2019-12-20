@@ -3,12 +3,19 @@ package com.wugui.dataxweb.controller;
 import com.alibaba.datax.common.log.LogResult;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.wugui.dataxweb.dto.RunJobDto;
+import com.wugui.dataxweb.dto.log.JobKillDTO;
+import com.wugui.dataxweb.dto.log.JobLogIdDTO;
+import com.wugui.dataxweb.entity.JobManagerEntity;
 import com.wugui.dataxweb.log.OperateLog;
 import com.wugui.dataxweb.service.IDataxJobService;
+import com.wugui.dataxweb.service.JobManagerService;
 import com.wugui.dataxweb.util.IpUtils;
+import com.wugui.dataxweb.vo.ResponseData;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,12 +27,15 @@ import java.util.List;
  * @create: 2019-05-05 14:21
  **/
 @RestController
-@RequestMapping("api")
-@Api(tags = "datax作业接口")
+@RequestMapping("/api")
+@Api(tags = "datax作业执行接口")
 public class JobController extends BaseController{
 
     @Autowired
     IDataxJobService iDataxJobService;
+
+    @Autowired
+    private JobManagerService jobManagerService;
 
     @GetMapping("/testStartJob")
     public void testStartJob() {
@@ -135,15 +145,19 @@ public class JobController extends BaseController{
      * @param runJobDto
      * @return
      */
-    @ApiOperation("通过传入json配置启动一个datax作业")
-    @PostMapping("/runJob")
-    @OperateLog(content = "开启作业任务")
-    public R<String> runJob(@RequestBody RunJobDto runJobDto) {
-        List<com.alibaba.datax.core.DataXLog> result = iDataxJobService.startJobByJsonStr(runJobDto.getJobJson());
-        String ipAddress = IpUtils.getIpAddress(request);
-        String executorLog = iDataxJobService.addExecutorLog(ipAddress, result);
-        return R.ok(executorLog);
-    }
+//    @ApiOperation("通过传入json配置启动一个datax作业")
+//    @PostMapping("/runJob")
+//    @OperateLog(content = "开启作业任务")
+//    public ResponseData<?> runJob(@RequestBody @Validated RunJobDto runJobDto, BindingResult bindingResult) {
+//        if (bindingResult.hasErrors()) {
+//            return responseFormError(bindingResult);
+//        }
+//        JobManagerEntity jobManagerEntity = jobManagerService.getById(runJobDto.getJobManagerId());
+//        if (null == jobManagerEntity) return responseError("作业数据不存在！");
+//        List<com.alibaba.datax.core.DataXLog> result = iDataxJobService.startJobByJsonStr(jobManagerEntity.getJobJson());
+//        String ipAddress = IpUtils.getIpAddress(request);
+//        return response(iDataxJobService.addExecutorLog(ipAddress, result));
+//    }
 
     /**
      * 通过接口传入 runJobDto 实体启动一个datax作业，并记录日志
@@ -151,33 +165,50 @@ public class JobController extends BaseController{
      * @param runJobDto
      * @return
      */
-    @ApiOperation("通过传入 runJobDto 实体启动一个datax作业，并记录日志")
+    @ApiOperation("在作业管理列表页面，每一行数据有开启按钮通过传入 runJobDto 实体启动一个datax作业，并记录日志")
     @PostMapping("/runJobLog")
     @OperateLog(content = "开启作业任务")
-    public R<String> runJobLog(@RequestBody RunJobDto runJobDto) {
-        List<com.alibaba.datax.core.DataXLog> result = iDataxJobService.startJobLog(runJobDto);
+    public ResponseData<?> runJobLog(@RequestBody @Validated RunJobDto runJobDto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return responseFormError(bindingResult);
+        }
+        JobManagerEntity jobManagerEntity = jobManagerService.getById(runJobDto.getJobManagerId());
+        if (null == jobManagerEntity) return responseError("作业数据不存在！");
+        List<com.alibaba.datax.core.DataXLog> result = iDataxJobService.startJobLog(jobManagerEntity);
         String ipAddress = IpUtils.getIpAddress(request);
-        String executorLog = iDataxJobService.addExecutorLog(ipAddress, result);
-        return R.ok(executorLog);
+        iDataxJobService.addExecutorLog(ipAddress, result, jobManagerEntity.getId());
+        jobManagerEntity.setStatus(1);
+        return response(jobManagerService.updateById(jobManagerEntity));
     }
 
     /**
      * 根据任务id查询日志
      *
-     * @param id
      * @return
      */
-    @ApiOperation("查看任务抽取日志,id为任务id，fromLineNum为读取的行数")
+    @ApiOperation("在作业管理列表页面，每一行数据有查看按钮，查看任务抽取日志,通过作业数据id")
     @GetMapping("/viewJobLog")
     @OperateLog(content = "查看作业任务")
-    public R<LogResult> viewJogLog(Long id, int fromLineNum) {
-        return R.ok(iDataxJobService.viewJogLog(id, fromLineNum));
+    public R<LogResult> viewJogLog(@RequestBody JobLogIdDTO dto) {
+        return R.ok(iDataxJobService.viewJogLog(dto.getJobManagerId(), 1));
     }
 
-    @ApiOperation("通过传入 进程ID 停止该job作业")
-    @GetMapping("/killJob/{pid}/{id}")
+    @ApiOperation("在作业管理列表页面，每一行数据有停止按钮，通过传入 进程ID，作业数据id 停止该job作业")
+    @GetMapping("/killJob")
     @OperateLog(content = "停止作业进程")
-    public R<Boolean> killJob(@PathVariable(value ="pid") String pid,@PathVariable(value = "id") Long id){
-        return R.ok(iDataxJobService.killJob(pid,id));
+    public ResponseData<?> killJob(@RequestBody @Validated JobKillDTO dto, BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            return responseFormError(bindingResult);
+        }
+        JobManagerEntity jobManagerEntity = jobManagerService.getById(dto.getJobManagerId());
+        if (null == jobManagerEntity) return responseError("作业数据不存在！");
+        boolean killJob = iDataxJobService.killJob(dto.getPid(), dto.getJobManagerId());
+        if (killJob) {
+            jobManagerEntity.setStatus(0);
+            return response(jobManagerService.updateById(jobManagerEntity));
+        }
+        return response("停止失败！");
     }
+
+
 }
