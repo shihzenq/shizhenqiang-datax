@@ -1,5 +1,6 @@
 package com.wugui.dataxweb.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 import javax.persistence.Table;
@@ -14,4 +15,6 @@ public class JobGroupEntity extends BaseEntity{
 
     private String remark;
 
+    @TableField(exist = false)
+    private String userName;
 }

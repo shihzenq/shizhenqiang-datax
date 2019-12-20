@@ -236,6 +236,7 @@ public class SystemManagementController extends BaseController {
         userEntity.setSex(dto.getSex());
         userEntity.setPhone(dto.getPhone());
         userEntity.setUpdateUserId(currentUser.getId());
+        userEntity.setRemark(dto.getRemark());
         return response(userService.updateUser(userEntity));
     }
 
@@ -274,7 +275,7 @@ public class SystemManagementController extends BaseController {
     @PostMapping("/delete-user")
     @ApiOperation(value = "用户删除，用户管理页面，删除接口")
     @OperateLog(content = "用户删除")
-    public ResponseData<?> deleteUser(@RequestBody @Validated UserUpdateDTO dto, BindingResult result) {
+    public ResponseData<?> deleteUser(@RequestBody @Validated UserIdDTO dto, BindingResult result) {
         if(result.hasErrors()) {
             return responseFormError(result);
         }

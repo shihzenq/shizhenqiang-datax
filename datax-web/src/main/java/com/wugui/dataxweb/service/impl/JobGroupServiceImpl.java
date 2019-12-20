@@ -7,7 +7,9 @@ import com.wugui.dataxweb.dao.GroupMapper;
 import com.wugui.dataxweb.dto.group.GroupSearchDTO;
 import com.wugui.dataxweb.dto.group.GroupUpdateDTO;
 import com.wugui.dataxweb.entity.JobGroupEntity;
+import com.wugui.dataxweb.entity.UserEntity;
 import com.wugui.dataxweb.service.JobGroupService;
+import com.wugui.dataxweb.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,8 @@ import java.util.Map;
 public class JobGroupServiceImpl extends ServiceImpl<GroupMapper, JobGroupEntity> implements JobGroupService {
 
     private GroupMapper groupMapper;
+
+    private UserService userService;
 
     @Override
     public JobGroupEntity add(JobGroupEntity groupEntity) {
@@ -46,7 +50,19 @@ public class JobGroupServiceImpl extends ServiceImpl<GroupMapper, JobGroupEntity
         }
         map.put("create_user_id", userId);
         PageHelper.startPage(dto.getPageNum(), dto.getPageSize());
-        return new PageInfo<>(groupMapper.selectByMap(map));
+        List<JobGroupEntity> jobGroupEntities = groupMapper.selectByMap(map);
+        if (!CollectionUtils.isEmpty(jobGroupEntities)) {
+            for (JobGroupEntity jobGroupEntity : jobGroupEntities) {
+                if (null != jobGroupEntity.getCreateUserId()) {
+                    UserEntity userEntity = userService.getById(jobGroupEntity.getCreateUserId());
+                    if (null != userEntity) {
+                        jobGroupEntity.setUserName(userEntity.getUsername());
+                    }
+                }
+            }
+            return new PageInfo<>(jobGroupEntities);
+        }
+        return new PageInfo<>();
     }
 
     @Override
@@ -64,5 +80,10 @@ public class JobGroupServiceImpl extends ServiceImpl<GroupMapper, JobGroupEntity
     @Autowired
     public void setGroupMapper(GroupMapper groupMapper) {
         this.groupMapper = groupMapper;
+    }
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 }
