@@ -22,13 +22,13 @@ public class JobManagerServiceImpl extends ServiceImpl<JobManagerMapper, JobMana
     public PageInfo<JobManagerEntity> list(JobManagerDTO dto) {
         PageHelper.startPage(dto.getPageNum(), dto.getPageSize());
         QueryWrapper<JobManagerEntity> queryWrapper = new QueryWrapper<>();
-        if (StringUtils.isNotBlank(dto.getJobName()) && StringUtils.isNotBlank(dto.getGroupName())) {
+        if (StringUtils.isNotBlank(dto.getJobName()) && null != dto.getGroupId()) {
             queryWrapper.eq("job_name", dto.getJobName());
-            queryWrapper.eq("group_name", dto.getGroupName());
-        } else if (StringUtils.isNotBlank(dto.getJobName()) && StringUtils.isBlank(dto.getGroupName())) {
+            queryWrapper.eq("group_id", dto.getGroupId());
+        } else if (StringUtils.isNotBlank(dto.getJobName()) && null == dto.getGroupId()) {
             queryWrapper.eq("job_name", dto.getJobName());
-        } else if (StringUtils.isNotBlank(dto.getGroupName()) && StringUtils.isBlank(dto.getJobName())) {
-            queryWrapper.eq("group_name", dto.getGroupName());
+        } else if (null!=dto.getGroupId() && StringUtils.isBlank(dto.getJobName())) {
+            queryWrapper.eq("group_id", dto.getGroupId());
         }
         return new PageInfo<>(jobManagerMapper.selectList(queryWrapper));
     }

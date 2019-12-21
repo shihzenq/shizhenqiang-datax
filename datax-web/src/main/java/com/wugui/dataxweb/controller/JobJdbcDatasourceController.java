@@ -151,7 +151,7 @@ public class JobJdbcDatasourceController extends BaseController {
         String type = DriverUtils.driverMap.get(entity.getType().toUpperCase());
         entity.setJdbcDriverClass(type);
         // jdbc:mysql://127.0.0.1:3306/wkxz_3_dev
-        entity.setJdbcUrl("jdbc:"+entity.getType()+"://"+ entity.getIpAddress()+":"+ entity.getPort() +"/"+entity.getJdbcUsername());
+        entity.setJdbcUrl("jdbc:"+entity.getType()+"://"+ entity.getIpAddress()+":"+ entity.getPort() +"/"+entity.getDatasourceName());
         return response(this.jobJdbcDatasourceService.save(entity));
     }
 

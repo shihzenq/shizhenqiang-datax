@@ -16,6 +16,7 @@ import com.wugui.dataxweb.entity.JobJdbcDatasource;
 import com.wugui.dataxweb.entity.JobManagerEntity;
 import com.wugui.dataxweb.service.IJobConfigService;
 import com.wugui.dataxweb.service.IJobJdbcDatasourceService;
+import com.wugui.dataxweb.service.JobGroupService;
 import com.wugui.dataxweb.service.JobManagerService;
 import com.wugui.dataxweb.util.PageUtils;
 import com.wugui.dataxweb.vo.ResponseData;
@@ -23,6 +24,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -49,6 +51,9 @@ public class JobConfigController extends BaseController {
     private JobManagerService jobManagerService;
     @Autowired
     private IJobJdbcDatasourceService iJobJdbcDatasourceService;
+
+    @Autowired
+    private JobGroupService jobGroupService;
 //    /**
 //     * 服务对象
 //     */
@@ -184,6 +189,9 @@ public class JobConfigController extends BaseController {
         if (null!=jobManagerEntity) {
             return responseError("作业管理添加重复");
         }
+        if (StringUtils.isBlank(dto.getJobName()) || null == dto.getGroupId()){
+            return responseError("作业名和组名不能为空！");
+        }
         jobManagerEntity = new JobManagerEntity();
         BeanUtils.copyProperties(dto, jobManagerEntity);
         jobManagerEntity.setCreateUserId(getCurrentUser().getId());
@@ -195,6 +203,12 @@ public class JobConfigController extends BaseController {
         if (null != jobManagerEntity.getTargetId()) {
             JobJdbcDatasource jobJdbcDatasource = iJobJdbcDatasourceService.getById(jobManagerEntity.getTargetId());
             jobManagerEntity.setTargetIp(jobJdbcDatasource.getIpAddress());
+        }
+        if (null != jobManagerEntity.getGroupId()) {
+            JobGroupEntity groupEntity = jobGroupService.getById(jobManagerEntity.getGroupId());
+            if (null != groupEntity) {
+                jobManagerEntity.setGroupName(groupEntity.getName());
+            }
         }
         return response(jobManagerService.save(jobManagerEntity));
     }

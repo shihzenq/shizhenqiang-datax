@@ -51,6 +51,8 @@ public class PermissionInterceptor extends BaseController implements HandlerInte
 
 
     private boolean checkPermission(HttpServletRequest request, HttpServletResponse response, Object handler) {
+        log.info("{}权限拦截:{}", request.getHeaderNames().toString(), request.getRequestURL());
+        log.info("handler instanceof HandlerMethod:{}", handler instanceof HandlerMethod);
         if (handler instanceof HandlerMethod) {
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             // 首先获取控制器方法上的权限注解

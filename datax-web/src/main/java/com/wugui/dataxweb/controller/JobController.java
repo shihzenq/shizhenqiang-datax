@@ -189,7 +189,7 @@ public class JobController extends BaseController{
     @PostMapping("/viewJobLog")
     @OperateLog(content = "查看作业任务")
     public R<LogResult> viewJogLog(@RequestBody JobLogIdDTO dto) {
-        return R.ok(iDataxJobService.viewJogLog(dto.getJobManagerId(), 1));
+        return R.ok(iDataxJobService.viewJogLog(dto.getId(), 1));
     }
 
     @ApiOperation("在作业管理列表页面，每一行数据有停止按钮，通过传入 进程ID，作业数据id 停止该job作业")

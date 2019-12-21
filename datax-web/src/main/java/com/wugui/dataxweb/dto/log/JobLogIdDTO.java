@@ -7,5 +7,5 @@ import lombok.Data;
 public class JobLogIdDTO {
 
     @ApiModelProperty(value = "作业数据id")
-    private Long jobManagerId;
+    private Long id;
 }

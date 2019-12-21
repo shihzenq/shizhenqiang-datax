@@ -36,6 +36,7 @@ public class LoginInterceptor extends BaseController implements HandlerIntercept
 	static {
 		urlList.add("/swagger-ui.html");
 		urlList.add("/college/article/");
+		urlList.add("classpath:/**");
 	}
 
 	@Override
@@ -54,8 +55,10 @@ public class LoginInterceptor extends BaseController implements HandlerIntercept
 				return true;
 			}
 		}
-
-		if (request.getRequestURI().indexOf(urlList.get(1)) != -1) {
+//		if(request.getRequestURI().indexOf(urlList.get(2)) == 1){
+//			return true;
+//		}
+		if (request.getRequestURI().indexOf(urlList.get(1)) != -1 ) {
 			return true;
 		}
 
