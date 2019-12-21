@@ -78,6 +78,7 @@ public class LogAspect {
                 systemLogEntity.setUserId(userEntity.getId());
                 systemLogEntity.setIp(getIpAddress(request));
                 systemLogEntity.setOperation(content);
+                systemLogEntity.setContent(content);
                 systemLogEntity.setCreateUserId(userEntity.getId());
                 systemLogService.save(systemLogEntity);
             }
