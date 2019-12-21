@@ -1,5 +1,7 @@
 package com.wugui.dataxweb.service;
 
+import com.wugui.dataxweb.vo.DataSourceColumnVO;
+import com.wugui.dataxweb.vo.DataSourceTablesVO;
 import com.wugui.tool.database.TableInfo;
 
 import java.util.List;
@@ -20,7 +22,7 @@ public interface JdbcDatasourceQueryService {
      * @param id
      * @return
      */
-    List<String> getTables(Long id);
+    DataSourceTablesVO getTables(Long id);
 
 
     /**
@@ -29,7 +31,7 @@ public interface JdbcDatasourceQueryService {
      * @param id
      * @return
      */
-    List<String> getColumns(Long id, String tableName);
+    DataSourceColumnVO getColumns(Long id, String tableName);
 
     /**
      * 根据 sql 语句获取字段

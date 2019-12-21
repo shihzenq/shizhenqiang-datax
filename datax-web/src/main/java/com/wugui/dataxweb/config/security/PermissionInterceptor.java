@@ -1,9 +1,16 @@
 package com.wugui.dataxweb.config.security;
 
+import com.wugui.dataxweb.controller.BaseController;
 import com.wugui.dataxweb.entity.UserEntity;
 import com.wugui.dataxweb.service.PermissionService;
+import com.wugui.dataxweb.service.UserService;
+import com.wugui.dataxweb.util.JSON;
+import com.wugui.dataxweb.util.JwtUtil;
 import com.wugui.dataxweb.util.KlksRedisUtils;
+import com.wugui.dataxweb.vo.ResponseData;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -11,15 +18,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-public class PermissionInterceptor implements HandlerInterceptor {
+@Slf4j
+public class PermissionInterceptor extends BaseController implements HandlerInterceptor {
 
     @Autowired
     private PermissionService permissionService;
 
     @Autowired
     private KlksRedisUtils redis;
+
+    @Autowired
+    private UserService userService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -47,24 +57,33 @@ public class PermissionInterceptor implements HandlerInterceptor {
             RequiredPermission requiredPermission = handlerMethod.getMethod().getAnnotation(RequiredPermission.class);
             // 如果方法上没有权限注解，则获取类上的权限注解
             if (requiredPermission == null) {
-                requiredPermission = handlerMethod.getMethod().getDeclaringClass().getAnnotation(RequiredPermission.class);
+//                requiredPermission = handlerMethod.getMethod().getDeclaringClass().getAnnotation(RequiredPermission.class);
+                return true;
             }
-            HttpSession session = request.getSession();
-            String userId = (String)session.getAttribute("userId");
-            UserEntity user = redis.getUserInfoFromCache(userId);
-            // 如果标记了注解，则判断权限
-            if (requiredPermission != null && StringUtils.isNotBlank(requiredPermission.value())) {
-                return permissionService.validatePermissionCodeExist(user, requiredPermission.value());
-            }
-            if(requiredPermission != null && requiredPermission.values().length > 0) {
-                boolean hasPermission = false;
-                for(String p : requiredPermission.values()) {
-                    hasPermission = permissionService.validatePermissionCodeExist(user, p);
-                    if(hasPermission) break;
+            try {
+                String token = request.getHeader("Authorization");
+                if (StringUtils.isNotBlank(token)) {
+                    String userId = JwtUtil.getUsername(token);
+                    if (StringUtils.isNotBlank(userId)) {
+                        UserEntity entity = userService.getById(Long.parseLong(userId));
+                        if (null != entity) {
+                            if (permissionService.validatePermissionPathExist(entity, requiredPermission.value())){
+                                return true;
+                            } else {
+                                ResponseData<T> responseData = new ResponseData<>();
+                                responseData.setCode(400);
+                                responseData.setMessage("您当前无此权限，无法操作此功能! ");
+                                response.setHeader("Content-type", "application/json;charset=UTF-8");
+                                response.setCharacterEncoding("UTF-8");
+                                response.getWriter().write(JSON.marshal(responseData));
+                            }
+                        }
+                    }
                 }
-                return hasPermission;
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
-        return true;
+        return false;
     }
 }

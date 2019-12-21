@@ -26,7 +26,7 @@ public class JobManagerEntity extends BaseEntity {
     @ApiModelProperty(value = "输出端ip")
     private String targetIp;
 
-    @ApiModelProperty(value = "状态, 0:未开启，1：进行中")
+    @ApiModelProperty(value = "状态, 0:未开启，1：进行中，2：已完成")
     private Integer status = 0;
 
     @ApiModelProperty(value = "创建人名字")
@@ -37,4 +37,10 @@ public class JobManagerEntity extends BaseEntity {
 
     @ApiModelProperty(value = "备注")
     private String remark;
+
+    @ApiModelProperty(value = "读取的数据源id")
+    private Long sourceId;
+
+    @ApiModelProperty(value = "写入的数据源id")
+    private Long targetId;
 }

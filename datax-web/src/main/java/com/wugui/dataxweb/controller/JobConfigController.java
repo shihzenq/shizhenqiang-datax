@@ -12,8 +12,10 @@ import com.wugui.dataxweb.dto.job.JobManagerDTO;
 import com.wugui.dataxweb.dto.job.JobManagerIdDTO;
 import com.wugui.dataxweb.entity.JobConfig;
 import com.wugui.dataxweb.entity.JobGroupEntity;
+import com.wugui.dataxweb.entity.JobJdbcDatasource;
 import com.wugui.dataxweb.entity.JobManagerEntity;
 import com.wugui.dataxweb.service.IJobConfigService;
+import com.wugui.dataxweb.service.IJobJdbcDatasourceService;
 import com.wugui.dataxweb.service.JobManagerService;
 import com.wugui.dataxweb.util.PageUtils;
 import com.wugui.dataxweb.vo.ResponseData;
@@ -45,6 +47,8 @@ public class JobConfigController extends BaseController {
 
     @Autowired
     private JobManagerService jobManagerService;
+    @Autowired
+    private IJobJdbcDatasourceService iJobJdbcDatasourceService;
 //    /**
 //     * 服务对象
 //     */
@@ -184,6 +188,14 @@ public class JobConfigController extends BaseController {
         BeanUtils.copyProperties(dto, jobManagerEntity);
         jobManagerEntity.setCreateUserId(getCurrentUser().getId());
         jobManagerEntity.setCreateUserName(getCurrentUser().getUsername());
+        if (null != jobManagerEntity.getSourceId()) {
+            JobJdbcDatasource jobJdbcDatasource = iJobJdbcDatasourceService.getById(jobManagerEntity.getSourceId());
+            jobManagerEntity.setSourceIp(jobJdbcDatasource.getIpAddress());
+        }
+        if (null != jobManagerEntity.getTargetId()) {
+            JobJdbcDatasource jobJdbcDatasource = iJobJdbcDatasourceService.getById(jobManagerEntity.getTargetId());
+            jobManagerEntity.setTargetIp(jobJdbcDatasource.getIpAddress());
+        }
         return response(jobManagerService.save(jobManagerEntity));
     }
 

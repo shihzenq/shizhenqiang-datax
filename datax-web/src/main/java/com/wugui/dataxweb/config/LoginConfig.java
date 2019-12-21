@@ -16,7 +16,7 @@ public class LoginConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public PermissionInterceptor securityInterceptor() {
+    public PermissionInterceptor permissionInterceptor() {
         return new PermissionInterceptor();
     }
 

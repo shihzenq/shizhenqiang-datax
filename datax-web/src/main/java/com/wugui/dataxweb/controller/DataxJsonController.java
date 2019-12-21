@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/dataxJson")
-@Api(tags = "组装datax-json的控制器")
+@Api(tags = "构建json的接口")
 public class DataxJsonController extends ApiController {
 
     @Autowired

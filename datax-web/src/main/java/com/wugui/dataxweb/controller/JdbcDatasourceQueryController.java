@@ -46,7 +46,7 @@ public class JdbcDatasourceQueryController extends BaseController {
     @PostMapping("/getTables")
     @ApiOperation("根据数据源id获取可用表名，数据源就是在系统管理模块下的数据源管理添加的数据")
     @OperateLog(content = "获取可用表名")
-    public ResponseData<List<String>> getTableNames(@RequestBody DataSourceIdDTO dto) {
+    public ResponseData<?> getTableNames(@RequestBody DataSourceIdDTO dto) {
         return response(jdbcDatasourceQueryService.getTables(dto.getId()));
     }
 
@@ -58,7 +58,7 @@ public class JdbcDatasourceQueryController extends BaseController {
     @PostMapping("/getColumns")
     @ApiOperation("根据数据源id和表名获取所有字段，数据源就是在系统管理模块下的数据源管理添加的数据")
     @OperateLog(content = "获取表下所有字段")
-    public ResponseData<List<String>> getColumns(@RequestBody DataSourceColumnDTO dto) {
+    public ResponseData<?> getColumns(@RequestBody DataSourceColumnDTO dto) {
         return response(jdbcDatasourceQueryService.getColumns(dto.getId(), dto.getTableName()));
     }
 

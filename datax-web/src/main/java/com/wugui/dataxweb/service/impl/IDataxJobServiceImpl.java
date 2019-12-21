@@ -110,7 +110,7 @@ public class IDataxJobServiceImpl extends ServiceImpl<DataXJobMapper, DataXLog> 
                     JobManagerEntity jobManagerEntity = jobManagerService.getById(jobManagerId);
                     if (null != jobManagerEntity) {
                         iDataxJobService.addExecutorLog(ip, log, jobManagerEntity.getId());
-                        jobManagerEntity.setStatus(1);
+                        jobManagerEntity.setStatus(2);
                         jobManagerService.updateById(jobManagerEntity);
                     }
                 }

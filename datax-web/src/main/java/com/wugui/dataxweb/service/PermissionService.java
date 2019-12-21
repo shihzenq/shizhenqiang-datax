@@ -18,15 +18,6 @@ public interface PermissionService extends IService<Permission> {
     List<String> getPermissionsByUser(UserEntity user);
 
     /**
-     * 判断用户是否存在某一项权限
-     *
-     * @param user       用户对象
-     * @param code       权限code
-     * @return Boolean
-     */
-    Boolean validatePermissionCodeExist(UserEntity user, String code);
-
-    /**
      * 新增权限节点
      * @param permission 权限
      * @return Permission
@@ -39,4 +30,13 @@ public interface PermissionService extends IService<Permission> {
      * @return int
      */
     int countByCode(String code);
+
+    /**
+     * 判断用户是否存在某一项权限
+     *
+     * @param user       用户对象
+     * @param code       权限code
+     * @return Boolean
+     */
+    boolean validatePermissionPathExist(UserEntity entity, String value);
 }

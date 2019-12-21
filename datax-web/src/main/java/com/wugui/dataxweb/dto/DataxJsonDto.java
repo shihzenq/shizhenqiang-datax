@@ -1,5 +1,6 @@
 package com.wugui.dataxweb.dto;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -16,24 +17,33 @@ import java.util.List;
 @Data
 public class DataxJsonDto implements Serializable {
 
+    @ApiModelProperty(value = "读取原数据源id")
     private Long readerDatasourceId;
 
+    @ApiModelProperty(value = "读取原数据源库下表名")
     private List<String> readerTables;
 
+    @ApiModelProperty(value = "读取原数据源库下表下的字段")
     private List<String> readerColumns;
 
-    private Boolean ifStreamWriter;
+    private Boolean ifStreamWriter = false;
 
+    @ApiModelProperty(value = "往目标数据源写的id")
     private Long writerDatasourceId;
 
+    @ApiModelProperty(value = "往目标数据源写的表名")
     private List<String> writerTables;
 
+    @ApiModelProperty(value = "往目标数据源写的字段名名")
     private List<String> writerColumns;
 
+    @ApiModelProperty(value = "where条件")
     private String whereParams;
 
+    @ApiModelProperty(value = "查询的SQL")
     private String querySql;
 
+    @ApiModelProperty(value = "执行的SQL")
     private String preSql;
 
     public Long getReaderDatasourceId() {

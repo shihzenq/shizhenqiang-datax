@@ -4,8 +4,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wugui.dataxweb.dao.PermissionMapper;
 import com.wugui.dataxweb.entity.Permission;
+import com.wugui.dataxweb.entity.Role;
 import com.wugui.dataxweb.entity.UserEntity;
 import com.wugui.dataxweb.service.PermissionService;
+import com.wugui.dataxweb.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -17,6 +19,8 @@ import java.util.stream.Collectors;
 public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permission> implements PermissionService {
 
     private PermissionMapper permissionMapper;
+
+    private RoleService roleService;
 
     @Override
     public List<Permission> getAll() {
@@ -39,11 +43,18 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permiss
     }
 
     @Override
-    public Boolean validatePermissionCodeExist(UserEntity user, String code) {
-        QueryWrapper<Permission> wrapper = new QueryWrapper<>();
-        wrapper.eq("user_id", user.getId());
-        wrapper.eq("code", code);
-        return permissionMapper.selectOne(wrapper) != null;
+    public boolean validatePermissionPathExist(UserEntity user, String path) {
+        List<Role> roleList = roleService.getAllByUserId(user.getId());
+        if (CollectionUtils.isEmpty(roleList)) return false;
+        for (Role role : roleList) {
+            List<Permission> permissionList = role.getPermissionList();
+            for (Permission permission : permissionList) {
+                if (permission.getPath().equals(path)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
@@ -62,5 +73,10 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permiss
     @Autowired
     public void setPermissionMapper(PermissionMapper permissionMapper) {
         this.permissionMapper = permissionMapper;
+    }
+
+    @Autowired
+    public void setRoleService(RoleService roleService) {
+        this.roleService = roleService;
     }
 }

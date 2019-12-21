@@ -174,6 +174,8 @@ public class JobController extends BaseController{
         }
         JobManagerEntity jobManagerEntity = jobManagerService.getById(runJobDto.getJobManagerId());
         if (null == jobManagerEntity) return responseError("作业数据不存在！");
+        jobManagerEntity.setStatus(1);
+        jobManagerService.updateById(jobManagerEntity);
         List<com.alibaba.datax.core.DataXLog> result = iDataxJobService.startJobLog(jobManagerEntity, IpUtils.getIpAddress(request));
         return response(result);
     }
@@ -184,7 +186,7 @@ public class JobController extends BaseController{
      * @return
      */
     @ApiOperation("在作业管理列表页面，每一行数据有查看按钮，查看任务抽取日志,通过作业数据id")
-    @GetMapping("/viewJobLog")
+    @PostMapping("/viewJobLog")
     @OperateLog(content = "查看作业任务")
     public R<LogResult> viewJogLog(@RequestBody JobLogIdDTO dto) {
         return R.ok(iDataxJobService.viewJogLog(dto.getJobManagerId(), 1));
