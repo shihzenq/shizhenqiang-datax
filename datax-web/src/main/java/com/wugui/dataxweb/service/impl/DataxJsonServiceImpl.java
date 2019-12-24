@@ -52,7 +52,6 @@ public class DataxJsonServiceImpl implements DataxJsonService {
             dataxJsonHelper.initWriter(writerDatasource, dataxJsonDto.getWriterTables(), dataxJsonDto.getWriterColumns());
             dataxJsonHelper.setPreSql(dataxJsonDto.getPreSql());
         }
-
         return JSON.toJSONString(dataxJsonHelper.buildJob());
     }
 }

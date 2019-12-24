@@ -1,5 +1,6 @@
 package com.wugui.dataxweb.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -55,5 +56,12 @@ public class DataXLog extends BaseEntity {
 //    @TableName(value = "")
 //    private Long transformerFilterRecords;
 
+    @TableField(exist = false)
     private String userName;
+
+    @TableField(exist = false)
+    private String jobName;
+
+    @TableField(exist = false)
+    private String ip;
 }

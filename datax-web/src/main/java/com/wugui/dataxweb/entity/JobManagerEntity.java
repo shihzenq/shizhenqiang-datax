@@ -1,10 +1,12 @@
 package com.wugui.dataxweb.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.persistence.Table;
+import java.util.List;
 
 @Data
 @Table(name = "job_manager_entity")
@@ -43,4 +45,31 @@ public class JobManagerEntity extends BaseEntity {
 
     @ApiModelProperty(value = "写入的数据源id")
     private Long targetId;
+
+    @TableField(exist = false)
+    @ApiModelProperty(value = "读取原数据源id")
+    private Long readerDatasourceId;
+
+    @TableField(exist = false)
+    @ApiModelProperty(value = "读取原数据源库下表名")
+    private List<String> readerTables;
+
+    @TableField(exist = false)
+    @ApiModelProperty(value = "读取原数据源库下表下的字段")
+    private List<String> readerColumns;
+
+    @TableField(exist = false)
+    private Boolean ifStreamWriter = false;
+
+    @TableField(exist = false)
+    @ApiModelProperty(value = "往目标数据源写的id")
+    private Long writerDatasourceId;
+
+    @TableField(exist = false)
+    @ApiModelProperty(value = "往目标数据源写的表名")
+    private List<String> writerTables;
+
+    @TableField(exist = false)
+    @ApiModelProperty(value = "往目标数据源写的字段名名")
+    private List<String> writerColumns;
 }

@@ -38,13 +38,13 @@ public class DataxJsonDto implements Serializable {
     private List<String> writerColumns;
 
     @ApiModelProperty(value = "where条件")
-    private String whereParams;
+    private String whereParams = "";
 
     @ApiModelProperty(value = "查询的SQL")
-    private String querySql;
+    private String querySql ="";
 
     @ApiModelProperty(value = "执行的SQL")
-    private String preSql;
+    private String preSql = "";
 
     public Long getReaderDatasourceId() {
         return readerDatasourceId;

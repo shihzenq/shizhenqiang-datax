@@ -1,12 +1,14 @@
 package com.wugui.dataxweb.controller;
 
 import cn.hutool.core.util.StrUtil;
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.api.ApiController;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.github.pagehelper.PageInfo;
+import com.wugui.dataxweb.dto.DataxJsonDto;
 import com.wugui.dataxweb.dto.job.JobManagerConfigDTO;
 import com.wugui.dataxweb.dto.job.JobManagerDTO;
 import com.wugui.dataxweb.dto.job.JobManagerIdDTO;
@@ -14,10 +16,7 @@ import com.wugui.dataxweb.entity.JobConfig;
 import com.wugui.dataxweb.entity.JobGroupEntity;
 import com.wugui.dataxweb.entity.JobJdbcDatasource;
 import com.wugui.dataxweb.entity.JobManagerEntity;
-import com.wugui.dataxweb.service.IJobConfigService;
-import com.wugui.dataxweb.service.IJobJdbcDatasourceService;
-import com.wugui.dataxweb.service.JobGroupService;
-import com.wugui.dataxweb.service.JobManagerService;
+import com.wugui.dataxweb.service.*;
 import com.wugui.dataxweb.util.PageUtils;
 import com.wugui.dataxweb.vo.ResponseData;
 import io.swagger.annotations.Api;
@@ -54,6 +53,9 @@ public class JobConfigController extends BaseController {
 
     @Autowired
     private JobGroupService jobGroupService;
+
+    @Autowired
+    private DataxJsonService dataxJsonService;
 //    /**
 //     * 服务对象
 //     */
@@ -196,6 +198,12 @@ public class JobConfigController extends BaseController {
         BeanUtils.copyProperties(dto, jobManagerEntity);
         jobManagerEntity.setCreateUserId(getCurrentUser().getId());
         jobManagerEntity.setCreateUserName(getCurrentUser().getUsername());
+        DataxJsonDto dataxJsonDto = new DataxJsonDto();
+        BeanUtils.copyProperties(dto, dataxJsonDto);
+        String buildJobJson = dataxJsonService.buildJobJson(dataxJsonDto);
+        System.out.println("构建JSON：{}"+ buildJobJson);
+        jobManagerEntity.setJobJson(buildJobJson);
+//        jobManagerEntity.setJobJson(dto.getJobJson().replaceAll("\n", "").replaceAll(" ", "").replaceAll("\t", ""));
         if (null != jobManagerEntity.getSourceId()) {
             JobJdbcDatasource jobJdbcDatasource = iJobJdbcDatasourceService.getById(jobManagerEntity.getSourceId());
             jobManagerEntity.setSourceIp(jobJdbcDatasource.getIpAddress());

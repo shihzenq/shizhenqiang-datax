@@ -24,6 +24,8 @@ import com.wugui.dataxweb.service.IDataxJobService;
 import com.wugui.dataxweb.service.IJobLogService;
 import com.wugui.dataxweb.service.JobManagerService;
 import com.wugui.dataxweb.util.ProcessUtil;
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -136,7 +138,13 @@ public class IDataxJobServiceImpl extends ServiceImpl<DataXJobMapper, DataXLog> 
     @Override
     public List<com.alibaba.datax.core.DataXLog> startJobLog(JobManagerEntity runJobDto, String ipAddress) {
         //取出 jobJson，并转为json对象
-        JSONObject json = JSONObject.parseObject(runJobDto.getJobJson());
+        String jobJson = runJobDto.getJobJson();
+        if (StringUtils.isBlank(jobJson)) {
+            return null;
+        }
+//        String sJson = JSON.toJSONString(jobJson);
+//        System.out.println(sJson);
+        JSONObject json = JSON.parseObject(jobJson);
         //根据jobId和当前时间戳生成日志文件名
         String logFileName = runJobDto.getId().toString().concat("_").concat(StrUtil.toString(System.currentTimeMillis()).concat(".log"));
         String logFilePath = etlLogDir.concat(logFileName);

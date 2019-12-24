@@ -27,7 +27,7 @@ public class LoginConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/error", "/login", "/user/registerUser","/home/invite/**",
                 		"/invitation/**","/img/**","/css/**","/js/**","/html/**","/actuator/**")
                 //饶过swagger
-                .excludePathPatterns("/swagger-resources/**", "/webjars/**", "/swagger-ui.html/**", "/index.html", "/**",  "/static/**");
+                .excludePathPatterns("/swagger-resources/**", "/webjars/**", "/swagger-ui.html/**", "/static/index.html", "/**",  "/static/**");
 
 
         registry.addInterceptor(permissionInterceptor())
@@ -35,7 +35,7 @@ public class LoginConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/error", "/login", "/user/registerUser","/home/invite/**",
                         "/invitation/**","/img/**","/css/**","/js/**","/html/**","/actuator/**")
                 //饶过swagger
-                .excludePathPatterns("/swagger-resources/**", "/webjars/**", "/swagger-ui.html/**", "/index.html", "/static/**");
+                .excludePathPatterns("/swagger-resources/**", "/webjars/**", "/swagger-ui.html/**", "/static/index.html", "/static/**");
 
     }
 
