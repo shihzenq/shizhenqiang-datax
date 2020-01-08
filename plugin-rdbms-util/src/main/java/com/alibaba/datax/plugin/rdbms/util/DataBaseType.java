@@ -13,7 +13,7 @@ public enum DataBaseType {
     MySql("mysql", "com.mysql.jdbc.Driver"),
     Tddl("mysql", "com.mysql.jdbc.Driver"),
     DRDS("drds", "com.mysql.jdbc.Driver"),
-    Oracle("oracle", "oracle.jdbc.OracleDriver"),
+    Oracle("oracle", "oracle.jdbc.driver.OracleDriver"),
     SQLServer("sqlserver", "com.microsoft.sqlserver.jdbc.SQLServerDriver"),
     PostgreSQL("postgresql", "org.postgresql.Driver"),
     RDBMS("rdbms", "com.alibaba.datax.plugin.rdbms.util.DataBaseType"),
@@ -39,7 +39,7 @@ public enum DataBaseType {
         switch (this) {
             case MySql:
             case DRDS:
-                suffix = "yearIsDateType=false&zeroDateTimeBehavior=convertToNull&tinyInt1isBit=false&rewriteBatchedStatements=true";
+                suffix = "yearIsDateType=false&zeroDateTimeBehavior=convertToNull&tinyInt1isBit=false&rewriteBatchedStatements=true&characterEncoding=UTF-8";
                 if (jdbc.contains("?")) {
                     result = jdbc + "&" + suffix;
                 } else {

@@ -4,6 +4,7 @@ spring:
   #数据源
   datasource:
     username: root
+#    password: 2wsx#EDC$RFV.
     password: root123
     url: jdbc:mysql://localhost:3306/datax_web?serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false&useSSL=false&nullNamePatternMatchesAll=true&useUnicode=true&characterEncoding=UTF-8
     driver-class-name: com.mysql.jdbc.Driver
@@ -84,9 +85,14 @@ mybatis-plus:
 
 app:
   #  数据抽取日志文件保存路径
-  etlLogDir: /xcloud/gpDataTest/data/applogs/datax-web/
+  etlLogDir: /Users/shizhenqiang/code/datax/shizhenqiang-datax/dataXlogs
+
+#app:
+#  #  数据抽取日志文件保存路径
+#  etlLogDir: /usr/local/datax/dataXlogs
 
 dataX-path: /Users/shizhenqiang/Documents/dataX/datax/bin/
+#dataX-path: /usr/local/datax/bin/
 
 #测试图形验证码
 captcha-test-code: 888888

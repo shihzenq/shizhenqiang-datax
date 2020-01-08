@@ -18,15 +18,19 @@ import com.wugui.dataxweb.util.DriverUtils;
 import com.wugui.dataxweb.util.IpUtils;
 import com.wugui.dataxweb.util.PageUtils;
 import com.wugui.dataxweb.vo.ResponseData;
+import com.zaxxer.hikari.HikariDataSource;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
 
@@ -151,7 +155,8 @@ public class JobJdbcDatasourceController extends BaseController {
         String type = DriverUtils.driverMap.get(entity.getType().toUpperCase());
         entity.setJdbcDriverClass(type);
         // jdbc:mysql://127.0.0.1:3306/wkxz_3_dev
-        entity.setJdbcUrl("jdbc:"+entity.getType()+"://"+ entity.getIpAddress()+":"+ entity.getPort() +"/"+entity.getDatasourceName());
+        // ?serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false&useSSL=false&nullNamePatternMatchesAll=true&useUnicode=true&characterEncoding=UTF-8
+        entity.setJdbcUrl("jdbc:"+entity.getType()+"://"+ entity.getIpAddress()+":"+ entity.getPort() +"/"+entity.getDatasourceName()+"?serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false&useSSL=false&nullNamePatternMatchesAll=true&useUnicode=true&characterEncoding=UTF-8");
         return response(this.jobJdbcDatasourceService.save(entity));
     }
 
@@ -200,4 +205,37 @@ public class JobJdbcDatasourceController extends BaseController {
         }
         return response(jobJdbcDatasourceService.createTable(jobJdbcDatasource, dto));
     }
+
+    /**
+     * 测试jdbc数据源
+     *
+     * @param entity 实体对象
+     * @return 新增结果
+     */
+    @ApiOperation("测试jdbc数据源，系统管理模块-数据源管理页面-数据源新增页面-测试连接数据库接口")
+    @PostMapping("/test-connect")
+    @OperateLog(content = "测试jdbc数据源")
+    public ResponseData<?> testConnectDataBase(@RequestBody JobJdbcDatasource entity) {
+        // jdbc:mysql://127.0.0.1:3306/wkxz_3_dev
+        // ?serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false&useSSL=false&nullNamePatternMatchesAll=true&useUnicode=true&characterEncoding=UTF-8
+        //entity.setJdbcUrl("jdbc:"+entity.getType()+"://"+ entity.getIpAddress()+":"+ entity.getPort() +"/"+entity.getDatasourceName()+"?serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false&useSSL=false&nullNamePatternMatchesAll=true&useUnicode=true&characterEncoding=UTF-8");
+        if (StringUtils.isNotBlank(entity.getType()) && entity.getType().toLowerCase().equals("mysql")) {
+            HikariDataSource dataSource = new HikariDataSource();
+            dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+            dataSource.setUsername(entity.getJdbcUsername());
+            dataSource.setPassword(entity.getJdbcPassword());
+            entity.setJdbcUrl("jdbc:"+entity.getType()+"://"+ entity.getIpAddress()+":"+ entity.getPort() +"/"+entity.getJdbcUsername());
+            dataSource.setJdbcUrl(entity.getJdbcUrl());
+            try {
+                Connection connection = dataSource.getConnection();
+                if (null != connection) {
+                    return response("连接成功！");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return response("连接失败！");
+    }
+
 }
