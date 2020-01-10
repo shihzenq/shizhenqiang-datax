@@ -72,4 +72,12 @@ public class JobManagerEntity extends BaseEntity {
     @TableField(exist = false)
     @ApiModelProperty(value = "往目标数据源写的字段名名")
     private List<String> writerColumns;
+
+    @TableField(exist = false)
+    @ApiModelProperty(value = "查询的SQL")
+    private String querySql ="";
+
+    @TableField(exist = false)
+    @ApiModelProperty(value = "执行的SQL")
+    private String preSql = "";
 }

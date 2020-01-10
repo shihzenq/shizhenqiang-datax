@@ -152,11 +152,12 @@ public class JobJdbcDatasourceController extends BaseController {
         entity.setUserId(getCurrentUser().getId());
 //        String ipAddress = IpUtils.getIpAddress(request);
 //        entity.setIpAddress(ipAddress);
-        String type = DriverUtils.driverMap.get(entity.getType().toUpperCase());
-        entity.setJdbcDriverClass(type);
+        String driverClass = DriverUtils.driverMap.get(entity.getType().toLowerCase());
+        entity.setJdbcDriverClass(driverClass);
         // jdbc:mysql://127.0.0.1:3306/wkxz_3_dev
         // ?serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false&useSSL=false&nullNamePatternMatchesAll=true&useUnicode=true&characterEncoding=UTF-8
-        entity.setJdbcUrl("jdbc:"+entity.getType()+"://"+ entity.getIpAddress()+":"+ entity.getPort() +"/"+entity.getDatasourceName()+"?serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false&useSSL=false&nullNamePatternMatchesAll=true&useUnicode=true&characterEncoding=UTF-8");
+        setJobUrl(entity, entity.getType().toLowerCase());
+        // entity.setJdbcUrl("jdbc:"+entity.getType()+"://"+ entity.getIpAddress()+":"+ entity.getPort() +"/"+entity.getDatasourceName()+"?serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false&useSSL=false&nullNamePatternMatchesAll=true&useUnicode=true&characterEncoding=UTF-8");
         return response(this.jobJdbcDatasourceService.save(entity));
     }
 
@@ -171,10 +172,11 @@ public class JobJdbcDatasourceController extends BaseController {
     @ApiOperation("修改jdbc数据源，系统管理模块-数据源管理页面-数据源修改接口")
     @OperateLog(content = "数据源修改")
     public ResponseData<?> update(@RequestBody JobJdbcDatasource entity) {
-        String type = DriverUtils.driverMap.get(entity.getType().toUpperCase());
-        entity.setJdbcDriverClass(type);
+        String driverClass = DriverUtils.driverMap.get(entity.getType().toLowerCase());
+        entity.setJdbcDriverClass(driverClass);
         // jdbc:mysql://127.0.0.1:3306/wkxz_3_dev
-        entity.setJdbcUrl("jdbc:"+entity.getType()+"://"+ entity.getIpAddress()+":"+ entity.getPort() +"/"+entity.getJdbcUsername());
+        // ?serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false&useSSL=false&nullNamePatternMatchesAll=true&useUnicode=true&characterEncoding=UTF-8
+        setJobUrl(entity, entity.getType().toLowerCase());
         return response(this.jobJdbcDatasourceService.updateById(entity));
     }
 
@@ -219,23 +221,46 @@ public class JobJdbcDatasourceController extends BaseController {
         // jdbc:mysql://127.0.0.1:3306/wkxz_3_dev
         // ?serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false&useSSL=false&nullNamePatternMatchesAll=true&useUnicode=true&characterEncoding=UTF-8
         //entity.setJdbcUrl("jdbc:"+entity.getType()+"://"+ entity.getIpAddress()+":"+ entity.getPort() +"/"+entity.getDatasourceName()+"?serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false&useSSL=false&nullNamePatternMatchesAll=true&useUnicode=true&characterEncoding=UTF-8");
-        if (StringUtils.isNotBlank(entity.getType()) && entity.getType().toLowerCase().equals("mysql")) {
-            HikariDataSource dataSource = new HikariDataSource();
-            dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-            dataSource.setUsername(entity.getJdbcUsername());
-            dataSource.setPassword(entity.getJdbcPassword());
-            entity.setJdbcUrl("jdbc:"+entity.getType()+"://"+ entity.getIpAddress()+":"+ entity.getPort() +"/"+entity.getJdbcUsername());
-            dataSource.setJdbcUrl(entity.getJdbcUrl());
-            try {
-                Connection connection = dataSource.getConnection();
-                if (null != connection) {
-                    return response("连接成功！");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+        HikariDataSource dataSource = new HikariDataSource();
+        dataSource.setUsername(entity.getJdbcUsername());
+        dataSource.setPassword(entity.getJdbcPassword());
+        if (StringUtils.isNotBlank(entity.getType())) {
+            String type = entity.getType().toLowerCase();
+            dataSource.setDriverClassName(DriverUtils.driverMap.get(type));
+            setJobUrl(entity, type);
+            if (StringUtils.isEmpty(entity.getJdbcUrl())) {
+                return responseError("连接失败！");
             }
         }
-        return response("连接失败！");
+        dataSource.setJdbcUrl(entity.getJdbcUrl());
+        try {
+            Connection connection = dataSource.getConnection();
+            if (null != connection) {
+                return response("连接成功！");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return responseError("连接失败！");
+    }
+
+
+    private void setJobUrl(JobJdbcDatasource entity, String type) {
+        switch (type) {
+            case "postgresql":
+            case "mysql":
+                entity.setJdbcUrl("jdbc:"+entity.getType()+"://"+ entity.getIpAddress()+":"+ entity.getPort() +"/"+entity.getDatasourceName());
+                break;
+            case "oracle":
+                entity.setJdbcUrl("jdbc:"+entity.getType()+":@"+ entity.getIpAddress()+":"+ entity.getPort() +":"+entity.getDatasourceName());
+                break;
+            case "sqlserver":
+                entity.setJdbcUrl("jdbc:"+entity.getType()+"://"+ entity.getIpAddress()+":"+ entity.getPort() +";DatabaseName="+entity.getDatasourceName());
+                break;
+            default:
+                break;
+        }
     }
 
 }

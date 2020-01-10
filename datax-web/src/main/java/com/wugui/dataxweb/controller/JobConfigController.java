@@ -198,11 +198,26 @@ public class JobConfigController extends BaseController {
         BeanUtils.copyProperties(dto, jobManagerEntity);
         jobManagerEntity.setCreateUserId(getCurrentUser().getId());
         jobManagerEntity.setCreateUserName(getCurrentUser().getUsername());
-        DataxJsonDto dataxJsonDto = new DataxJsonDto();
-        BeanUtils.copyProperties(dto, dataxJsonDto);
-        String buildJobJson = dataxJsonService.buildJobJson(dataxJsonDto);
-        System.out.println("构建JSON：{}"+ buildJobJson);
-        jobManagerEntity.setJobJson(buildJobJson);
+//        if (null != dto.getReaderDatasourceId()) {
+//            DataxJsonDto dataxJsonDto = new DataxJsonDto();
+//            BeanUtils.copyProperties(dto, dataxJsonDto);
+//            String buildJobJson = dataxJsonService.buildJobJson(dataxJsonDto);
+//            System.out.println("构建JSON：{}"+ buildJobJson);
+//            jobManagerEntity.setJobJson(buildJobJson);
+//        } else {
+//            if (StringUtils.isNotBlank(dto.getJobJson())) {
+//                jobManagerEntity.setJobJson(dto.getJobJson().substring(0, dto.getJobJson().length()-1)+"}");
+//            }
+//        }
+        if (StringUtils.isNotBlank(dto.getJobJson())) {
+            jobManagerEntity.setJobJson(dto.getJobJson().substring(0, dto.getJobJson().length()-1)+"}");
+        } else if (null != dto.getReaderDatasourceId() && null != dto.getWriterDatasourceId()) {
+            DataxJsonDto dataxJsonDto = new DataxJsonDto();
+            BeanUtils.copyProperties(dto, dataxJsonDto);
+            String buildJobJson = dataxJsonService.buildJobJson(dataxJsonDto);
+            System.out.println("构建JSON：{}"+ buildJobJson);
+            jobManagerEntity.setJobJson(buildJobJson);
+        }
 //        jobManagerEntity.setJobJson(dto.getJobJson().replaceAll("\n", "").replaceAll(" ", "").replaceAll("\t", ""));
         if (null != jobManagerEntity.getSourceId()) {
             JobJdbcDatasource jobJdbcDatasource = iJobJdbcDatasourceService.getById(jobManagerEntity.getSourceId());

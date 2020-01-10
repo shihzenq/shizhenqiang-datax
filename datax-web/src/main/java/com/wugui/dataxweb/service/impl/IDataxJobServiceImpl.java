@@ -24,7 +24,6 @@ import com.wugui.dataxweb.service.IDataxJobService;
 import com.wugui.dataxweb.service.IJobLogService;
 import com.wugui.dataxweb.service.JobManagerService;
 import com.wugui.dataxweb.util.ProcessUtil;
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +38,6 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.*;
 
@@ -83,13 +81,12 @@ public class IDataxJobServiceImpl extends ServiceImpl<DataXJobMapper, DataXLog> 
     private IDataxJobService iDataxJobService;
 
 
-
     @Override
     public List<com.alibaba.datax.core.DataXLog> startJobByJsonStr(String jobJson, String ip, Long jobManagerId) {
         List<com.alibaba.datax.core.DataXLog> logList = new ArrayList<>();
         jobPool.submit(() -> {
 
-            final String tmpFilePath = etlLogDir+"/jobTmp-" + System.currentTimeMillis() + ".json";
+            final String tmpFilePath = etlLogDir + "/jobTmp-" + System.currentTimeMillis() + ".json";
             // 根据json写入到临时本地文件
             PrintWriter writer = null;
             try {
