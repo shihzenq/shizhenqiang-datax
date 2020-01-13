@@ -6,5 +6,5 @@ import com.wugui.dataxweb.entity.SystemLogEntity;
 
 public interface SystemLogService extends IService<SystemLogEntity> {
 
-    PageInfo<SystemLogEntity> list(Long id, Integer pageNum, Integer pageSize);
+    PageInfo<SystemLogEntity> list(Long id, Integer pageNum, Integer pageSize, String name);
 }

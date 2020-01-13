@@ -157,6 +157,7 @@ public class JobJdbcDatasourceController extends BaseController {
         // jdbc:mysql://127.0.0.1:3306/wkxz_3_dev
         // ?serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false&useSSL=false&nullNamePatternMatchesAll=true&useUnicode=true&characterEncoding=UTF-8
         setJobUrl(entity, entity.getType().toLowerCase());
+        entity.setStatus(1);
         // entity.setJdbcUrl("jdbc:"+entity.getType()+"://"+ entity.getIpAddress()+":"+ entity.getPort() +"/"+entity.getDatasourceName()+"?serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false&useSSL=false&nullNamePatternMatchesAll=true&useUnicode=true&characterEncoding=UTF-8");
         return response(this.jobJdbcDatasourceService.save(entity));
     }
@@ -177,6 +178,7 @@ public class JobJdbcDatasourceController extends BaseController {
         // jdbc:mysql://127.0.0.1:3306/wkxz_3_dev
         // ?serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false&useSSL=false&nullNamePatternMatchesAll=true&useUnicode=true&characterEncoding=UTF-8
         setJobUrl(entity, entity.getType().toLowerCase());
+        entity.setStatus(1);
         return response(this.jobJdbcDatasourceService.updateById(entity));
     }
 
@@ -250,7 +252,7 @@ public class JobJdbcDatasourceController extends BaseController {
         switch (type) {
             case "postgresql":
             case "mysql":
-                entity.setJdbcUrl("jdbc:"+entity.getType()+"://"+ entity.getIpAddress()+":"+ entity.getPort() +"/"+entity.getDatasourceName());
+                entity.setJdbcUrl("jdbc:"+entity.getType()+"://"+ entity.getIpAddress()+":"+ entity.getPort() +"/"+entity.getDatasourceName()+"?serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false&useSSL=false&nullNamePatternMatchesAll=true&useUnicode=true&characterEncoding=UTF-8");
                 break;
             case "oracle":
                 entity.setJdbcUrl("jdbc:"+entity.getType()+":@"+ entity.getIpAddress()+":"+ entity.getPort() +":"+entity.getDatasourceName());

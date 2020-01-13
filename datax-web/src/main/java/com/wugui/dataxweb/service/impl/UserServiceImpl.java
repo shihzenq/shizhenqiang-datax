@@ -114,7 +114,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
         PageHelper.startPage(pageNum, pageSize);
         if (StringUtils.isNotBlank(username)) {
             QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
-            queryWrapper.eq("username", username);
+            queryWrapper.like("username", username);
             return new PageInfo<>(userMapper.selectList(queryWrapper));
         }
         return new PageInfo<>(userMapper.selectList(null));

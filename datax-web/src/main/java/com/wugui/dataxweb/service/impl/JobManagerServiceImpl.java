@@ -23,7 +23,7 @@ public class JobManagerServiceImpl extends ServiceImpl<JobManagerMapper, JobMana
         PageHelper.startPage(dto.getPageNum(), dto.getPageSize());
         QueryWrapper<JobManagerEntity> queryWrapper = new QueryWrapper<>();
         if (StringUtils.isNotBlank(dto.getJobName()) && null != dto.getGroupId()) {
-            queryWrapper.eq("job_name", dto.getJobName());
+            queryWrapper.like("job_name", dto.getJobName());
             queryWrapper.eq("group_id", dto.getGroupId());
         } else if (StringUtils.isNotBlank(dto.getJobName()) && null == dto.getGroupId()) {
             queryWrapper.eq("job_name", dto.getJobName());

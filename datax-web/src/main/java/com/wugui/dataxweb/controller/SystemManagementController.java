@@ -319,7 +319,7 @@ public class SystemManagementController extends BaseController {
     @ApiOperation(value = "系统日志查看，日志管理页面-系统日志，系统日志查看接口")
     @OperateLog(content = "系统日志查看")
     public ResponseData<PageInfo<SystemLogEntity>> listSystemLog(@RequestBody SearchDTO dto) {
-        return response(systemLogService.list(getCurrentUser().getId(), dto.getPageNum(), dto.getPageSize()));
+        return response(systemLogService.list(getCurrentUser().getId(), dto.getPageNum(), dto.getPageSize(), dto.getName()));
     }
 
 

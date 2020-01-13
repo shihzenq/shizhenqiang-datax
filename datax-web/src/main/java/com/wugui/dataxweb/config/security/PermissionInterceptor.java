@@ -51,41 +51,41 @@ public class PermissionInterceptor extends BaseController implements HandlerInte
 
 
     private boolean checkPermission(HttpServletRequest request, HttpServletResponse response, Object handler) {
-//        log.info("{}权限拦截:{}", request.getHeaderNames().toString(), request.getRequestURL());
-//        log.info("handler instanceof HandlerMethod:{}", handler instanceof HandlerMethod);
-//        if (handler instanceof HandlerMethod) {
-//            HandlerMethod handlerMethod = (HandlerMethod) handler;
-//            // 首先获取控制器方法上的权限注解
-//            RequiredPermission requiredPermission = handlerMethod.getMethod().getAnnotation(RequiredPermission.class);
-//            // 如果方法上没有权限注解，则获取类上的权限注解
-//            if (requiredPermission == null) {
-////                requiredPermission = handlerMethod.getMethod().getDeclaringClass().getAnnotation(RequiredPermission.class);
-//                return true;
-//            }
-//            try {
-//                String token = request.getHeader("Authorization");
-//                if (StringUtils.isNotBlank(token)) {
-//                    String userId = JwtUtil.getUsername(token);
-//                    if (StringUtils.isNotBlank(userId)) {
-//                        UserEntity entity = userService.getById(Long.parseLong(userId));
-//                        if (null != entity) {
-//                            if (permissionService.validatePermissionPathExist(entity, requiredPermission.value())){
-//                                return true;
-//                            } else {
-//                                ResponseData<T> responseData = new ResponseData<>();
-//                                responseData.setCode(400);
-//                                responseData.setMessage("您当前无此权限，无法操作此功能! ");
-//                                response.setHeader("Content-type", "application/json;charset=UTF-8");
-//                                response.setCharacterEncoding("UTF-8");
-//                                response.getWriter().write(JSON.marshal(responseData));
-//                            }
-//                        }
-//                    }
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
+        log.info("{}权限拦截:{}", request.getHeaderNames().toString(), request.getRequestURL());
+        log.info("handler instanceof HandlerMethod:{}", handler instanceof HandlerMethod);
+        if (handler instanceof HandlerMethod) {
+            HandlerMethod handlerMethod = (HandlerMethod) handler;
+            // 首先获取控制器方法上的权限注解
+            RequiredPermission requiredPermission = handlerMethod.getMethod().getAnnotation(RequiredPermission.class);
+            // 如果方法上没有权限注解，则获取类上的权限注解
+            if (requiredPermission == null) {
+//                requiredPermission = handlerMethod.getMethod().getDeclaringClass().getAnnotation(RequiredPermission.class);
+                return true;
+            }
+            try {
+                String token = request.getHeader("Authorization");
+                if (StringUtils.isNotBlank(token)) {
+                    String userId = JwtUtil.getUsername(token);
+                    if (StringUtils.isNotBlank(userId)) {
+                        UserEntity entity = userService.getById(Long.parseLong(userId));
+                        if (null != entity) {
+                            if (permissionService.validatePermissionPathExist(entity, requiredPermission.value())){
+                                return true;
+                            } else {
+                                ResponseData<T> responseData = new ResponseData<>();
+                                responseData.setCode(400);
+                                responseData.setMessage("您当前无此权限，无法操作此功能! ");
+                                response.setHeader("Content-type", "application/json;charset=UTF-8");
+                                response.setCharacterEncoding("UTF-8");
+                                response.getWriter().write(JSON.marshal(responseData));
+                            }
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 //        return false;
         return true;
     }

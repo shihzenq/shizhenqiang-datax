@@ -14,6 +14,7 @@ public class SearchDTO implements Serializable {
     @ApiModelProperty(value = "条数")
     private Integer pageSize;
 
+    private String name;
 
     public Integer getPageNum() {
         return pageNum == null ? 1 : pageNum;
