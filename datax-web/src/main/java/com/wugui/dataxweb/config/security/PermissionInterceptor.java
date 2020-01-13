@@ -36,7 +36,7 @@ public class PermissionInterceptor extends BaseController implements HandlerInte
         if(checkPermission(request, response, handler)) {
             return true;
         }
-        response.sendError(HttpServletResponse.SC_FORBIDDEN, "没有权限");
+//        response.sendError(HttpServletResponse.SC_FORBIDDEN, "没有权限");
         return false;
     }
 
@@ -78,6 +78,7 @@ public class PermissionInterceptor extends BaseController implements HandlerInte
                                 response.setHeader("Content-type", "application/json;charset=UTF-8");
                                 response.setCharacterEncoding("UTF-8");
                                 response.getWriter().write(JSON.marshal(responseData));
+                                return false;
                             }
                         }
                     }

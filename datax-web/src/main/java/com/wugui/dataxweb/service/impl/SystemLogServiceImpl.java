@@ -27,4 +27,9 @@ public class SystemLogServiceImpl extends ServiceImpl<SystemLogMapper, SystemLog
         PageHelper.startPage(pageNum, pageSize);
         return new PageInfo<>(systemLogMapper.selectList(queryWrapper));
     }
+
+    @Override
+    public Boolean deleteById(Long id) {
+        return systemLogMapper.deleteById(id) > 0;
+    }
 }

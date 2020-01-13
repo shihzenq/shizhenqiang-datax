@@ -311,7 +311,7 @@ public class SystemManagementController extends BaseController {
         if(result.hasErrors()) {
             return responseFormError(result);
         }
-        return response(systemLogService.removeById(dto.getId()));
+        return response(systemLogService.deleteById(dto.getId()));
     }
 
     @RequiredPermission(value = Permissions.LOG_DETAIL)
